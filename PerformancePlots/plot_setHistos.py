@@ -48,11 +48,11 @@ except NameError: profilePhi_bin, profilePhi_min, profilePhi_max = 16, -3.2, 3.2
 try:                profileEta_bin, profileEta_min, profileEta_max
 except NameError: profileEta_bin, profileEta_min, profileEta_max = 18, -2.7, 2.7
 
-execfile("plot_setHistos_ptRes_gen_trk.py")
+#execfile("plot_setHistos_ptRes_gen_trk.py")
 execfile("plot_setHistos_ptRes_sta_glb.py")
-execfile("plot_setHistos_ptRes_sta_gen.py")
+#execfile("plot_setHistos_ptRes_sta_gen.py")
 execfile("plot_setHistos_ptRes_pic_trk.py")
-execfile("plot_setHistos_ptRes_pic_gen.py")
+#execfile("plot_setHistos_ptRes_pic_gen.py")
 
 # ------------------------------------------------------------------------------
 # Normalized chi2/n
@@ -112,7 +112,7 @@ histos.append( [h_glb_pic_phi, h_glb_pic_phi_label, h_glb_pic_phi_title, h_glb_p
 # Dimuon mass
 # ------------------------------------------------------------------------------
 try:                m_bin, m_min, m_max
-except NameError: m_bin, m_min, m_max = 40, 80, 100
+except NameError: m_bin, m_min, m_max = 40, 60, 120
 m_fit = "gauss"
 
 try:                mFitSigma_bin, mFitSigma_min, mFitSigma_max

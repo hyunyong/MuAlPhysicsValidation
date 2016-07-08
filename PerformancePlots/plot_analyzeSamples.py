@@ -1,5 +1,8 @@
 print >> sys.stderr, "Start analyze samples"
 
+try:              threshold_pT_GeV
+except NameError: threshold_pT_GeV = 30.0
+
 iSample = -1
 
 for sample in samples:
@@ -18,9 +21,9 @@ for sample in samples:
       fillRecoMuons   = info.fillRecoMuons
       fillRecoDimuons = info.fillRecoDimuons
     
-    if ( fillGenMuons ): print >> sys.stderr,    "         fillGenMuons = ",    fillGenMuons
-    if ( fillRecoMuons ): print >> sys.stderr,   "         fillRecoMuons = ",   fillRecoMuons
-    if ( fillRecoDimuons ): print >> sys.stderr, "         fillRecoDimuons = ", fillRecoDimuons
+    print >> sys.stderr, "         fillGenMuons = ",    fillGenMuons
+    print >> sys.stderr, "         fillRecoMuons = ",   fillRecoMuons
+    print >> sys.stderr, "         fillRecoDimuons = ", fillRecoDimuons
     
     if ( fillRecoMuons ):
       counterRecoMuons = 0 # reset counter for every file
@@ -32,7 +35,7 @@ for sample in samples:
       for mu in recoMuons:
         if maxEntries > 0 and counterRecoMuons >= maxEntries:
           break
-        if ( not counterRecoMuons%100000 ):
+        if ( not counterRecoMuons%10000 ):
           print >> sys.stderr, counterRecoMuons
         counterRecoMuons = counterRecoMuons + 1
         if ( mu.glb ):
@@ -58,7 +61,8 @@ for sample in samples:
           h_sta_eta[iSample].Fill(mu.sta_eta)
           h_sta_phi[iSample].Fill(mu.sta_phi)
         
-        if ( mu.sta and mu.glb and mu.glb_pt > 30):
+        # pT resolution for STA muons w.r.t. GLB muons
+        if ( mu.sta and mu.glb and mu.glb_pt > threshold_pT_GeV):
           if ( mu.sta_pt != 0.0 and mu.glb_pt != 0.0 ):
             ptRes_sta_glb = mu.q/mu.sta_pt - mu.q/mu.glb_pt
             h_ptRes_sta_glb[iSample].Fill(ptRes_sta_glb)
@@ -147,8 +151,9 @@ for sample in samples:
               if ( mu.glb_phi >=  2.0 and mu.glb_phi <=  2.4 ): h_ptRes_sta_glbEOm_phi_p20_p24[iSample].Fill(ptRes_sta_glb)
               if ( mu.glb_phi >=  2.4 and mu.glb_phi <=  2.8 ): h_ptRes_sta_glbEOm_phi_p24_p28[iSample].Fill(ptRes_sta_glb)
               if ( mu.glb_phi >=  2.8 and mu.glb_phi <=  3.2 ): h_ptRes_sta_glbEOm_phi_p28_p32[iSample].Fill(ptRes_sta_glb)
-        ''' 
-        if ( mu.sta and mu.glb and mu.glb_gen_pt > 30):
+        
+        # pT resolution STA muons w.r.t. GEN muons matched to GLB muons
+        if ( fillGenMuons and mu.sta and mu.glb and mu.glb_gen_pt > threshold_pT_GeV ):
           if ( mu.sta_pt != 0.0 and mu.glb_gen_pt != 0.0 ):
             ptRes_sta_glb_gen = mu.q/mu.sta_pt - mu.q/mu.glb_gen_pt
             h_ptRes_sta_glb_gen[iSample].Fill(ptRes_sta_glb_gen)
@@ -237,9 +242,9 @@ for sample in samples:
               if ( mu.glb_gen_phi >=  2.0 and mu.glb_gen_phi <=  2.4 ): h_ptRes_sta_glb_genEOm_phi_p20_p24[iSample].Fill(ptRes_sta_glb_gen)
               if ( mu.glb_gen_phi >=  2.4 and mu.glb_gen_phi <=  2.8 ): h_ptRes_sta_glb_genEOm_phi_p24_p28[iSample].Fill(ptRes_sta_glb_gen)
               if ( mu.glb_gen_phi >=  2.8 and mu.glb_gen_phi <=  3.2 ): h_ptRes_sta_glb_genEOm_phi_p28_p32[iSample].Fill(ptRes_sta_glb_gen)
-        '''
-
-        if ( mu.glb_pic and mu.glb_trk_pt > 30):
+        
+        # pT resolution of GLB Picky muons w.r.t. GLB muons (tracker part only)
+        if ( mu.glb_pic and mu.glb_trk_pt > threshold_pT_GeV):
           if ( mu.glb_pic_pt != 0.0 and mu.glb_trk_pt != 0.0 ):
             ptRes_pic_trk = mu.q/mu.glb_pic_pt - mu.q/mu.glb_trk_pt
             h_ptRes_pic_trk[iSample].Fill(ptRes_pic_trk)
@@ -329,8 +334,9 @@ for sample in samples:
               if ( mu.glb_trk_phi >=  2.0 and mu.glb_trk_phi <=  2.4 ): h_ptRes_pic_trkEOm_phi_p20_p24[iSample].Fill(ptRes_pic_trk)
               if ( mu.glb_trk_phi >=  2.4 and mu.glb_trk_phi <=  2.8 ): h_ptRes_pic_trkEOm_phi_p24_p28[iSample].Fill(ptRes_pic_trk)
               if ( mu.glb_trk_phi >=  2.8 and mu.glb_trk_phi <=  3.2 ): h_ptRes_pic_trkEOm_phi_p28_p32[iSample].Fill(ptRes_pic_trk)
-        '''
-        if ( mu.glb_pic and mu.glb_gen_pt > 30):
+        
+        # pT resolution of GLB Picky muons w.r.t. GEN muons matched to the GLB muons
+        if ( fillGenMuons and mu.glb_pic and mu.glb_gen_pt > threshold_pT_GeV ):
           if ( mu.glb_pic_pt != 0.0 and mu.glb_gen_pt != 0.0 ):
             ptRes_pic_gen = mu.q/mu.glb_pic_pt - mu.q/mu.glb_gen_pt
             h_ptRes_pic_gen[iSample].Fill(ptRes_pic_gen)
@@ -421,7 +427,8 @@ for sample in samples:
               if ( mu.glb_gen_phi >=  2.4 and mu.glb_gen_phi <=  2.8 ): h_ptRes_pic_genEOm_phi_p24_p28[iSample].Fill(ptRes_pic_gen)
               if ( mu.glb_gen_phi >=  2.8 and mu.glb_gen_phi <=  3.2 ): h_ptRes_pic_genEOm_phi_p28_p32[iSample].Fill(ptRes_pic_gen)
         
-        if ( mu.glb and mu.glb_trk_pt > 30):
+        # pT resolution of GLB muons (tracker part only) w.r.t. GEN muons matched to the GLB muons
+        if ( fillGenMuons and mu.glb and mu.glb_trk_pt > threshold_pT_GeV ):
           if ( mu.glb_gen_pt != 0.0 and mu.glb_trk_pt != 0.0 ):
             ptRes_gen_trk = mu.q/mu.glb_gen_pt - mu.q/mu.glb_trk_pt
             h_ptRes_gen_trk[iSample].Fill(ptRes_gen_trk)
@@ -511,7 +518,6 @@ for sample in samples:
               if ( mu.glb_trk_phi >=  2.0 and mu.glb_trk_phi <=  2.4 ): h_ptRes_gen_trkEOm_phi_p20_p24[iSample].Fill(ptRes_gen_trk)
               if ( mu.glb_trk_phi >=  2.4 and mu.glb_trk_phi <=  2.8 ): h_ptRes_gen_trkEOm_phi_p24_p28[iSample].Fill(ptRes_gen_trk)
               if ( mu.glb_trk_phi >=  2.8 and mu.glb_trk_phi <=  3.2 ): h_ptRes_gen_trkEOm_phi_p28_p32[iSample].Fill(ptRes_gen_trk)
-    '''
         
     if ( fillRecoDimuons ):
       counterRecoDimuons = 0 # reset counter for every file
@@ -523,11 +529,11 @@ for sample in samples:
       for dm in recoDimuons:
         if maxEntries > 0 and counterRecoDimuons >= maxEntries:
           break
-        if ( not counterRecoDimuons%100000 ):
+        if ( not counterRecoDimuons%10000 ):
           print >> sys.stderr, counterRecoDimuons
         counterRecoDimuons = counterRecoDimuons + 1
-        if ( dm.sta and dm.glb and dm.pos_glb_pt > 30 and dm.neg_glb_pt > 30):
-#          h_m_sta[iSample].Fill(dm.sta_m)
+        if ( dm.sta and dm.glb and dm.pos_glb_pt > threshold_pT_GeV and dm.neg_glb_pt > threshold_pT_GeV):
+          h_m_sta[iSample].Fill(dm.sta_m)
           
           # resolution vs eta
           if ( dm.pos_sta_eta >= -2.4 and dm.pos_sta_eta <= -2.1 ): h_m_sta_etaMuP_m24_m21[iSample].Fill(dm.sta_m)

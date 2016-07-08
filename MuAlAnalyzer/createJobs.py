@@ -24,9 +24,9 @@ rm *root
 
 """ % (pwd, i, inputNames))
 
-working_dir = sys.argv[1]
-file_list = sys.argv[2]
-njobs = int(sys.argv[3])
+working_dir = sys.argv[1] # ana_PromptGT_TrackerMay2016_MuAlMay2016_v1 ana_PromptGT_TrackerMay2016_v1
+file_list = sys.argv[2]   # refit_PromptGT_TrackerMay2016_MuAlMay2016_v1_files_LUCA.py refit_PromptGT_v1_files_LUCA.py
+njobs = int(sys.argv[3])  # 500
 
 print "working_dir =", working_dir
 print "file_list =", file_list

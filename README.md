@@ -14,18 +14,21 @@ Checkout the physics validation code
 
     cd MuAlPhysicsValidation/MuAlRefit
 
-1b. Use **createJobs_newGT.py** to create a new python script.
+1b. Use **createJobs_PromptGT_TrackerMay2016_MuAlMay2016.py** to create a new python script for running with latest conditions.
 
-1c. Check the output location in L21 and other options in L26-L29.
+1c. Check the output location in L23-L24 and other options in L29-L32.
 
-1d. Use **refit_newGT_cfg.py** to create a new python configuration file.
+1d. The prev. file is linked to the cfg: **refit_PromptGT_TrackerMay2016_MuAlMay2016_cfg.py**.
 
 1e. Check the globaltag in L21 and additional conditions in L71-L87.
 
 1f. Create and submit refit jobs:
 
-    python createJobs_newGT.py
+    python createJobs_PromptGT_TrackerMay2016_MuAlMay2016.py
     source submit.sh
+
+1g. Once the jobs containing latest conditions are finished... do the same using **createJobs_PromptGT_TrackerMay2016.py**,
+that is linked to **refit_PromptGT_TrackerMay2016_cfg.py** and uses GT conditions (old ones), and new Tracker geoemtry.
 
 ---
 ## Analysis

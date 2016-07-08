@@ -20,14 +20,15 @@ cd $CAFDIR/
 
 cmsRun %s
 
-cmsStage *root /store/group/alca_muonalign/pakhotin/%s/
+eos mkdir -p /store/group/alca_muonalign/lpernie/%s/
+cmsStage *root /store/group/alca_muonalign/lpernie/%s/
 rm *root
 
-""" % (pwd, i, inputNames, cfg, cfg, wd))
+""" % (pwd, i, inputNames, cfg, cfg, wd, wd))
 
 working_dir = "refit_PromptGT_TrackerMay2016_v1"
-file_list = "SingleMuon_Run2016B_ZMu_v2_files.py"
-njobs = 500
+file_list = "SingleMuon_Run2016B_ZMu_v2_files_large.py"
+njobs = 900
 cfg = "refit_PromptGT_TrackerMay2016_cfg.py"
 
 print "working_dir =", working_dir
@@ -44,11 +45,11 @@ bsubfile = ["#!/bin/sh", ""]
 
 for i in range(njobs):
     inputNames = " ".join(fileNames[len(fileNames)*i/njobs:len(fileNames)*(i+1)/njobs])
-    analyzer = "%s/analyzer%03d.sh" % (working_dir, i)
-    writeCfg(analyzer, inputNames, str(os.getcwdu()), i, working_dir, cfg)
-    os.system("chmod +x %s" % analyzer)
-    bsubfile.append("echo %s/analyzer%03d.sh" % (working_dir, i))
-    bsubfile.append("bsub -R \"type==SLC6_64\" -q cmscaf1nd -J \"analyzer%03d\" -u a@b analyzer%03d.sh" % (i,i))
+    refitter = "%s/refitter%03d.sh" % (working_dir, i)
+    writeCfg(refitter, inputNames, str(os.getcwdu()), i, working_dir, cfg)
+    os.system("chmod +x %s" % refitter)
+    bsubfile.append("echo %s/refitter%03d.sh" % (working_dir, i))
+    bsubfile.append("bsub -R \"type==SLC6_64\" -q cmscaf1nd -J \"refitter%03d\" -u a@b refitter%03d.sh" % (i,i))
 
 bsubfile.append("cd ..")
 bsubfile.append("")

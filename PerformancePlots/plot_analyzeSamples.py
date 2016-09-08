@@ -1,3 +1,5 @@
+from ROOT import TLorentzVector
+from random import randint
 print >> sys.stderr, "Start analyze samples"
 
 try:              threshold_pT_GeV
@@ -62,7 +64,7 @@ for sample in samples:
           h_sta_phi[iSample].Fill(mu.sta_phi)
         
         # pT resolution for STA muons w.r.t. GLB muons
-        if ( mu.sta and mu.glb and mu.glb_pt > threshold_pT_GeV):
+        if ( mu.sta and mu.glb and mu.glb_trk_pt > threshold_pT_GeV):
           if ( mu.sta_pt != 0.0 and mu.glb_pt != 0.0 ):
             ptRes_sta_glb = mu.q/mu.sta_pt - mu.q/mu.glb_pt
             h_ptRes_sta_glb[iSample].Fill(ptRes_sta_glb)
@@ -532,9 +534,37 @@ for sample in samples:
         if ( not counterRecoDimuons%10000 ):
           print >> sys.stderr, counterRecoDimuons
         counterRecoDimuons = counterRecoDimuons + 1
-        if ( dm.sta and dm.glb and dm.pos_glb_pt > threshold_pT_GeV and dm.neg_glb_pt > threshold_pT_GeV):
+        if ( dm.sta and dm.glb and dm.pos_glb_trk_pt > threshold_pT_GeV and dm.neg_glb_trk_pt > threshold_pT_GeV):
           h_m_sta[iSample].Fill(dm.sta_m)
           
+          # resolution vs eta of the sta muon
+          RandmonNumber=randint(0,1) # generate or 0 or 1
+          hybridMu1 = TLorentzVector(); hybridMu2 = TLorentzVector();
+          if(RandmonNumber>0.5):
+            hybridMu1.SetPtEtaPhiM(dm.pos_sta_pt,dm.pos_sta_eta,dm.pos_sta_phi,0)
+            hybridMu2.SetPtEtaPhiM(dm.neg_glb_pt,dm.neg_glb_eta,dm.neg_glb_phi,0)
+            etaSta=dm.pos_sta_eta
+          else:
+            hybridMu1.SetPtEtaPhiM(dm.pos_glb_pt,dm.pos_glb_eta,dm.pos_glb_phi,0)
+            hybridMu2.SetPtEtaPhiM(dm.neg_sta_pt,dm.neg_sta_eta,dm.neg_sta_phi,0)
+            etaSta=dm.neg_sta_eta
+          hybridZ = TLorentzVector(); hybridZ=hybridMu1+hybridMu2        
+          if ( etaSta >= -2.4 and etaSta <= -2.1 ): h_m_HybSta_etaSta_m24_m21[iSample].Fill(hybridZ.M())
+          if ( etaSta >= -2.1 and etaSta <= -1.8 ): h_m_HybSta_etaSta_m21_m18[iSample].Fill(hybridZ.M())
+          if ( etaSta >= -1.8 and etaSta <= -1.5 ): h_m_HybSta_etaSta_m18_m15[iSample].Fill(hybridZ.M())
+          if ( etaSta >= -1.5 and etaSta <= -1.2 ): h_m_HybSta_etaSta_m15_m12[iSample].Fill(hybridZ.M())
+          if ( etaSta >= -1.2 and etaSta <= -0.9 ): h_m_HybSta_etaSta_m12_m09[iSample].Fill(hybridZ.M())
+          if ( etaSta >= -0.9 and etaSta <= -0.6 ): h_m_HybSta_etaSta_m09_m06[iSample].Fill(hybridZ.M())
+          if ( etaSta >= -0.6 and etaSta <= -0.3 ): h_m_HybSta_etaSta_m06_m03[iSample].Fill(hybridZ.M())
+          if ( etaSta >= -0.3 and etaSta <=  0.0 ): h_m_HybSta_etaSta_m03_m00[iSample].Fill(hybridZ.M())
+          if ( etaSta >=  0.0 and etaSta <=  0.3 ): h_m_HybSta_etaSta_p00_p03[iSample].Fill(hybridZ.M())
+          if ( etaSta >=  0.3 and etaSta <=  0.6 ): h_m_HybSta_etaSta_p03_p06[iSample].Fill(hybridZ.M())
+          if ( etaSta >=  0.6 and etaSta <=  0.9 ): h_m_HybSta_etaSta_p06_p09[iSample].Fill(hybridZ.M())
+          if ( etaSta >=  0.9 and etaSta <=  1.2 ): h_m_HybSta_etaSta_p09_p12[iSample].Fill(hybridZ.M())
+          if ( etaSta >=  1.2 and etaSta <=  1.5 ): h_m_HybSta_etaSta_p12_p15[iSample].Fill(hybridZ.M())
+          if ( etaSta >=  1.5 and etaSta <=  1.8 ): h_m_HybSta_etaSta_p15_p18[iSample].Fill(hybridZ.M())
+          if ( etaSta >=  1.8 and etaSta <=  2.1 ): h_m_HybSta_etaSta_p18_p21[iSample].Fill(hybridZ.M())
+          if ( etaSta >=  2.1 and etaSta <=  2.4 ): h_m_HybSta_etaSta_p21_p24[iSample].Fill(hybridZ.M())
           # resolution vs eta
           if ( dm.pos_sta_eta >= -2.4 and dm.pos_sta_eta <= -2.1 ): h_m_sta_etaMuP_m24_m21[iSample].Fill(dm.sta_m)
           if ( dm.pos_sta_eta >= -2.1 and dm.pos_sta_eta <= -1.8 ): h_m_sta_etaMuP_m21_m18[iSample].Fill(dm.sta_m)

@@ -89,6 +89,7 @@ for sampleGroup in combineHistos:
       plotName = plotName+"_"+sample_label
     c1.SaveAs( pngFolder+"/"+plotName+".png" )
     c1.SaveAs( pdfFolder+"/"+plotName+".pdf" )
+    c1.SaveAs( cFolder+"/"+plotName+".C" )
     
   iProfile = -1
   for profile in profiles:
@@ -123,4 +124,5 @@ for sampleGroup in combineHistos:
       plotName = plotName+"_"+sample_label
     c1.SaveAs( pngFolder+"/"+plotName+".png" )
     c1.SaveAs( pdfFolder+"/"+plotName+".pdf" )
+    c1.SaveAs( cFolder+"/"+plotName+".C" )
 

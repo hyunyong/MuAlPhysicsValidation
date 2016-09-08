@@ -1,5 +1,24 @@
 print >> sys.stderr, "Fill profiles"
 
+h_m_HybSta_etaSta = [
+  [ h_m_HybSta_etaSta_m24_m21, -2.4, -2.1, -2.25],
+  [ h_m_HybSta_etaSta_m21_m18, -2.1, -1.8, -1.95],
+  [ h_m_HybSta_etaSta_m18_m15, -1.8, -1.5, -1.65],
+  [ h_m_HybSta_etaSta_m15_m12, -1.5, -1.2, -1.35],
+  [ h_m_HybSta_etaSta_m12_m09, -1.2, -0.9, -1.05],
+  [ h_m_HybSta_etaSta_m09_m06, -0.9, -0.6, -0.75],
+  [ h_m_HybSta_etaSta_m06_m03, -0.6, -0.3, -0.45],
+  [ h_m_HybSta_etaSta_m03_m00, -0.3,  0.0, -0.15],
+  [ h_m_HybSta_etaSta_p00_p03,  0.0,  0.3,  0.15],
+  [ h_m_HybSta_etaSta_p03_p06,  0.3,  0.6,  0.45],
+  [ h_m_HybSta_etaSta_p06_p09,  0.6,  0.9,  0.75],
+  [ h_m_HybSta_etaSta_p09_p12,  0.9,  1.2,  1.05],
+  [ h_m_HybSta_etaSta_p12_p15,  1.2,  1.5,  1.35],
+  [ h_m_HybSta_etaSta_p15_p18,  1.5,  1.8,  1.65],
+  [ h_m_HybSta_etaSta_p18_p21,  1.8,  2.1,  1.95],
+  [ h_m_HybSta_etaSta_p21_p24,  2.1,  2.4,  2.25],
+]
+
 h_m_sta_etaMuP = [
   [ h_m_sta_etaMuP_m24_m21, -2.4, -2.1, -2.25],
   [ h_m_sta_etaMuP_m21_m18, -2.1, -1.8, -1.95],
@@ -101,7 +120,44 @@ for sample in samples:
   
   color  = sample[3][0]
   marker = sample[3][1]
+ 
+  # Transverse momentum resolution in 16 bins of HibEtaSta
+  mFitSigma_sta_etaMuP     = array("d")
+  mFitSigma_sta_etaMuP_Err = array("d")
+  mFitMean_sta_etaMuP     = array("d")
+  mFitMean_sta_etaMuP_Err = array("d")
+  etaMuP     = array("d")
+  etaMuP_Err = array("d")
   
+  iHisto = -1
+  for h in h_m_HybSta_etaSta:
+    iHisto = iHisto + 1
+    
+#    fitFunc = h[0][ iSample ].GetFunction( "fit"+h[0][ iSample ].GetName() )
+#    mFitSigma_sta_etaMuP.append( fitFunc.GetParameter( "Sigma" ) )
+#    mFitSigma_sta_etaMuP_Err.append( fitFunc.GetParError( 2 ) )
+#    mFitMean_sta_etaMuP.append( fitFunc.GetParameter( "Mean" ) )
+#    mFitMean_sta_etaMuP_Err.append( fitFunc.GetParError( 1 ) )
+    
+    mFitSigma_sta_etaMuP.append( h[0][ iSample ].GetRMS() )
+    mFitSigma_sta_etaMuP_Err.append( h[0][ iSample ].GetRMSError() )
+    mFitMean_sta_etaMuP.append( h[0][ iSample ].GetMean() )
+    mFitMean_sta_etaMuP_Err.append( h[0][ iSample ].GetMeanError() )
+    
+    etaMuP.append( h[3] )
+    etaMuP_Err.append( 0.15 )
+
+  p_mFitSigma_HybSta_etaSta.append ( ROOT.TGraphErrors( len(h_m_HybSta_etaSta), etaMuP, mFitSigma_sta_etaMuP, etaMuP_Err, mFitSigma_sta_etaMuP_Err ) )
+  p_mFitSigma_HybSta_etaSta[ iSample ].SetLineColor(color)
+  p_mFitSigma_HybSta_etaSta[ iSample ].SetMarkerColor(color)
+  p_mFitSigma_HybSta_etaSta[ iSample ].SetMarkerStyle(marker)
+  
+  p_mFitMean_HybSta_etaSta.append ( ROOT.TGraphErrors( len(h_m_HybSta_etaSta), etaMuP, mFitMean_sta_etaMuP, etaMuP_Err, mFitMean_sta_etaMuP_Err ) )
+  p_mFitMean_HybSta_etaSta[ iSample ].SetLineColor(color)
+  p_mFitMean_HybSta_etaSta[ iSample ].SetMarkerColor(color)
+  p_mFitMean_HybSta_etaSta[ iSample ].SetMarkerStyle(marker)
+ 
+ 
   # Transverse momentum resolution in 16 bins of etaMuP
   mFitSigma_sta_etaMuP     = array("d")
   mFitSigma_sta_etaMuP_Err = array("d")

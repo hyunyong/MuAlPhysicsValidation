@@ -9,7 +9,41 @@ histos.append( [h_m_sta, h_m_sta_label, h_m_sta_title, h_m_sta_x, h_m_sta_y, m_b
 # Dimuon mass in 16 bins of etaMuP (-2.4 < etaMuP < 2.4)
 # ------------------------------------------------------------------------------
 
-h_m_sta_etaMuP_m24_m21, h_m_sta_etaMuP_m24_m21_label, h_m_sta_etaMuP_m24_m21_title = [], "m_sta_etaMuP_m24_m21", "Mass for STA dimuons: -2.4 < #eta_{#mu^{+}} < -2.1"
+h_m_HybSta_etaSta_m24_m21, h_m_HybSta_etaSta_m24_m21_label, h_m_HybSta_etaSta_m24_m21_title = [], "m_HybSta_etaSta_m24_m21", "Mass for GLB+STA dimuons:  -2.4 < #eta_{#mu^{+}} < -2.1"
+h_m_HybSta_etaSta_m21_m18, h_m_HybSta_etaSta_m21_m18_label, h_m_HybSta_etaSta_m21_m18_title = [], "m_HybSta_etaSta_m21_m18", "Mass for GLB+STA dimuons:  -2.1 < #eta_{#mu^{+}} < -1.8"
+h_m_HybSta_etaSta_m18_m15, h_m_HybSta_etaSta_m18_m15_label, h_m_HybSta_etaSta_m18_m15_title = [], "m_HybSta_etaSta_m18_m15", "Mass for GLB+STA dimuons:  -1.8 < #eta_{#mu^{+}} < -1.5"
+h_m_HybSta_etaSta_m15_m12, h_m_HybSta_etaSta_m15_m12_label, h_m_HybSta_etaSta_m15_m12_title = [], "m_HybSta_etaSta_m15_m12", "Mass for GLB+STA dimuons:  -1.5 < #eta_{#mu^{+}} < -1.2"
+h_m_HybSta_etaSta_m12_m09, h_m_HybSta_etaSta_m12_m09_label, h_m_HybSta_etaSta_m12_m09_title = [], "m_HybSta_etaSta_m12_m09", "Mass for GLB+STA dimuons:  -1.2 < #eta_{#mu^{+}} < -0.9"
+h_m_HybSta_etaSta_m09_m06, h_m_HybSta_etaSta_m09_m06_label, h_m_HybSta_etaSta_m09_m06_title = [], "m_HybSta_etaSta_m09_m06", "Mass for GLB+STA dimuons:  -0.9 < #eta_{#mu^{+}} < -0.6"
+h_m_HybSta_etaSta_m06_m03, h_m_HybSta_etaSta_m06_m03_label, h_m_HybSta_etaSta_m06_m03_title = [], "m_HybSta_etaSta_m06_m03", "Mass for GLB+STA dimuons:  -0.6 < #eta_{#mu^{+}} < -0.3"
+h_m_HybSta_etaSta_m03_m00, h_m_HybSta_etaSta_m03_m00_label, h_m_HybSta_etaSta_m03_m00_title = [], "m_HybSta_etaSta_m03_m00", "Mass for GLB+STA dimuons:  -0.3 < #eta_{#mu^{+}} < 0"
+h_m_HybSta_etaSta_p00_p03, h_m_HybSta_etaSta_p00_p03_label, h_m_HybSta_etaSta_p00_p03_title = [], "m_HybSta_etaSta_p00_p03", "Mass for GLB+STA dimuons:  0 < #eta_{#mu^{+}} < 0.3"
+h_m_HybSta_etaSta_p03_p06, h_m_HybSta_etaSta_p03_p06_label, h_m_HybSta_etaSta_p03_p06_title = [], "m_HybSta_etaSta_p03_p06", "Mass for GLB+STA dimuons:  0.3 < #eta_{#mu^{+}} < 0.6"
+h_m_HybSta_etaSta_p06_p09, h_m_HybSta_etaSta_p06_p09_label, h_m_HybSta_etaSta_p06_p09_title = [], "m_HybSta_etaSta_p06_p09", "Mass for GLB+STA dimuons:  0.6 < #eta_{#mu^{+}} < 0.9"
+h_m_HybSta_etaSta_p09_p12, h_m_HybSta_etaSta_p09_p12_label, h_m_HybSta_etaSta_p09_p12_title = [], "m_HybSta_etaSta_p09_p12", "Mass for GLB+STA dimuons:  0.9 < #eta_{#mu^{+}} < 1.2"
+h_m_HybSta_etaSta_p12_p15, h_m_HybSta_etaSta_p12_p15_label, h_m_HybSta_etaSta_p12_p15_title = [], "m_HybSta_etaSta_p12_p15", "Mass for GLB+STA dimuons:  1.2 < #eta_{#mu^{+}} < 1.5"
+h_m_HybSta_etaSta_p15_p18, h_m_HybSta_etaSta_p15_p18_label, h_m_HybSta_etaSta_p15_p18_title = [], "m_HybSta_etaSta_p15_p18", "Mass for GLB+STA dimuons:  1.5 < #eta_{#mu^{+}} < 1.8"
+h_m_HybSta_etaSta_p18_p21, h_m_HybSta_etaSta_p18_p21_label, h_m_HybSta_etaSta_p18_p21_title = [], "m_HybSta_etaSta_p18_p21", "Mass for GLB+STA dimuons:  1.8 < #eta_{#mu^{+}} < 2.1"
+h_m_HybSta_etaSta_p21_p24, h_m_HybSta_etaSta_p21_p24_label, h_m_HybSta_etaSta_p21_p24_title = [], "m_HybSta_etaSta_p21_p24", "Mass for GLB+STA dimuons:  2.1 < #eta_{#mu^{+}} < 2.4"
+
+histos.append( [h_m_HybSta_etaSta_m24_m21, h_m_HybSta_etaSta_m24_m21_label, h_m_HybSta_etaSta_m24_m21_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_m21_m18, h_m_HybSta_etaSta_m21_m18_label, h_m_HybSta_etaSta_m21_m18_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_m18_m15, h_m_HybSta_etaSta_m18_m15_label, h_m_HybSta_etaSta_m18_m15_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_m15_m12, h_m_HybSta_etaSta_m15_m12_label, h_m_HybSta_etaSta_m15_m12_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_m12_m09, h_m_HybSta_etaSta_m12_m09_label, h_m_HybSta_etaSta_m12_m09_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_m09_m06, h_m_HybSta_etaSta_m09_m06_label, h_m_HybSta_etaSta_m09_m06_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_m06_m03, h_m_HybSta_etaSta_m06_m03_label, h_m_HybSta_etaSta_m06_m03_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_m03_m00, h_m_HybSta_etaSta_m03_m00_label, h_m_HybSta_etaSta_m03_m00_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_p00_p03, h_m_HybSta_etaSta_p00_p03_label, h_m_HybSta_etaSta_p00_p03_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_p03_p06, h_m_HybSta_etaSta_p03_p06_label, h_m_HybSta_etaSta_p03_p06_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_p06_p09, h_m_HybSta_etaSta_p06_p09_label, h_m_HybSta_etaSta_p06_p09_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_p09_p12, h_m_HybSta_etaSta_p09_p12_label, h_m_HybSta_etaSta_p09_p12_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_p12_p15, h_m_HybSta_etaSta_p12_p15_label, h_m_HybSta_etaSta_p12_p15_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_p15_p18, h_m_HybSta_etaSta_p15_p18_label, h_m_HybSta_etaSta_p15_p18_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_p18_p21, h_m_HybSta_etaSta_p18_p21_label, h_m_HybSta_etaSta_p18_p21_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+histos.append( [h_m_HybSta_etaSta_p21_p24, h_m_HybSta_etaSta_p21_p24_label, h_m_HybSta_etaSta_p21_p24_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+
+h_m_sta_etaMuP_m24_m21, h_m_sta_etaMuP_m24_m21_label, h_m_sta_etaMuP_m24_m21_title = [], "m_sta_etaMuP_m24_m21", "Mass for STA dimuons:  -2.4 < #eta_{#mu^{+}} < -2.1"
 h_m_sta_etaMuP_m21_m18, h_m_sta_etaMuP_m21_m18_label, h_m_sta_etaMuP_m21_m18_title = [], "m_sta_etaMuP_m21_m18", "Mass for STA dimuons:  -2.1 < #eta_{#mu^{+}} < -1.8"
 h_m_sta_etaMuP_m18_m15, h_m_sta_etaMuP_m18_m15_label, h_m_sta_etaMuP_m18_m15_title = [], "m_sta_etaMuP_m18_m15", "Mass for STA dimuons:  -1.8 < #eta_{#mu^{+}} < -1.5"
 h_m_sta_etaMuP_m15_m12, h_m_sta_etaMuP_m15_m12_label, h_m_sta_etaMuP_m15_m12_title = [], "m_sta_etaMuP_m15_m12", "Mass for STA dimuons:  -1.5 < #eta_{#mu^{+}} < -1.2"
@@ -42,6 +76,12 @@ histos.append( [h_m_sta_etaMuP_p12_p15, h_m_sta_etaMuP_p12_p15_label, h_m_sta_et
 histos.append( [h_m_sta_etaMuP_p15_p18, h_m_sta_etaMuP_p15_p18_label, h_m_sta_etaMuP_p15_p18_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
 histos.append( [h_m_sta_etaMuP_p18_p21, h_m_sta_etaMuP_p18_p21_label, h_m_sta_etaMuP_p18_p21_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
 histos.append( [h_m_sta_etaMuP_p21_p24, h_m_sta_etaMuP_p21_p24_label, h_m_sta_etaMuP_p21_p24_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
+
+p_mFitSigma_HybSta_etaSta, p_mFitSigma_HybSta_etaSta_label, p_mFitSigma_HybSta_etaSta_title, p_mFitSigma_HybSta_etaSta_x, p_mFitSigma_HybSta_etaSta_y = [], "mFitSigma_HybSta_etaSta", "Mass res. for GLB-STA dimuons (p_{T}>30 GeV)", "#eta_{#mu_{STA}}", "#sigma m_{#mu#mu} [GeV]"
+profiles.append( [p_mFitSigma_HybSta_etaSta, p_mFitSigma_HybSta_etaSta_label, p_mFitSigma_HybSta_etaSta_title, p_mFitSigma_HybSta_etaSta_x, p_mFitSigma_HybSta_etaSta_y, mFitSigma_bin, mFitSigma_min, mFitSigma_max, profileEta_bin, profileEta_min, profileEta_max] )
+
+p_mFitMean_HybSta_etaSta, p_mFitMean_HybSta_etaSta_label, p_mFitMean_HybSta_etaSta_title, p_mFitMean_HybSta_etaSta_x, p_mFitMean_HybSta_etaSta_y = [], "mFitMean_HybSta_etaSta", "Mass for GLB-STA dimuons (p_{T}>30 GeV)", "#eta_{#mu_{STA}}", "m_{#mu#mu} [GeV]"
+profiles.append( [p_mFitMean_HybSta_etaSta, p_mFitMean_HybSta_etaSta_label, p_mFitMean_HybSta_etaSta_title, p_mFitMean_HybSta_etaSta_x, p_mFitMean_HybSta_etaSta_y, mFitMean_bin, mFitMean_min, mFitMean_max, profileEta_bin, profileEta_min, profileEta_max] )
 
 p_mFitSigma_sta_etaMuP, p_mFitSigma_sta_etaMuP_label, p_mFitSigma_sta_etaMuP_title, p_mFitSigma_sta_etaMuP_x, p_mFitSigma_sta_etaMuP_y = [], "mFitSigma_sta_etaMuP", "Mass res. for STA dimuons (p_{T}>30 GeV)", "#eta_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitSigma_sta_etaMuP, p_mFitSigma_sta_etaMuP_label, p_mFitSigma_sta_etaMuP_title, p_mFitSigma_sta_etaMuP_x, p_mFitSigma_sta_etaMuP_y, mFitSigma_bin, mFitSigma_min, mFitSigma_max, profileEta_bin, profileEta_min, profileEta_max] )

@@ -18,3 +18,7 @@ pdfFolder = outputFolder+"/PDF"
 if not os.path.exists(pdfFolder):
   os.makedirs(pdfFolder)
 
+cFolder = outputFolder+"/C"
+
+if not os.path.exists(cFolder):
+  os.makedirs(cFolder)

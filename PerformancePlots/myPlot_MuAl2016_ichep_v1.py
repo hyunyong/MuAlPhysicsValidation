@@ -13,18 +13,15 @@ maxEntries = -1
 # 5 - name of input file for the sample
 
 folder = "./ROOT/"
-#fldr2016 = "/home/pakhotin/Work/CMS_My_Service_Work/Muon_Alignment/2016/2016-06-03_MuAlWith2016B_PhysValidation/"
-fldr2016 = "/afs/cern.ch/work/l/lpernie/MuonAlign/WD/CMSSW_8_0_8_patch1/src/MuAlPhysicsValidation/MuAlAnalyzer/"
 samples = [ 
-[ch_Data2016B, "2016B (prompt)",    "2016BPrompt",      [ ROOT.kBlack,   24 ], maxEntries, fldr2016+"ana_PromptGT_TrackerMay2016_v1/FINALNTUPLES.root"],
-[ch_Data2016B, "2016B (prompt ape)",    "2016BPromptape",      [ ROOT.kRed,   24 ], maxEntries, fldr2016+"ana_PromptGT_TrackerMay2016ape_v1/FINALNTUPLES.root"],
-[ch_Data2016B, "2016B + MuAlMay16", "2016BMuAlMay2016", [ ROOT.kBlue,    21 ], maxEntries, fldr2016+"ana_PromptGT_TrackerMay2016_MuAlMay2016_v1/FINALNTUPLES.root"],
-#[ch_Data2015,  "2015D + MuAlNov15", "2015DMuAlNov2015", [ ROOT.kRed,     20 ], maxEntries, folder+"MuAlAnalyzer_refit_newGT_MuAlNov2015_v1.root"],
+[ch_Data2016B, "2016 (prompt)","2016Prompt",[ ROOT.kBlack, 20 ], maxEntries, "../MuAlAnalyzer/ana_PromptGT_TrackerMay2016_v1/FINALNTUPLES_2.root"],
+[ch_Data2016B, "2016",         "2016",      [ ROOT.kRed,   24 ], maxEntries, "../MuAlAnalyzer/ana_PromptGT_TrackerMay2016_MuAlMay2016_v1/FINALNTUPLES_2.root"],
+[ch_Data2016B, "2015",         "2015",      [ ROOT.kBlue,  21 ], maxEntries, "/afs/cern.ch/cms/CAF/CMSALCA/ALCA_MUONALIGN/www/muonGeometries/2015-11_data_Fall15AlignmentWithRun2015D/PhysValidation/ROOT/MuAlAnalyzer_refit_newGT_MuAlNov2015_v1.root"],
 ]
 
 execfile("plot_checkSamples.py")
 
-threshold_pT_GeV = 100
+threshold_pT_GeV = 30
 
 pt_bin, pt_min, pt_max = 125, 0, 250
 ptRes_bin, ptRes_min, ptRes_max = 100, -0.01, 0.01
@@ -48,7 +45,7 @@ execfile("plot_fillProfiles.py")
 combineHistos = [ 
 #  [0], [1], [2],
 #  [0,1], [0,2],
-#  [0,1]
+  [0,1],
   [0,1,2]
 ]
 

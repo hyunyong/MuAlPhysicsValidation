@@ -82,9 +82,9 @@ Checkout the physics validation code
 
     cd ../PerformancePlots
 
-3b. Use **myPlot_MuAl2016_ichep_v1.py** as a model for a new pyhton command to make the plots
+3b. Use **myPlot_2016E_3vs6DOF.py** as a model for a new pyhton command to make the plots
 
-    cp myPlot_MuAl2016_ichep_v1.py myPlot_MINE.py
+    cp myPlot_2016E_3vs6DOF.py myPlot_MINE.py
 
 3c. You need to change:
     

@@ -19,7 +19,7 @@ Checkout the physics validation code
     cp -r CRAB_2016E_6vs3FOD CRAB_MYSTUDY
     cd CRAB_MYSTUDY
 
-1c. Change the crab configuration file: crab_data.py:
+1c. Change the crab configuration file: **crab_data.py**:
 
     Change the requestName and outLFNDirBase 
     Change the Input dataset: inputDataset and the json file (if data)
@@ -30,7 +30,7 @@ Checkout the physics validation code
 
     mv refit_PromptGT_TrackerMay2016_MuAl_DT2016D6DOF_CSC2016D3DOF_cfg.py refit_PromptGT_MYNAME_cfg.py
  
-1e. In refit_PromptGT_MYNAME_cfg.py you want to customize:
+1e. In **refit_PromptGT_MYNAME_cfg.py** you want to customize:
 
     The GT.
     The json file.
@@ -50,16 +50,30 @@ Checkout the physics validation code
 
         cd ../MuAlAnalyzer
 
-2b. Create a filelist for the sample to be analyzed.
+2b. Create a Working directory for this comparison (it could be the filder name on EOS from prev. step)
 
-2c. Put the JSON file used in CRAB_MYSTUDY in L16 of **muAlAnalyzer_Data_cfg.py**.
+        mkdir MuAlRefit_MYSTUDY
 
-2d. Create and submit analyzer jobs, provide working directory name, filelist name, and total number of jobs:
+2c. Create a filelist for the sample to be analyzed (need to specify in **Create_Input.sh** the EOS folder that contains the Refit files and the output txt file)
 
-    python createJobs.py $WORKDIR$ $FILELIST$ $N_JOBS$
+        bash Create_Input.sh 
+        cd MYSTUDY
+
+2d. Now copy here the python file you will change to run your comparison **muAlAnalyzer_Data_cfg.py**.
+      
+        cp ../muAlAnalyzer_Data_cfg.py .
+        cp ../createJobs.py .
+        pyhton createJobs.py $FILELIST$ $N_JOBS$ (FILELIST is the one you created and N_JOBS is the job splitting you want to use)
+
+2e. Now you can submit the jobs:
+
     source submit.sh
     
-2e. hadd outout ROOT files into a single ROOT file.
+2f. hadd the output ROOT files into a single ROOT file and clean space.
+ 
+    hadd FINALFILE.root out_*root
+    rm -rf out_*root
+    rm -rf LSF*
 
 ---
 ## Plotting
@@ -68,10 +82,16 @@ Checkout the physics validation code
 
     cd ../PerformancePlots
 
-3b. Use **comp_v2.py** to create a new python script
+3b. Use **myPlot_MuAl2016_ichep_v1.py** as a model for a new pyhton command to make the plots
 
-3c. Set location of ROOT files in L5.
+    cp myPlot_MuAl2016_ichep_v1.py myPlot_MINE.py
 
-3d. Edit list of samples in L17-22.
+3c. You need to change:
+    
+    maxEntries -> for test set to low value, for final plots set to -1 (all events)
+    samples -> change the path to the root files you created in the previous step
+    combineHistos -> decide what sample are shown in teh same plot (E.g. [0,1] the first and the second only).
 
-3e. Edit list of comparisons in L40-45 (each list defines what samples will be compared).
+3d. Launch the command:
+
+    python myPlot_MINE.py

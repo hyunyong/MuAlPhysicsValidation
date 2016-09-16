@@ -20,20 +20,21 @@ Checkout the physics validation code
     cd CRAB_MYSTUDY
 
 1c. Change the crab configuration file: crab_data.py:
+
     Change the requestName and outLFNDirBase 
     Change the Input dataset: inputDataset and the json file (if data)
     The python command you will execute: psetName
-    inputFiles: inputFiles (CRAB cannot see external files if you do not specify them. If you want to use special APE, Geometries or GPR, you have to give here
-the path. He will importthem and copy them in the same place he runs cmsRun. So in the python code you will run, do not put the path simple the name.)
+    inputFiles: inputFiles (CRAB cannot see external files if you do not specify them. If you want to use special APE, Geometries or GPR, you have to give here the path. He will importthem and copy them in the same place he runs cmsRun. So in the python code you will run, do not put the path simple the name.)
 
 1d. One your crab file if fine, change the python code you will run. You can rename it with a better name:
 
     mv refit_PromptGT_TrackerMay2016_MuAl_DT2016D6DOF_CSC2016D3DOF_cfg.py refit_PromptGT_MYNAME_cfg.py
  
 1e. In refit_PromptGT_MYNAME_cfg.py you want to customize:
-    -) The GT.
-    -) The json file.
-    -) The APE, GPR, muon geometry and tracker geometry (all external files have to be declared in the CRAB file as 'inputFiles').
+
+    The GT.
+    The json file.
+    The APE, GPR, muon geometry and tracker geometry (all external files have to be declared in the CRAB file as inputFiles).
 
 1f. Submit CRAB jobs:
 

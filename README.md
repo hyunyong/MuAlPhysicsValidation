@@ -14,21 +14,33 @@ Checkout the physics validation code
 
     cd MuAlPhysicsValidation/MuAlRefit
 
-1b. Use **createJobs_PromptGT_TrackerMay2016_MuAlMay2016.py** to create a new python script for running with latest conditions.
+1b. You should create a working directory as CRAB_2016E_6vs3FOD. We will analyze all the things you have to customize each time.
 
-1c. Check the output location in L23-L24 and other options in L29-L32.
+    cp -r CRAB_2016E_6vs3FOD CRAB_MYSTUDY
+    cd CRAB_MYSTUDY
 
-1d. The prev. file is linked to the cfg: **refit_PromptGT_TrackerMay2016_MuAlMay2016_cfg.py**.
+1c. Change the crab configuration file: crab_data.py:
+    -) Change the requestName and outLFNDirBase 
+    -) Change the Input dataset: inputDataset and the json file (if data)
+    -) The python command you will execute: psetName
+    -) inputFiles: inputFiles['file1','file2'] (CRAB cannot see external files if you do not specify them. If you want to use special APE, Geometries or GPR, you have to give here
+the path. He will importthem and copy them in the same place he runs cmsRun. So in the python code you will run, do not put the path simple the name.)
 
-1e. Check the globaltag in L21 and additional conditions in L71-L87.
+1d. One your crab file if fine, change the python code you will run. You can rename it with a better name:
 
-1f. Create and submit refit jobs:
+    mv refit_PromptGT_TrackerMay2016_MuAl_DT2016D6DOF_CSC2016D3DOF_cfg.py refit_PromptGT_MYNAME_cfg.py
+ 
+1e. In refit_PromptGT_MYNAME_cfg.py you want to customize:
+    -) The GT.
+    -) The json file.
+    -) The APE, GPR, muon geometry and tracker geometry (all external files have to be declared in the CRAB file as 'inputFiles').
 
-    python createJobs_PromptGT_TrackerMay2016_MuAlMay2016.py
-    source submit.sh
+1f. Submit CRAB jobs:
 
-1g. Once the jobs containing latest conditions are finished... do the same using **createJobs_PromptGT_TrackerMay2016.py**,
-that is linked to **refit_PromptGT_TrackerMay2016_cfg.py** and uses GT conditions (old ones), and new Tracker geoemtry.
+    crab submit -c crab_data.py
+    crab status (and all the CRAB commands to check status, resubmit etc...)
+
+1g. Once the jobs are finisced, the output will be opn EOS, as spdecified by outLFNDirBase in the crab cfg file.
 
 ---
 ## Analysis
@@ -39,7 +51,7 @@ that is linked to **refit_PromptGT_TrackerMay2016_cfg.py** and uses GT condition
 
 2b. Create a filelist for the sample to be analyzed.
 
-2c. Download the latest JSON file and define path to him in L16 of **muAlAnalyzer_Data_cfg.py**.
+2c. Put the JSON file used in CRAB_MYSTUDY in L16 of **muAlAnalyzer_Data_cfg.py**.
 
 2d. Create and submit analyzer jobs, provide working directory name, filelist name, and total number of jobs:
 

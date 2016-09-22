@@ -14,19 +14,19 @@ maxEntries = -1
 
 folder = "./ROOT/"
 samples = [
-[ch_Data2016E, "2016", "2016E 3 DOF",[ ROOT.kRed,   24 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Run2016E_RAWreco_DT3DOF_CSC3DOF_02/FINALFILE.root"],
-[ch_Data2016E, "2016", "2016E 6 DOF",[ ROOT.kBlue,  21 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Run2016E_RAWreco_DT6DOF_CSC3DOF_01/FINALFILE.root"],
+[ch_Data2016E, "2016E 3 DOF", "2016E 3 DOF",[ ROOT.kRed,   24 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Run2016E_RAWreco_DT3DOF_CSC3DOF_02/FINALFILE.root"],
+[ch_Data2016E, "2016E 6 DOF", "2016E 6 DOF",[ ROOT.kBlue,  21 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Run2016E_RAWreco_DT6DOF_CSC3DOF_01/FINALFILE.root"],
 ]
 
 execfile("plot_checkSamples.py")
 
-threshold_pT_GeV = 50
+threshold_pT_GeV = 30
 
 pt_bin, pt_min, pt_max = 125, 0, 250
 ptRes_bin, ptRes_min, ptRes_max = 100, -0.01, 0.01
 ptResFitSigma_bin, ptResFitSigma_min, ptResFitSigma_max = 80, 0., 0.008
 ptResFitMean_bin, ptResFitMean_min, ptResFitMean_max = 300, -0.001, 0.002
-mFitSigma_bin, mFitSigma_min, mFitSigma_max = 60, 10., 20
+mFitSigma_bin, mFitSigma_min, mFitSigma_max = 50, 3, 13
 mFitMean_bin, mFitMean_min, mFitMean_max = 40, 80, 100
  
 execfile("plot_setHistos.py")

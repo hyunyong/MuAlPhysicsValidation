@@ -18,7 +18,24 @@ h_m_HybSta_etaSta = [
   [ h_m_HybSta_etaSta_p18_p21,  1.8,  2.1,  1.95],
   [ h_m_HybSta_etaSta_p21_p24,  2.1,  2.4,  2.25],
 ]
-
+h_m_HybSta_phiSta = [
+  [ h_m_HybSta_phiSta_m32_m28, -3.2, -2.8, -3.0], 
+  [ h_m_HybSta_phiSta_m28_m24, -2.8, -2.4, -2.6],
+  [ h_m_HybSta_phiSta_m24_m20, -2.4, -2.0, -2.2],
+  [ h_m_HybSta_phiSta_m20_m16, -2.0, -1.6, -1.8],
+  [ h_m_HybSta_phiSta_m16_m12, -1.6, -1.2, -1.4],
+  [ h_m_HybSta_phiSta_m12_m08, -1.2, -0.8, -1.0],
+  [ h_m_HybSta_phiSta_m08_m04, -0.8, -0.4, -0.6],
+  [ h_m_HybSta_phiSta_m04_m00, -0.4,  0.0, -0.2],
+  [ h_m_HybSta_phiSta_p00_p04,  0.0,  0.4,  0.2],
+  [ h_m_HybSta_phiSta_p04_p08,  0.4,  0.8,  0.6],
+  [ h_m_HybSta_phiSta_p08_p12,  0.8,  1.2,  1.0],
+  [ h_m_HybSta_phiSta_p12_p16,  1.2,  1.6,  1.4],
+  [ h_m_HybSta_phiSta_p16_p20,  1.6,  2.0,  1.8],
+  [ h_m_HybSta_phiSta_p20_p24,  2.0,  2.4,  2.2],
+  [ h_m_HybSta_phiSta_p24_p28,  2.4,  2.8,  2.6],
+  [ h_m_HybSta_phiSta_p28_p32,  2.8,  3.2,  3.0],
+]
 h_m_sta_etaMuP = [
   [ h_m_sta_etaMuP_m24_m21, -2.4, -2.1, -2.25],
   [ h_m_sta_etaMuP_m21_m18, -2.1, -1.8, -1.95],
@@ -132,7 +149,7 @@ for sample in samples:
   iHisto = -1
   for h in h_m_HybSta_etaSta:
     iHisto = iHisto + 1
-    
+
 #    fitFunc = h[0][ iSample ].GetFunction( "fit"+h[0][ iSample ].GetName() )
 #    mFitSigma_sta_etaMuP.append( fitFunc.GetParameter( "Sigma" ) )
 #    mFitSigma_sta_etaMuP_Err.append( fitFunc.GetParError( 2 ) )
@@ -155,9 +172,44 @@ for sample in samples:
   p_mFitMean_HybSta_etaSta.append ( ROOT.TGraphErrors( len(h_m_HybSta_etaSta), etaMuP, mFitMean_sta_etaMuP, etaMuP_Err, mFitMean_sta_etaMuP_Err ) )
   p_mFitMean_HybSta_etaSta[ iSample ].SetLineColor(color)
   p_mFitMean_HybSta_etaSta[ iSample ].SetMarkerColor(color)
-  p_mFitMean_HybSta_etaSta[ iSample ].SetMarkerStyle(marker)
- 
- 
+  p_mFitMean_HybSta_etaSta[ iSample ].SetMarkerStyle(marker) 
+
+  # Transverse momentum resolution in 16 bins of HibPhiSta
+  mFitSigma_sta_phiMuP     = array("d")
+  mFitSigma_sta_phiMuP_Err = array("d")
+  mFitMean_sta_phiMuP     = array("d")
+  mFitMean_sta_phiMuP_Err = array("d")
+  phiMuP     = array("d")
+  phiMuP_Err = array("d")
+  
+  iHisto = -1
+  for h in h_m_HybSta_phiSta:
+    iHisto = iHisto + 1                                     
+
+#    fitFunc = h[0][ iSample ].GetFunction( "fit"+h[0][ iSample ].GetName() )
+#    mFitSigma_sta_phiMuP.append( fitFunc.GetParameter( "Sigma" ) )
+#    mFitSigma_sta_phiMuP_Err.append( fitFunc.GetParError( 2 ) )
+#    mFitMean_sta_phiMuP.append( fitFunc.GetParameter( "Mean" ) )
+#    mFitMean_sta_phiMuP_Err.append( fitFunc.GetParError( 1 ) )
+    
+    mFitSigma_sta_phiMuP.append( h[0][ iSample ].GetRMS() )
+    mFitSigma_sta_phiMuP_Err.append( h[0][ iSample ].GetRMSError() )
+    mFitMean_sta_phiMuP.append( h[0][ iSample ].GetMean() )
+    mFitMean_sta_phiMuP_Err.append( h[0][ iSample ].GetMeanError() )
+    
+    phiMuP.append( h[3] )
+    phiMuP_Err.append( 0.15 )
+
+  p_mFitSigma_HybSta_phiSta.append ( ROOT.TGraphErrors( len(h_m_HybSta_phiSta), phiMuP, mFitSigma_sta_phiMuP, phiMuP_Err, mFitSigma_sta_phiMuP_Err ) )
+  p_mFitSigma_HybSta_phiSta[ iSample ].SetLineColor(color)
+  p_mFitSigma_HybSta_phiSta[ iSample ].SetMarkerColor(color)
+  p_mFitSigma_HybSta_phiSta[ iSample ].SetMarkerStyle(marker)
+  
+  p_mFitMean_HybSta_phiSta.append ( ROOT.TGraphErrors( len(h_m_HybSta_phiSta), phiMuP, mFitMean_sta_phiMuP, phiMuP_Err, mFitMean_sta_phiMuP_Err ) )
+  p_mFitMean_HybSta_phiSta[ iSample ].SetLineColor(color)
+  p_mFitMean_HybSta_phiSta[ iSample ].SetMarkerColor(color)
+  p_mFitMean_HybSta_phiSta[ iSample ].SetMarkerStyle(marker)                                                                                            
+
   # Transverse momentum resolution in 16 bins of etaMuP
   mFitSigma_sta_etaMuP     = array("d")
   mFitSigma_sta_etaMuP_Err = array("d")

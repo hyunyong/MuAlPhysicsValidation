@@ -544,12 +544,15 @@ for sample in samples:
             hybridMu1.SetPtEtaPhiM(dm.pos_sta_pt,dm.pos_sta_eta,dm.pos_sta_phi,0)
             hybridMu2.SetPtEtaPhiM(dm.neg_glb_pt,dm.neg_glb_eta,dm.neg_glb_phi,0)
             etaSta=dm.pos_sta_eta
+            phiSta=dm.pos_sta_phi
           else:
             hybridMu1.SetPtEtaPhiM(dm.pos_glb_pt,dm.pos_glb_eta,dm.pos_glb_phi,0)
             hybridMu2.SetPtEtaPhiM(dm.neg_sta_pt,dm.neg_sta_eta,dm.neg_sta_phi,0)
             etaSta=dm.neg_sta_eta
+            phiSta=dm.neg_sta_phi
           hybridZ = TLorentzVector(); hybridZ=hybridMu1+hybridMu2
           if( fabs(dm.glb_m-91.)<5. ):     
+            # Hybrid Z vs Eta
             if ( etaSta >= -2.4 and etaSta <= -2.1 ): h_m_HybSta_etaSta_m24_m21[iSample].Fill(hybridZ.M())
             if ( etaSta >= -2.1 and etaSta <= -1.8 ): h_m_HybSta_etaSta_m21_m18[iSample].Fill(hybridZ.M())
             if ( etaSta >= -1.8 and etaSta <= -1.5 ): h_m_HybSta_etaSta_m18_m15[iSample].Fill(hybridZ.M())
@@ -566,6 +569,25 @@ for sample in samples:
             if ( etaSta >=  1.5 and etaSta <=  1.8 ): h_m_HybSta_etaSta_p15_p18[iSample].Fill(hybridZ.M())
             if ( etaSta >=  1.8 and etaSta <=  2.1 ): h_m_HybSta_etaSta_p18_p21[iSample].Fill(hybridZ.M())
             if ( etaSta >=  2.1 and etaSta <=  2.4 ): h_m_HybSta_etaSta_p21_p24[iSample].Fill(hybridZ.M())
+            # Hybrid Z vs Phi
+            if ( phiSta >= -3.2 and phiSta <= -2.8 ): h_m_HybSta_phiSta_m32_m28[iSample].Fill(hybridZ.M())
+            if ( phiSta >= -2.8 and phiSta <= -2.4 ): h_m_HybSta_phiSta_m28_m24[iSample].Fill(hybridZ.M())
+            if ( phiSta >= -2.4 and phiSta <= -2.0 ): h_m_HybSta_phiSta_m24_m20[iSample].Fill(hybridZ.M())
+            if ( phiSta >= -2.0 and phiSta <= -1.6 ): h_m_HybSta_phiSta_m20_m16[iSample].Fill(hybridZ.M())
+            if ( phiSta >= -1.6 and phiSta <= -1.2 ): h_m_HybSta_phiSta_m16_m12[iSample].Fill(hybridZ.M())
+            if ( phiSta >= -1.2 and phiSta <= -0.8 ): h_m_HybSta_phiSta_m12_m08[iSample].Fill(hybridZ.M())
+            if ( phiSta >= -0.8 and phiSta <= -0.4 ): h_m_HybSta_phiSta_m08_m04[iSample].Fill(hybridZ.M())
+            if ( phiSta >= -0.4 and phiSta <=  0.0 ): h_m_HybSta_phiSta_m04_m00[iSample].Fill(hybridZ.M())
+            if ( phiSta >=  0.0 and phiSta <=  0.4 ): h_m_HybSta_phiSta_p00_p04[iSample].Fill(hybridZ.M())
+            if ( phiSta >=  0.4 and phiSta <=  0.8 ): h_m_HybSta_phiSta_p04_p08[iSample].Fill(hybridZ.M())
+            if ( phiSta >=  0.8 and phiSta <=  1.2 ): h_m_HybSta_phiSta_p08_p12[iSample].Fill(hybridZ.M())
+            if ( phiSta >=  1.2 and phiSta <=  1.6 ): h_m_HybSta_phiSta_p12_p16[iSample].Fill(hybridZ.M())
+            if ( phiSta >=  1.6 and phiSta <=  2.0 ): h_m_HybSta_phiSta_p16_p20[iSample].Fill(hybridZ.M())
+            if ( phiSta >=  2.0 and phiSta <=  2.4 ): h_m_HybSta_phiSta_p20_p24[iSample].Fill(hybridZ.M())
+            if ( phiSta >=  2.4 and phiSta <=  2.8 ): h_m_HybSta_phiSta_p24_p28[iSample].Fill(hybridZ.M())
+            if ( phiSta >=  2.8 and phiSta <=  3.2 ): h_m_HybSta_phiSta_p28_p32[iSample].Fill(hybridZ.M())
+
+
           # resolution vs eta
           if ( dm.pos_sta_eta >= -2.4 and dm.pos_sta_eta <= -2.1 ): h_m_sta_etaMuP_m24_m21[iSample].Fill(dm.sta_m)
           if ( dm.pos_sta_eta >= -2.1 and dm.pos_sta_eta <= -1.8 ): h_m_sta_etaMuP_m21_m18[iSample].Fill(dm.sta_m)

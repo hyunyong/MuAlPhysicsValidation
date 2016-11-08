@@ -48,11 +48,11 @@ except NameError: profilePhi_bin, profilePhi_min, profilePhi_max = 16, -3.2, 3.2
 try:                profileEta_bin, profileEta_min, profileEta_max
 except NameError: profileEta_bin, profileEta_min, profileEta_max = 18, -2.7, 2.7
 
-#execfile("plot_setHistos_ptRes_gen_trk.py")
+#execfile("plot_setHistos_ptRes_gen_trk.py") # was #
 execfile("plot_setHistos_ptRes_sta_glb.py")
-#execfile("plot_setHistos_ptRes_sta_gen.py")
+#execfile("plot_setHistos_ptRes_sta_gen.py") # was #
 execfile("plot_setHistos_ptRes_pic_trk.py")
-#execfile("plot_setHistos_ptRes_pic_gen.py")
+#execfile("plot_setHistos_ptRes_pic_gen.py") # was #
 
 # ------------------------------------------------------------------------------
 # Normalized chi2/n

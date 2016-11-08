@@ -3,11 +3,8 @@ import os
 
 process = cms.Process("MUALREFIT")
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:0014E2DC-4974-E511-89A2-0025901D08AE.root')
+    fileNames = cms.untracked.vstring('file:out_RECO_dropped.root')
 )
-
-import FWCore.PythonUtilities.LumiList as LumiList #! JSON here
-process.source.lumisToProcess = LumiList.LumiList(filename = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-279931_13TeV_PromptReco_Collisions16_JSON_NoL1T.txt').getVLuminosityBlockRange()
 
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
 
@@ -19,9 +16,9 @@ process.MessageLogger = cms.Service("MessageLogger",
                                    )
 
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-process.GlobalTag.globaltag = "80X_dataRun2_Prompt_v11_customFor2016ReReco" #! GT Here
+process.GlobalTag.globaltag = "80X_mcRun2_design_v19" #! GT Here
 
-process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
+process.load('Configuration.StandardSequences.GeometryDB_cff')
 process.load("Geometry.CMSCommonData.cmsExtendedGeometry2016aXML_cfi") # is this correct geometry for 2016 run???
 process.load('Configuration.StandardSequences.MagneticField_cff')
 
@@ -88,34 +85,34 @@ from CondCore.DBCommon.CondDBSetup_cfi import *
 
 # Muon geometry (CRAB copies take the files location in the crab.py file and copy it where the cmsRun command is executed)
 process.muonDtAlignment = cms.ESSource("PoolDBESSource", CondDBSetup,
-                                     connect = cms.string('sqlite_file:data_DT-1100-110001_SingleMuon_Run2016E_MuAlCalIsolatedMu_276830_277420_8_0_17_NewTrack_v1_03.db'),
+                                     connect = cms.string('sqlite_file:muonGeometry_IDEAL_AllZeroes.Ape6x6.StdTags.746p3.DBv2.db'),
                                      toGet   = cms.VPSet(cms.PSet(record = cms.string("DTAlignmentRcd"),  tag = cms.string("DTAlignmentRcd")))
                                      )
 process.es_prefer_muonDtAlignment = cms.ESPrefer("PoolDBESSource","muonDtAlignment")
 
 process.muonCscAlignment = cms.ESSource("PoolDBESSource", CondDBSetup,
-                                     connect = cms.string('sqlite_file:data_CSC-1100-110001_SingleMuon_Run2016E_MuAlCalIsolatedMu_276830_277420_8_0_17_NewTrack_v1_03.db'),
+                                     connect = cms.string('sqlite_file:muonGeometry_IDEAL_AllZeroes.Ape6x6.StdTags.746p3.DBv2.db'),
                                      toGet   = cms.VPSet(cms.PSet(record = cms.string("CSCAlignmentRcd"), tag = cms.string("CSCAlignmentRcd")))
                                      )
 process.es_prefer_muonCscAlignment = cms.ESPrefer("PoolDBESSource","muonCscAlignment")
 
 process.globalPosition = cms.ESSource("PoolDBESSource", CondDBSetup,
-                                     connect = cms.string('sqlite_file:GPR_May24_2016_SW808_gprGT_Tk_MP_Run2016B_v2_dL4_iter1.db'),
-                                     toGet   = cms.VPSet(cms.PSet(record = cms.string("GlobalPositionRcd"), tag = cms.string("IdealGeometry")))
+                                     connect = cms.string('sqlite_file:inertGlobalPositionRcd.StdTags.746p3.DBv2.db'),
+                                     toGet   = cms.VPSet(cms.PSet(record = cms.string("GlobalPositionRcd"), tag = cms.string("inertGlobalPositionRcd")))
                                      )
 process.es_prefer_globalPosition = cms.ESPrefer("PoolDBESSource","globalPosition")
 
 # Asymptotic Muon APEs
-process.GlobalTag.toGet = cms.VPSet(
-         cms.PSet(record = cms.string("CSCAlignmentErrorExtendedRcd"),
-                  tag =  cms.string("MuonCSCAPEObjectsExtended_v0_mc"),
-                  connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
-                  ),
-         cms.PSet(record = cms.string("DTAlignmentErrorExtendedRcd"),
-                  tag =  cms.string("DTAlignmentErrorExtendedRcd"),
-                  connect = cms.string('sqlite_file:APEs_DT_Data_AllContributions_AllTypesOfApes_3DOF.db')
-                  )
-)
+#process.GlobalTag.toGet = cms.VPSet(
+#         cms.PSet(record = cms.string("CSCAlignmentErrorExtendedRcd"),
+#                  tag =  cms.string("MuonCSCAPEObjectsExtended_v0_mc"),
+#                  connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+#                  ),
+#         cms.PSet(record = cms.string("DTAlignmentErrorExtendedRcd"),
+#                  tag =  cms.string("DTAlignmentErrorExtendedRcd"),
+#                  connect = cms.string('sqlite_file:APEs_DT_Data_AllContributions_AllTypesOfApes_3DOF.db')
+#                  )
+#)
 
 process.Path = cms.Path(process.MeasurementTrackerEvent * process.muAlGeneralTracks * process.muAlAncientMuonSeed * process.muAlStandAloneMuons * process.muAlGlobalMuons * process.muAlTevMuons * process.muAlGlbTrackQual * process.muAlMuons)
 

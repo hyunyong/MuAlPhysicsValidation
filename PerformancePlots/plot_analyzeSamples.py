@@ -19,7 +19,7 @@ for sample in samples:
     print >> sys.stderr, "      Read tree", treeName
     Info = tfile.Get(treeName)
     for info in Info:
-      fillGenMuons    = info.fillGenMuons
+      fillGenMuons    = False ##! info.fillGenMuons
       fillRecoMuons   = info.fillRecoMuons
       fillRecoDimuons = info.fillRecoDimuons
     

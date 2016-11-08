@@ -112,8 +112,8 @@ process.GlobalTag.toGet = cms.VPSet(
                   connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
                   ),
          cms.PSet(record = cms.string("DTAlignmentErrorExtendedRcd"),
-                  tag =  cms.string("MuonDTAPEObjectsExtended_v0_mc"),
-                  connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+                  tag =  cms.string("DTAlignmentErrorExtendedRcd"),
+                  connect = cms.string('sqlite_file:APEs_DT_Data_AllContributions_AllTypesOfApes_6DOF.db')
                   )
 )
 

@@ -15,7 +15,9 @@ maxEntries = -1
 folder = "./ROOT/"
 samples = [
 [ch_Data2016E, "2016E 3 DOF", "2016E 3 DOF",[ ROOT.kRed,   24 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Run2016E_RAWreco_DT3DOF_CSC3DOF_02/FINALFILE.root"],
-[ch_Data2016E, "2016E 6 DOF", "2016E 6 DOF",[ ROOT.kBlue,  21 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Run2016E_RAWreco_DT6DOF_CSC3DOF_01/FINALFILE.root"],
+#[ch_Data2016E, "2016E 6 DOF", "2016E 6 DOF",[ ROOT.kBlue,  21 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Run2016E_RAWreco_DT6DOF_CSC3DOF_01/FINALFILE.root"],
+#[ch_Data2016E, "2016E 6 DOF APE", "2016E 6 DOF APE",[ ROOT.kBlack,  22 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Run2016E_RAWreco_DT6DOF_CSC3DOF_APE02/FINALFILE.root"],
+[ch_MC, "Zmumu MC", "Zmumu MC",[80,  33 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Ideal_MC_Zmumu/FINALFILE.root"],
 ]
 
 execfile("plot_checkSamples.py")
@@ -39,7 +41,12 @@ execfile("plot_fillProfiles.py")
 
 # Don't combine more than 4 histos on one plot
 combineHistos = [ 
+#   [0]
   [0,1]
+#  [0,3],
+#  [1,2],
+#  [0,2],
+#  [0,1,2,3]
 ]
 
 execfile("plot_drawHistos.py")

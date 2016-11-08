@@ -71,6 +71,7 @@ class MuAlAnalyzer : public edm::EDAnalyzer {
   
   edm::EDGetTokenT<reco::MuonCollection> recoMuonCollectionToken_;
   edm::EDGetTokenT<reco::BeamSpot> recoBeamSpotToken_;
+  edm::EDGetTokenT<reco::GenParticleCollection> recoGenParticleToken_;
 
   bool  m_fillGenMuons;
   Int_t m_genMuonMotherId;
@@ -217,7 +218,10 @@ MuAlAnalyzer::MuAlAnalyzer( const edm::ParameterSet& iConfig ) {
   m_debugLevel = iConfig.getParameter<int>("debugLevel");
 
   m_fillGenMuons = iConfig.getParameter<bool>("fillGenMuons");
-  if ( m_fillGenMuons ) m_genParticles    = iConfig.getParameter<edm::InputTag>("genParticles");
+  if ( m_fillGenMuons ){
+    m_genParticles = iConfig.getParameter<edm::InputTag>("genParticle");
+    recoGenParticleToken_ = consumes<reco::GenParticleCollection,edm::InEvent>( m_genParticles );
+  }
 
   m_fillRecoMuons = iConfig.getParameter<bool>("fillRecoMuons");
   if ( m_fillRecoMuons ) {
@@ -432,7 +436,7 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
 
   if ( m_fillGenMuons ) {
     edm::Handle<reco::GenParticleCollection> genParticles;
-    iEvent.getByLabel(m_genParticles, genParticles);
+    iEvent.getByToken(recoGenParticleToken_, genParticles);
 
     // Loop over all gen particles
     int counterGenParticle = 0;
@@ -523,7 +527,7 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
 	    if (    muon->globalTrack()->normalizedChi2()   < 10
 		  && muon->innerTrack()->numberOfValidHits() > 10
 		  && muon->numberOfMatchedStations() > 1
-		  && fabs( muon->innerTrack()->dxy( beamspot->position() ) ) < 0.2 && muon->innerTrack()->pt() > 30.0) {
+		  && fabs( muon->innerTrack()->dxy( beamspot->position() ) ) < 0.2 && muon->innerTrack()->pt() > 30.0 && TMath::Abs(muon->innerTrack()->eta()) < 2.4) {
 		recoMuonsSelected.push_back(&*muon);
 	    }
 	  }

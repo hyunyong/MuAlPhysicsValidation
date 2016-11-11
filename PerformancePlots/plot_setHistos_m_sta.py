@@ -77,16 +77,16 @@ histos.append( [h_m_sta_etaMuP_p15_p18, h_m_sta_etaMuP_p15_p18_label, h_m_sta_et
 histos.append( [h_m_sta_etaMuP_p18_p21, h_m_sta_etaMuP_p18_p21_label, h_m_sta_etaMuP_p18_p21_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
 histos.append( [h_m_sta_etaMuP_p21_p24, h_m_sta_etaMuP_p21_p24_label, h_m_sta_etaMuP_p21_p24_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
 
-p_mFitSigma_HybSta_etaSta, p_mFitSigma_HybSta_etaSta_label, p_mFitSigma_HybSta_etaSta_title, p_mFitSigma_HybSta_etaSta_x, p_mFitSigma_HybSta_etaSta_y = [], "mFitSigma_HybSta_etaSta", "Mass res. for GLB-STA dimuons (p_{T}>30 GeV)", "#eta_{#mu_{STA}}", "#sigma m_{#mu#mu} [GeV]"
+p_mFitSigma_HybSta_etaSta, p_mFitSigma_HybSta_etaSta_label, p_mFitSigma_HybSta_etaSta_title, p_mFitSigma_HybSta_etaSta_x, p_mFitSigma_HybSta_etaSta_y = [], "mFitSigma_HybSta_etaSta", "Mass res. for GLB-STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV)", "#eta_{#mu_{STA}}", "#sigma m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitSigma_HybSta_etaSta, p_mFitSigma_HybSta_etaSta_label, p_mFitSigma_HybSta_etaSta_title, p_mFitSigma_HybSta_etaSta_x, p_mFitSigma_HybSta_etaSta_y, mFitSigma_bin, mFitSigma_min, mFitSigma_max, profileEta_bin, profileEta_min, profileEta_max] )
 
-p_mFitMean_HybSta_etaSta, p_mFitMean_HybSta_etaSta_label, p_mFitMean_HybSta_etaSta_title, p_mFitMean_HybSta_etaSta_x, p_mFitMean_HybSta_etaSta_y = [], "mFitMean_HybSta_etaSta", "Mass for GLB-STA dimuons (p_{T}>30 GeV)", "#eta_{#mu_{STA}}", "m_{#mu#mu} [GeV]"
+p_mFitMean_HybSta_etaSta, p_mFitMean_HybSta_etaSta_label, p_mFitMean_HybSta_etaSta_title, p_mFitMean_HybSta_etaSta_x, p_mFitMean_HybSta_etaSta_y = [], "mFitMean_HybSta_etaSta", "Mass for GLB-STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV)", "#eta_{#mu_{STA}}", "m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitMean_HybSta_etaSta, p_mFitMean_HybSta_etaSta_label, p_mFitMean_HybSta_etaSta_title, p_mFitMean_HybSta_etaSta_x, p_mFitMean_HybSta_etaSta_y, mFitMean_bin, mFitMean_min, mFitMean_max, profileEta_bin, profileEta_min, profileEta_max] )
 
-p_mFitSigma_sta_etaMuP, p_mFitSigma_sta_etaMuP_label, p_mFitSigma_sta_etaMuP_title, p_mFitSigma_sta_etaMuP_x, p_mFitSigma_sta_etaMuP_y = [], "mFitSigma_sta_etaMuP", "Mass res. for STA dimuons (p_{T}>30 GeV)", "#eta_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
+p_mFitSigma_sta_etaMuP, p_mFitSigma_sta_etaMuP_label, p_mFitSigma_sta_etaMuP_title, p_mFitSigma_sta_etaMuP_x, p_mFitSigma_sta_etaMuP_y = [], "mFitSigma_sta_etaMuP", "Mass res. for STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV)", "#eta_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitSigma_sta_etaMuP, p_mFitSigma_sta_etaMuP_label, p_mFitSigma_sta_etaMuP_title, p_mFitSigma_sta_etaMuP_x, p_mFitSigma_sta_etaMuP_y, mFitSigma_bin, mFitSigma_min, mFitSigma_max, profileEta_bin, profileEta_min, profileEta_max] )
 
-p_mFitMean_sta_etaMuP, p_mFitMean_sta_etaMuP_label, p_mFitMean_sta_etaMuP_title, p_mFitMean_sta_etaMuP_x, p_mFitMean_sta_etaMuP_y = [], "mFitMean_sta_etaMuP", "Mass for STA dimuons (p_{T}>30 GeV)", "#eta_{#mu^{+}}", "m_{#mu#mu} [GeV]"
+p_mFitMean_sta_etaMuP, p_mFitMean_sta_etaMuP_label, p_mFitMean_sta_etaMuP_title, p_mFitMean_sta_etaMuP_x, p_mFitMean_sta_etaMuP_y = [], "mFitMean_sta_etaMuP", "Mass for STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV)", "#eta_{#mu^{+}}", "m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitMean_sta_etaMuP, p_mFitMean_sta_etaMuP_label, p_mFitMean_sta_etaMuP_title, p_mFitMean_sta_etaMuP_x, p_mFitMean_sta_etaMuP_y, mFitMean_bin, mFitMean_min, mFitMean_max, profileEta_bin, profileEta_min, profileEta_max] )
 
 # ------------------------------------------------------------------------------
@@ -128,10 +128,10 @@ histos.append( [h_m_HybSta_phiSta_p24_p28, h_m_HybSta_phiSta_p24_p28_label, h_m_
 histos.append( [h_m_HybSta_phiSta_p28_p32, h_m_HybSta_phiSta_p28_p32_label, h_m_HybSta_phiSta_p28_p32_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )                        
 
 
-p_mFitSigma_HybSta_phiSta, p_mFitSigma_HybSta_phiSta_label, p_mFitSigma_HybSta_phiSta_title, p_mFitSigma_HybSta_phiSta_x, p_mFitSigma_HybSta_phiSta_y = [], "mFitSigma_HybSta_phiSta", "Mass res. for GLB-STA dimuons (p_{T}>30 GeV)", "#phi_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
+p_mFitSigma_HybSta_phiSta, p_mFitSigma_HybSta_phiSta_label, p_mFitSigma_HybSta_phiSta_title, p_mFitSigma_HybSta_phiSta_x, p_mFitSigma_HybSta_phiSta_y = [], "mFitSigma_HybSta_phiSta", "Mass res. for GLB-STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV)", "#phi_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitSigma_HybSta_phiSta, p_mFitSigma_HybSta_phiSta_label, p_mFitSigma_HybSta_phiSta_title, p_mFitSigma_HybSta_phiSta_x, p_mFitSigma_HybSta_phiSta_y, mFitSigma_bin, mFitSigma_min, mFitSigma_max, profilePhi_bin, profilePhi_min, profilePhi_max] )
 
-p_mFitMean_HybSta_phiSta, p_mFitMean_HybSta_phiSta_label, p_mFitMean_HybSta_phiSta_title, p_mFitMean_HybSta_phiSta_x, p_mFitMean_HybSta_phiSta_y = [], "mFitMean_HybSta_phiSta", "Mass for GLB-STA dimuons (p_{T}>30 GeV)", "#phi_{#mu^{+}}", "m_{#mu#mu} [GeV]"
+p_mFitMean_HybSta_phiSta, p_mFitMean_HybSta_phiSta_label, p_mFitMean_HybSta_phiSta_title, p_mFitMean_HybSta_phiSta_x, p_mFitMean_HybSta_phiSta_y = [], "mFitMean_HybSta_phiSta", "Mass for GLB-STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV)", "#phi_{#mu^{+}}", "m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitMean_HybSta_phiSta, p_mFitMean_HybSta_phiSta_label, p_mFitMean_HybSta_phiSta_title, p_mFitMean_HybSta_phiSta_x, p_mFitMean_HybSta_phiSta_y, mFitMean_bin, mFitMean_min, mFitMean_max, profilePhi_bin, profilePhi_min, profilePhi_max] )                         
 
 # ------------------------------------------------------------------------------
@@ -172,10 +172,10 @@ histos.append( [h_m_sta_phiMuP_p20_p24, h_m_sta_phiMuP_p20_p24_label, h_m_sta_ph
 histos.append( [h_m_sta_phiMuP_p24_p28, h_m_sta_phiMuP_p24_p28_label, h_m_sta_phiMuP_p24_p28_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
 histos.append( [h_m_sta_phiMuP_p28_p32, h_m_sta_phiMuP_p28_p32_label, h_m_sta_phiMuP_p28_p32_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )
 
-p_mFitSigma_sta_phiMuP, p_mFitSigma_sta_phiMuP_label, p_mFitSigma_sta_phiMuP_title, p_mFitSigma_sta_phiMuP_x, p_mFitSigma_sta_phiMuP_y = [], "mFitSigma_sta_phi", "Mass res. for STA dimuons (p_{T}>30 GeV, |#eta_{#mu^{+}}|<2.4)", "#phi_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
+p_mFitSigma_sta_phiMuP, p_mFitSigma_sta_phiMuP_label, p_mFitSigma_sta_phiMuP_title, p_mFitSigma_sta_phiMuP_x, p_mFitSigma_sta_phiMuP_y = [], "mFitSigma_sta_phi", "Mass res. for STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV, |#eta_{#mu^{+}}|<2.4)", "#phi_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitSigma_sta_phiMuP, p_mFitSigma_sta_phiMuP_label, p_mFitSigma_sta_phiMuP_title, p_mFitSigma_sta_phiMuP_x, p_mFitSigma_sta_phiMuP_y, mFitSigma_bin, mFitSigma_min, mFitSigma_max, profilePhi_bin, profilePhi_min, profilePhi_max] )
 
-p_mFitMean_sta_phiMuP, p_mFitMean_sta_phiMuP_label, p_mFitMean_sta_phiMuP_title, p_mFitMean_sta_phiMuP_x, p_mFitMean_sta_phiMuP_y = [], "mFitMean_sta_phi", "Mass for STA dimuons (p_{T}>30 GeV, |#eta_{#mu^{+}}|<2.4)", "#phi_{#mu^{+}}", "m_{#mu#mu} [GeV]"
+p_mFitMean_sta_phiMuP, p_mFitMean_sta_phiMuP_label, p_mFitMean_sta_phiMuP_title, p_mFitMean_sta_phiMuP_x, p_mFitMean_sta_phiMuP_y = [], "mFitMean_sta_phi", "Mass for STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV, |#eta_{#mu^{+}}|<2.4)", "#phi_{#mu^{+}}", "m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitMean_sta_phiMuP, p_mFitMean_sta_phiMuP_label, p_mFitMean_sta_phiMuP_title, p_mFitMean_sta_phiMuP_x, p_mFitMean_sta_phiMuP_y, mFitMean_bin, mFitMean_min, mFitMean_max, profilePhi_bin, profilePhi_min, profilePhi_max] )
 
 # ------------------------------------------------------------------------------
@@ -217,10 +217,10 @@ histos.append( [h_m_staB_phiMuP_p20_p24, h_m_staB_phiMuP_p20_p24_label, h_m_staB
 histos.append( [h_m_staB_phiMuP_p24_p28, h_m_staB_phiMuP_p24_p28_label, h_m_staB_phiMuP_p24_p28_title, h_m_staB_x, h_m_staB_y, m_bin, m_min, m_max, m_fit] )
 histos.append( [h_m_staB_phiMuP_p28_p32, h_m_staB_phiMuP_p28_p32_label, h_m_staB_phiMuP_p28_p32_title, h_m_staB_x, h_m_staB_y, m_bin, m_min, m_max, m_fit] )
 
-p_mFitSigma_staB_phiMuP, p_mFitSigma_staB_phiMuP_label, p_mFitSigma_staB_phiMuP_title, p_mFitSigma_staB_phiMuP_x, p_mFitSigma_staB_phiMuP_y = [], "mFitSigma_staB_phi", "Mass res. for STA dimuons (p_{T}>30 GeV, |#eta_{#mu^{+}}|<0.9)", "#phi_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
+p_mFitSigma_staB_phiMuP, p_mFitSigma_staB_phiMuP_label, p_mFitSigma_staB_phiMuP_title, p_mFitSigma_staB_phiMuP_x, p_mFitSigma_staB_phiMuP_y = [], "mFitSigma_staB_phi", "Mass res. for STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV, |#eta_{#mu^{+}}|<0.9)", "#phi_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitSigma_staB_phiMuP, p_mFitSigma_staB_phiMuP_label, p_mFitSigma_staB_phiMuP_title, p_mFitSigma_staB_phiMuP_x, p_mFitSigma_staB_phiMuP_y, mFitSigma_bin, mFitSigma_min, mFitSigma_max, profilePhi_bin, profilePhi_min, profilePhi_max] )
 
-p_mFitMean_staB_phiMuP, p_mFitMean_staB_phiMuP_label, p_mFitMean_staB_phiMuP_title, p_mFitMean_staB_phiMuP_x, p_mFitMean_staB_phiMuP_y = [], "mFitMean_staB_phi", "Mass for STA dimuons (p_{T}>30 GeV, |#eta_{#mu^{+}}|<0.9)", "#phi_{#mu^{+}}", "m_{#mu#mu} [GeV]"
+p_mFitMean_staB_phiMuP, p_mFitMean_staB_phiMuP_label, p_mFitMean_staB_phiMuP_title, p_mFitMean_staB_phiMuP_x, p_mFitMean_staB_phiMuP_y = [], "mFitMean_staB_phi", "Mass for STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV, |#eta_{#mu^{+}}|<0.9)", "#phi_{#mu^{+}}", "m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitMean_staB_phiMuP, p_mFitMean_staB_phiMuP_label, p_mFitMean_staB_phiMuP_title, p_mFitMean_staB_phiMuP_x, p_mFitMean_staB_phiMuP_y, mFitMean_bin, mFitMean_min, mFitMean_max, profilePhi_bin, profilePhi_min, profilePhi_max] )
 
 # ------------------------------------------------------------------------------
@@ -262,10 +262,10 @@ histos.append( [h_m_staEOp_phiMuP_p20_p24, h_m_staEOp_phiMuP_p20_p24_label, h_m_
 histos.append( [h_m_staEOp_phiMuP_p24_p28, h_m_staEOp_phiMuP_p24_p28_label, h_m_staEOp_phiMuP_p24_p28_title, h_m_staEOp_x, h_m_staEOp_y, m_bin, m_min, m_max, m_fit] )
 histos.append( [h_m_staEOp_phiMuP_p28_p32, h_m_staEOp_phiMuP_p28_p32_label, h_m_staEOp_phiMuP_p28_p32_title, h_m_staEOp_x, h_m_staEOp_y, m_bin, m_min, m_max, m_fit] )
 
-p_mFitSigma_staEOp_phiMuP, p_mFitSigma_staEOp_phiMuP_label, p_mFitSigma_staEOp_phiMuP_title, p_mFitSigma_staEOp_phiMuP_x, p_mFitSigma_staEOp_phiMuP_y = [], "mFitSigma_staEOp_phi", "Mass res. for STA dimuons (p_{T}>30 GeV, 0.9<#eta_{#mu^{+}}<2.4)", "#phi_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
+p_mFitSigma_staEOp_phiMuP, p_mFitSigma_staEOp_phiMuP_label, p_mFitSigma_staEOp_phiMuP_title, p_mFitSigma_staEOp_phiMuP_x, p_mFitSigma_staEOp_phiMuP_y = [], "mFitSigma_staEOp_phi", "Mass res. for STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV, 0.9<#eta_{#mu^{+}}<2.4)", "#phi_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitSigma_staEOp_phiMuP, p_mFitSigma_staEOp_phiMuP_label, p_mFitSigma_staEOp_phiMuP_title, p_mFitSigma_staEOp_phiMuP_x, p_mFitSigma_staEOp_phiMuP_y, mFitSigma_bin, mFitSigma_min, mFitSigma_max, profilePhi_bin, profilePhi_min, profilePhi_max] )
 
-p_mFitMean_staEOp_phiMuP, p_mFitMean_staEOp_phiMuP_label, p_mFitMean_staEOp_phiMuP_title, p_mFitMean_staEOp_phiMuP_x, p_mFitMean_staEOp_phiMuP_y = [], "mFitMean_staEOp_phi", "Mass for STA dimuons (p_{T}>30 GeV, 0.9<#eta_{#mu^{+}}<2.4)", "#phi_{#mu^{+}}", "m_{#mu#mu} [GeV]"
+p_mFitMean_staEOp_phiMuP, p_mFitMean_staEOp_phiMuP_label, p_mFitMean_staEOp_phiMuP_title, p_mFitMean_staEOp_phiMuP_x, p_mFitMean_staEOp_phiMuP_y = [], "mFitMean_staEOp_phi", "Mass for STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV, 0.9<#eta_{#mu^{+}}<2.4)", "#phi_{#mu^{+}}", "m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitMean_staEOp_phiMuP, p_mFitMean_staEOp_phiMuP_label, p_mFitMean_staEOp_phiMuP_title, p_mFitMean_staEOp_phiMuP_x, p_mFitMean_staEOp_phiMuP_y, mFitMean_bin, mFitMean_min, mFitMean_max, profilePhi_bin, profilePhi_min, profilePhi_max] )
 
 # ------------------------------------------------------------------------------
@@ -307,8 +307,8 @@ histos.append( [h_m_staEOm_phiMuP_p20_p24, h_m_staEOm_phiMuP_p20_p24_label, h_m_
 histos.append( [h_m_staEOm_phiMuP_p24_p28, h_m_staEOm_phiMuP_p24_p28_label, h_m_staEOm_phiMuP_p24_p28_title, h_m_staEOm_x, h_m_staEOm_y, m_bin, m_min, m_max, m_fit] )
 histos.append( [h_m_staEOm_phiMuP_p28_p32, h_m_staEOm_phiMuP_p28_p32_label, h_m_staEOm_phiMuP_p28_p32_title, h_m_staEOm_x, h_m_staEOm_y, m_bin, m_min, m_max, m_fit] )
 
-p_mFitSigma_staEOm_phiMuP, p_mFitSigma_staEOm_phiMuP_label, p_mFitSigma_staEOm_phiMuP_title, p_mFitSigma_staEOm_phiMuP_x, p_mFitSigma_staEOm_phiMuP_y = [], "mFitSigma_staEOm_phi", "Mass res. for STA dimuons (p_{T}>30 GeV, -2.4<#eta_{#mu^{+}}<-0.9)", "#phi_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
+p_mFitSigma_staEOm_phiMuP, p_mFitSigma_staEOm_phiMuP_label, p_mFitSigma_staEOm_phiMuP_title, p_mFitSigma_staEOm_phiMuP_x, p_mFitSigma_staEOm_phiMuP_y = [], "mFitSigma_staEOm_phi", "Mass res. for STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV, -2.4<#eta_{#mu^{+}}<-0.9)", "#phi_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitSigma_staEOm_phiMuP, p_mFitSigma_staEOm_phiMuP_label, p_mFitSigma_staEOm_phiMuP_title, p_mFitSigma_staEOm_phiMuP_x, p_mFitSigma_staEOm_phiMuP_y, mFitSigma_bin, mFitSigma_min, mFitSigma_max, profilePhi_bin, profilePhi_min, profilePhi_max] )
 
-p_mFitMean_staEOm_phiMuP, p_mFitMean_staEOm_phiMuP_label, p_mFitMean_staEOm_phiMuP_title, p_mFitMean_staEOm_phiMuP_x, p_mFitMean_staEOm_phiMuP_y = [], "mFitMean_staEOm_phi", "Mass for STA dimuons (p_{T}>30 GeV, -2.4<#eta_{#mu^{+}}<-0.9)", "#phi_{#mu^{+}}", "m_{#mu#mu} [GeV]"
+p_mFitMean_staEOm_phiMuP, p_mFitMean_staEOm_phiMuP_label, p_mFitMean_staEOm_phiMuP_title, p_mFitMean_staEOm_phiMuP_x, p_mFitMean_staEOm_phiMuP_y = [], "mFitMean_staEOm_phi", "Mass for STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV, -2.4<#eta_{#mu^{+}}<-0.9)", "#phi_{#mu^{+}}", "m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitMean_staEOm_phiMuP, p_mFitMean_staEOm_phiMuP_label, p_mFitMean_staEOm_phiMuP_title, p_mFitMean_staEOm_phiMuP_x, p_mFitMean_staEOm_phiMuP_y, mFitMean_bin, mFitMean_min, mFitMean_max, profilePhi_bin, profilePhi_min, profilePhi_max] )

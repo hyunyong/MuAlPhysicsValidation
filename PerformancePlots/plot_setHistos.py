@@ -63,8 +63,25 @@ except NameError: nchi2_bin, nchi2_min, nchi2_max = 60, 0., 3.
 h_glb_nchi2, h_glb_nchi2_label, h_glb_nchi2_title, h_glb_nchi2_x, h_glb_nchi2_y = [], "glb_nchi2", "Normalized #chi^{2} for GLB muons", "#chi^{2}/n_{GLB}", "a.u."
 histos.append( [h_glb_nchi2, h_glb_nchi2_label, h_glb_nchi2_title, h_glb_nchi2_x, h_glb_nchi2_y, nchi2_bin, nchi2_min, nchi2_max] )
 
+#nchi2 plot for barrel
+h_glb_nchi2_bar, h_glb_nchi2_bar_label, h_glb_nchi2_bar_title, h_glb_nchi2_bar_x, h_glb_nchi2_bar_y = [], "glb_nchi2_bar", "Normalized #chi^{2} for GLB muons: eta < 0.9", "#chi^{2}/n_{GLB}", "a.u."
+histos.append( [h_glb_nchi2_bar, h_glb_nchi2_bar_label, h_glb_nchi2_bar_title, h_glb_nchi2_bar_x, h_glb_nchi2_bar_y, nchi2_bin, nchi2_min, nchi2_max] )
+
+#nchi2 plot for csc
+h_glb_nchi2_csc, h_glb_nchi2_csc_label, h_glb_nchi2_csc_title, h_glb_nchi2_csc_x, h_glb_nchi2_csc_y = [], "glb_nchi2_csc", "Normalized #chi^{2} for GLB muons: eta > 1.2", "#chi^{2}/n_{GLB}", "a.u."
+histos.append( [h_glb_nchi2_csc, h_glb_nchi2_csc_label, h_glb_nchi2_csc_title, h_glb_nchi2_csc_x, h_glb_nchi2_csc_y, nchi2_bin, nchi2_min, nchi2_max] )
+
 h_sta_nchi2, h_sta_nchi2_label, h_sta_nchi2_title, h_sta_nchi2_x, h_sta_nchi2_y = [], "sta_nchi2", "Normalized #chi^{2} for STA muons", "#chi^{2}/n_{STA}", "a.u."
 histos.append( [h_sta_nchi2, h_sta_nchi2_label, h_sta_nchi2_title, h_sta_nchi2_x, h_sta_nchi2_y, nchi2_bin, nchi2_min, nchi2_max] )
+
+#nchi2 plot for barrel
+h_sta_nchi2_bar, h_sta_nchi2_bar_label, h_sta_nchi2_bar_title, h_sta_nchi2_bar_x, h_sta_nchi2_bar_y = [], "sta_nchi2_bar", "Normalized #chi^{2} for STA muons: eta < 0.9", "#chi^{2}/n_{STA}", "a.u."
+histos.append( [h_sta_nchi2_bar, h_sta_nchi2_bar_label, h_sta_nchi2_bar_title, h_sta_nchi2_bar_x, h_sta_nchi2_bar_y, nchi2_bin, nchi2_min, nchi2_max] )
+
+#nchi2 plot for csc
+h_sta_nchi2_csc, h_sta_nchi2_csc_label, h_sta_nchi2_csc_title, h_sta_nchi2_csc_x, h_sta_nchi2_csc_y = [], "sta_nchi2_csc", "Normalized #chi^{2} for STA muons: eta > 1.2", "#chi^{2}/n_{STA}", "a.u."
+histos.append( [h_sta_nchi2_csc, h_sta_nchi2_csc_label, h_sta_nchi2_csc_title, h_sta_nchi2_csc_x, h_sta_nchi2_csc_y, nchi2_bin, nchi2_min, nchi2_max] )
+
 
 #h_glb_trk_nchi2, h_glb_trk_nchi2_label, h_glb_trk_nchi2_title, h_glb_trk_nchi2_x, h_glb_trk_nchi2_y = [], "glb_trk_nchi2", "Normalized #chi^{2} for TRK muons", "#chi^{2}/n_{TRK}", "a.u."
 #histos.append( [h_glb_trk_nchi2, h_glb_trk_nchi2_label, h_glb_trk_nchi2_title, h_glb_trk_nchi2_x, h_glb_trk_nchi2_y, nchi2_bin, nchi2_min, nchi2_max] )

@@ -43,6 +43,10 @@ for sample in samples:
         if ( mu.glb ):
           h_glb_pt[iSample].Fill(mu.glb_pt)
           h_glb_nchi2[iSample].Fill(mu.glb_nchi2)
+          if abs(mu.glb_eta) < 0.9 :
+            h_glb_nchi2_bar[iSample].Fill(mu.glb_nchi2)
+          if abs(mu.glb_eta) > 1.2 :
+            h_glb_nchi2_csc[iSample].Fill(mu.glb_nchi2)
           h_glb_eta[iSample].Fill(mu.glb_eta)
           h_glb_phi[iSample].Fill(mu.glb_phi)
           
@@ -60,6 +64,10 @@ for sample in samples:
         if ( mu.sta ):
           h_sta_pt[iSample].Fill(mu.sta_pt)
           h_sta_nchi2[iSample].Fill(mu.sta_nchi2)
+          if abs(mu.sta_eta) < 0.9 :
+            h_sta_nchi2_bar[iSample].Fill(mu.sta_nchi2)     
+          if abs(mu.sta_eta) > 1.2 :
+            h_sta_nchi2_csc[iSample].Fill(mu.sta_nchi2)
           h_sta_eta[iSample].Fill(mu.sta_eta)
           h_sta_phi[iSample].Fill(mu.sta_phi)
         

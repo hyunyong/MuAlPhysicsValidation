@@ -109,7 +109,7 @@ for sampleGroup in combineHistos:
     legend.SetFillColor(ROOT.kWhite)
     legend.SetBorderSize(0)
     legend.SetTextFont(42)
-    legend.SetTextSize(0.045)
+    legend.SetTextSize(0.03)
     legend.SetMargin(0.13)
     legend.SetHeader( profile[2] )
     for iSample in sampleGroup:

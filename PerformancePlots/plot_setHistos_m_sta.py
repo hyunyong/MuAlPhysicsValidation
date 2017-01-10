@@ -128,10 +128,10 @@ histos.append( [h_m_HybSta_phiSta_p24_p28, h_m_HybSta_phiSta_p24_p28_label, h_m_
 histos.append( [h_m_HybSta_phiSta_p28_p32, h_m_HybSta_phiSta_p28_p32_label, h_m_HybSta_phiSta_p28_p32_title, h_m_sta_x, h_m_sta_y, m_bin, m_min, m_max, m_fit] )                        
 
 
-p_mFitSigma_HybSta_phiSta, p_mFitSigma_HybSta_phiSta_label, p_mFitSigma_HybSta_phiSta_title, p_mFitSigma_HybSta_phiSta_x, p_mFitSigma_HybSta_phiSta_y = [], "mFitSigma_HybSta_phiSta", "Mass res. for GLB-STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV)", "#phi_{#mu^{+}}", "#sigma m_{#mu#mu} [GeV]"
+p_mFitSigma_HybSta_phiSta, p_mFitSigma_HybSta_phiSta_label, p_mFitSigma_HybSta_phiSta_title, p_mFitSigma_HybSta_phiSta_x, p_mFitSigma_HybSta_phiSta_y = [], "mFitSigma_HybSta_phiSta", "Mass res. for GLB-STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV)", "#phi_{#mu_{STA}}", "#sigma m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitSigma_HybSta_phiSta, p_mFitSigma_HybSta_phiSta_label, p_mFitSigma_HybSta_phiSta_title, p_mFitSigma_HybSta_phiSta_x, p_mFitSigma_HybSta_phiSta_y, mFitSigma_bin, mFitSigma_min, mFitSigma_max, profilePhi_bin, profilePhi_min, profilePhi_max] )
 
-p_mFitMean_HybSta_phiSta, p_mFitMean_HybSta_phiSta_label, p_mFitMean_HybSta_phiSta_title, p_mFitMean_HybSta_phiSta_x, p_mFitMean_HybSta_phiSta_y = [], "mFitMean_HybSta_phiSta", "Mass for GLB-STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV)", "#phi_{#mu^{+}}", "m_{#mu#mu} [GeV]"
+p_mFitMean_HybSta_phiSta, p_mFitMean_HybSta_phiSta_label, p_mFitMean_HybSta_phiSta_title, p_mFitMean_HybSta_phiSta_x, p_mFitMean_HybSta_phiSta_y = [], "mFitMean_HybSta_phiSta", "Mass for GLB-STA dimuons (p_{T}>" + str(threshold_pT_GeV) + " GeV)", "#phi_{#mu_{STA}}", "m_{#mu#mu} [GeV]"
 profiles.append( [p_mFitMean_HybSta_phiSta, p_mFitMean_HybSta_phiSta_label, p_mFitMean_HybSta_phiSta_title, p_mFitMean_HybSta_phiSta_x, p_mFitMean_HybSta_phiSta_y, mFitMean_bin, mFitMean_min, mFitMean_max, profilePhi_bin, profilePhi_min, profilePhi_max] )                         
 
 # ------------------------------------------------------------------------------

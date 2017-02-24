@@ -70,12 +70,13 @@ for sampleGroup in combineHistos:
       histo[0][ iSample ].Draw("same")
     
     # Draw labels
-    legend = ROOT.TLegend(0.18,0.96 - 0.05 - 0.05*len(sampleGroup),0.92,0.96)
+    #!legend = ROOT.TLegend(0.18,0.96 - 0.05 - 0.05*len(sampleGroup),0.92,0.96)
+    legend = ROOT.TLegend(0.45,0.96 - 0.05 - 0.05*len(sampleGroup),0.92,0.96)
     legend.SetFillColor(ROOT.kWhite)
     legend.SetBorderSize(0)
     legend.SetTextFont(42)
-    legend.SetTextSize(0.03)
-    legend.SetMargin(0.13)
+    legend.SetTextSize(0.02)#!0.03
+    legend.SetMargin(0.13) #!0.13
     legend.SetHeader( histo[0][0].GetTitle() )
     for iSample in sampleGroup:
       legend.AddEntry( histo[0][ iSample ], samples[ iSample ][1], "L")

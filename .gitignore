@@ -1,3 +1,9 @@
 MuAlAnalyzer/MuAlRefit_Run2016E_RAWreco_DT3DOF_CSC3DOF_02
 */*/analyzer*.sh
 PerformancePlots/LSFJO*
+MuAlAnalyzer/python/*.pyc
+MuAlAnalyzer/*/*.root
+PerformancePlots/*/*txt
+PerformancePlots/*/C
+PerformancePlots/*/PNG
+PerformancePlots/*/PDF

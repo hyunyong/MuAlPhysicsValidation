@@ -102,11 +102,13 @@ class MuAlAnalyzer : public edm::EDAnalyzer {
   Float_t b_recoMu_glb_pt;
   Float_t b_recoMu_glb_eta;
   Float_t b_recoMu_glb_phi;
+  Float_t b_recoMu_glb_phi_error;
   Float_t b_recoMu_glb_nchi2;
   Float_t b_recoMu_glb_chi2;
   Float_t b_recoMu_glb_pterror;
   Float_t b_recoMu_glb_qoverpterror;
   Int_t   b_recoMu_glb_nhits;
+
 
   // GEN muons matched to GLB muons
   Bool_t  b_recoMu_glb_gen;
@@ -270,6 +272,7 @@ MuAlAnalyzer::MuAlAnalyzer( const edm::ParameterSet& iConfig ) {
     m_tree_recoMuons->Branch("glb_pt",&b_recoMu_glb_pt,"glb_pt/F");
     m_tree_recoMuons->Branch("glb_eta",&b_recoMu_glb_eta,"glb_eta/F");
     m_tree_recoMuons->Branch("glb_phi",&b_recoMu_glb_phi,"glb_phi/F");
+    m_tree_recoMuons->Branch("glb_phi_error",&b_recoMu_glb_phi_error,"glb_phi_error/F");
     m_tree_recoMuons->Branch("glb_nchi2",&b_recoMu_glb_nchi2,"glb_nchi2/F");
     m_tree_recoMuons->Branch("glb_chi2",&b_recoMu_glb_chi2,"glb_chi2/F");
     m_tree_recoMuons->Branch("glb_pt_error",&b_recoMu_glb_pterror,"glb_pt_error/F");
@@ -561,6 +564,7 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
 	  b_recoMu_glb_eta   = recoMuonsSelected[i]->globalTrack()->eta();
 	  b_recoMu_glb_phi   = recoMuonsSelected[i]->globalTrack()->phi();
 	  b_recoMu_glb_nchi2 = recoMuonsSelected[i]->globalTrack()->normalizedChi2();
+	  b_recoMu_glb_phi_error  = recoMuonsSelected[i]->globalTrack()->phiError();
 	  b_recoMu_glb_chi2  = recoMuonsSelected[i]->globalTrack()->chi2();
     b_recoMu_glb_pterror  = recoMuonsSelected[i]->globalTrack()->ptError();
     b_recoMu_glb_qoverpterror  = recoMuonsSelected[i]->globalTrack()->qoverpError();
@@ -628,6 +632,7 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
 	  b_recoMu_glb_pt    = -1.0;
 	  b_recoMu_glb_eta   = 10.0;
 	  b_recoMu_glb_phi   =  5.0;
+	  b_recoMu_glb_phi_Error = -1.0;
 	  b_recoMu_glb_nchi2 = -1.0;
 	  b_recoMu_glb_chi2  = -1.0;
     b_recoMu_glb_pterror  = -1.0;
@@ -667,6 +672,7 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
 	    << " pt " << b_recoMu_glb_pt
 	    << " eta " << b_recoMu_glb_eta
 	    << " phi " << b_recoMu_glb_phi
+	    << " phi error " << b_recoMu_glb_phi_error << "\n"
 	    << " nchi2 " << b_recoMu_glb_nchi2
 	    << " chi2 " << b_recoMu_glb_chi2 << "\n"
       << " pT error " << b_recoMu_glb_pterror << "\n"

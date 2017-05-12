@@ -632,7 +632,7 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
 	  b_recoMu_glb_pt    = -1.0;
 	  b_recoMu_glb_eta   = 10.0;
 	  b_recoMu_glb_phi   =  5.0;
-	  b_recoMu_glb_phi_Error = -1.0;
+	  b_recoMu_glb_phi_error = -1.0;
 	  b_recoMu_glb_nchi2 = -1.0;
 	  b_recoMu_glb_chi2  = -1.0;
     b_recoMu_glb_pterror  = -1.0;

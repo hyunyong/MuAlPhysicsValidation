@@ -34,8 +34,8 @@ ptPullSTASigmaRange = 0, 30
 ptPullGLBMeanRange = -.3,.3
 ptPullGLBSigmaRange = 0, 3
 
-massMeanRange = 60, 120
-massSigmaRange = 0, 40
+massMeanRange = 80, 100
+massSigmaRange = 0, 20
 
 nChi2MeanRange = .5, 2
 nChi2RMSRange = 0, 1

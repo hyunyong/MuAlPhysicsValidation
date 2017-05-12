@@ -1,3 +1,4 @@
+import ROOT
 from ROOT import TFile, TTree, TH1F, TCanvas, TProfile, TH2F,  TCollection, TLegend, gStyle
 import  math, sys, os
 
@@ -8,13 +9,10 @@ gStyle.SetLegendFillColor(0);
 execfile("functions.py")
 execfile("constants.py")
 
-#outputFolderName = "MuAlRefit_Legacy_Prompt"
-##fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root"]
-#fileListName = [ "Legacy","Prompt"]
 outputFolderName = "MuAlRefit_Legacy_local"
-fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Legacy_dbLocal.root"]
-fileListName = [ "Legacy","Legacy_loc"]
-colors = [2,1]
+fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root","MuAlRefit_Legacy_APEminuitx2.root"]
+fileListName = [ "Legacy","Prompt","Legacy APE minuit"]
+colors = [ROOT.kBlack,ROOT.kRed,ROOT.kGreen]
 
 files = []
 TH2F_temp = []
@@ -81,6 +79,4 @@ makeProfile("glb_sta_phi_v_ptRes_barrel","res",nBins, "gaus", drawBinPlots,ptRes
 makeProfile("sta_glb_pt_HybridSTA_Mass","mass",nBins, "gaus", drawBinPlots,massMeanRange,massSigmaRange)
 makeProfile("sta_glb_phi_HybridSTA_Mass","mass",nBins, "gaus", drawBinPlots,massMeanRange,massSigmaRange)
 makeProfile("sta_glb_eta_HybridSTA_Mass","mass",nBins, "gaus", drawBinPlots,massMeanRange,massSigmaRange)
-
-
 

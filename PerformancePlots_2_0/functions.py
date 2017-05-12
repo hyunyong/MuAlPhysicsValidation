@@ -136,7 +136,7 @@ def makeProfile(TH2F_name, dirName, lnBins, fitType, drawBinPlots, meanRange, si
 					titleString = titleString.replace("#", "")
 					binlegend =  TLegend(0.12,0.68,0.5,0.88)
 					makeLegend(binlegend, temp)
-					binlegend.SetHeader("{} {:0.3f} to {:0.3f}".format(histo.GetTitle(), boundsValue[0], boundsValue[1]))
+					#binlegend.SetHeader("{} {:0.3f} to {:0.3f}".format(histo.GetTitle(), boundsValue[0], boundsValue[1]))
 
 					c1.SaveAs('{}/{}_{}_from_{:0.3f}_to_{:0.3f}_{}.png'.format(path,TH2F_name,fitType, boundsValue[0],boundsValue[1],titleString ))
 				

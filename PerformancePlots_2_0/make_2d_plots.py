@@ -1,50 +1,30 @@
-#import ROOT
 from ROOT import TFile, TTree, TH1F, TLorentzVector
-#import histograms
-import  math, sys, os
 from ROOT import TLorentzVector
 from random import randint
-
+import math, sys, os
+from math import fabs
+#RUN WITH:
 #python make_2d_plots.py ../MuAlAnalyzer/MuAlRefit_Legacy/MuAlRefit_Legacy.root MuAlRefit_Legacy -b
-#python make_2d_plots.py ../MuAlAnalyzer/MuAlRefit_Prompt/MuAlRefit_Prompt.root MuAlRefit_Prompt -b
-#python make_2d_plots.py ../MuAlAnalyzer/MuAlRefit_Legacy_APEminuitx2/MuAlRefit_Legacy_APEminuitx2.root MuAlRefit_Legacy_APEminuitx2 -b
-#python make_2d_plots.py ../MuAlAnalyzer/MuAlRefit_Legacy_dbLocal/MuAlRefit_Legacy_dbLocal.root MuAlRefit_Legacy_dbLocal -b
 
 # input arguments, first is input root file, second is output root file 
 fileIn = sys.argv[1]
 fileOut = sys.argv[2]
 
 # read the input root file
-f = TFile.Open(fileIn, "read")
-td = f.Get("muAlAnalyzer")
-Events = td.Get("Events")
-genMuons = td.Get("genMuons")
-recoMuons = td.Get("recoMuons")
-recoDimuons = td.Get("recoDimuons")
+f            = TFile.Open(fileIn, "read")
+td           = f.Get("muAlAnalyzer")
+Events       = td.Get("Events")
+genMuons     = td.Get("genMuons")
+recoMuons    = td.Get("recoMuons")
+recoDimuons  = td.Get("recoDimuons")
+savePng      = True
+Event_ro_RUN = -1
+#Events.Print(); genMuons.Print(); recoMuons.Print(); recoDimuons.Print()
 
-savePng = True
-
-#Events.Print()
-#genMuons.Print()
-#recoMuons.Print()
-#recoDimuons.Print()
-
-execfile("functions.py")
-
-########################################################################################
-##
 ## First step, define your histograms in histograms.py
-##
-########################################################################################
-
+execfile("functions.py")
 execfile("histograms.py")
-
-########################################################################################
-##
 ## Second step, fill recoMuon and recoDimuon histograms  
-##
-########################################################################################
-
 execfile("recoMuonLoop.py")
 execfile("recoDimuonLoop.py")
 execfile("drawPng.py")

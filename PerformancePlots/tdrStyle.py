@@ -117,7 +117,7 @@ def setTDRStyle():
   tdrStyle.SetNdivisions(510, "XYZ")
   tdrStyle.SetPadTickX(1)  # To get tick marks on the opposite side of the frame
   tdrStyle.SetPadTickY(1)
-  ROOT.TGaxis.SetMaxDigits(3)
+  ROOT.TGaxis.SetMaxDigits(4)
 
 # Change for log plots:
   tdrStyle.SetOptLogx(0)

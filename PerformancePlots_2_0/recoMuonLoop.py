@@ -10,10 +10,20 @@ for counter, event in enumerate(recoMuons):
 	##
 	## barrel
 	##
+	deltaPhiGLB = (event.glb_phi-event.sta_phi)/event.glb_phi_error
+	deltaPhiTRK = (event.glb_trk_phi-event.sta_phi)/event.glb_phi_error
 
 	if abs(event.glb_eta) < 0.9 :
 		TH1F_sta_nChi2_barrel.Fill(event.sta_nchi2)
 		TH1F_glb_nChi2_barrel.Fill(event.glb_nchi2)
+
+		
+		TH1F_sta_glb_delta_phi_barrel.Fill(deltaPhiGLB)
+		
+		TH1F_sta_TRK_delta_phi_barrel.Fill(deltaPhiTRK)
+
+
+
 
 	##
 	## endcap
@@ -22,6 +32,12 @@ for counter, event in enumerate(recoMuons):
 	if abs(event.glb_eta) > 0.9 :
 		TH1F_sta_nChi2_endcap.Fill(event.sta_nchi2)
 		TH1F_glb_nChi2_endcap.Fill(event.glb_nchi2)
+
+		TH1F_sta_glb_delta_phi_endcap.Fill(deltaPhiGLB)
+		TH1F_sta_TRK_delta_phi_endcap.Fill(deltaPhiTRK)
+		
+	TH1F_sta_glb_delta_phi.Fill(deltaPhiGLB)
+	TH1F_sta_TRK_delta_phi.Fill(deltaPhiTRK)
 
 
 
@@ -65,12 +81,17 @@ for counter, event in enumerate(recoMuons):
 		#ptResGLBSTA = (event.sta_pt-event.glb_pt)/event.glb_pt
 		TH2F_glb_sta_eta_ptRes.Fill(event.glb_eta, ptResGLBSTA)
 		TH2F_glb_sta_phi_ptRes.Fill(event.glb_phi, ptResGLBSTA)
+		if abs(event.glb_eta) > 0.9 :
+			TH2F_glb_sta_phi_ptRes_endcap.Fill(event.glb_phi, ptResGLBSTA)
+		if abs(event.glb_eta) < 0.9 :
+			TH2F_glb_sta_phi_ptRes_barrel.Fill(event.glb_phi, ptResGLBSTA)
+
 
 		ptResGLBSTA = (event.sta_pt-event.glb_pt)/event.glb_pt
 		TH2F_glb_sta_eta_ptRes_type_2.Fill(event.glb_eta, ptResGLBSTA)
 		TH2F_glb_sta_phi_ptRes_type_2.Fill(event.glb_phi, ptResGLBSTA)
 		TH2F_glb_sta_pt_ptRes_type_2.Fill(event.glb_pt, ptResGLBSTA)
-
+		
 		
 
 	##

@@ -38,8 +38,28 @@ if savePng:
 		c1.SaveAs("{}/TH2F_gen_glb_eta_ptRes.png".format(fileOut))
 		TH2F_gen_glb_phi_ptRes.Draw("colz")
 		c1.SaveAs("{}/TH2F_gen_glb_phi_ptRes.png".format(fileOut))
+
+
+
+
 		TH2F_gen_glb_pt_ptRes.Draw("colz")
 		c1.SaveAs("{}/TH2F_gen_glb_pt_ptRes.png".format(fileOut))
+	##
+	##	phi
+	##
+
+	TH1F_sta_glb_delta_phi_barrel.Draw()
+	c1.SaveAs("{}/TH1F_sta_glb_delta_phi_barrel.png".format(fileOut))
+	TH1F_sta_glb_delta_phi_endcap.Draw()
+	c1.SaveAs("{}/TH1F_sta_glb_delta_phi_endcap.png".format(fileOut)) 
+	TH1F_sta_TRK_delta_phi_barrel.Draw()
+	c1.SaveAs("{}/TH1F_sta_TRK_delta_phi_barrel.png".format(fileOut))
+	TH1F_sta_TRK_delta_phi_endcap.Draw()
+	c1.SaveAs("{}/TH1F_sta_TRK_delta_phi_endcap.png".format(fileOut))
+	TH1F_sta_glb_delta_phi.Draw()
+	c1.SaveAs("{}/TH1F_sta_glb_delta_phi.png".format(fileOut))
+	TH1F_sta_TRK_delta_phi.Draw()
+	c1.SaveAs("{}/TH1F_sta_TRK_delta_phi.png".format(fileOut))
 
 	##
 	##	ptPull
@@ -95,6 +115,10 @@ if savePng:
 	c1.SaveAs("{}/TH2F_glb_sta_eta_ptRes_type_2.png".format(fileOut))
 	TH2F_glb_sta_phi_ptRes_type_2.Draw("colz")
 	c1.SaveAs("{}/TH2F_glb_sta_phi_ptRes_type_2.png".format(fileOut))
+	TH2F_glb_sta_phi_ptRes_endcap.Draw("colz")
+	c1.SaveAs("{}/TH2F_glb_sta_phi_ptRes_endcap.png".format(fileOut))
+	TH2F_glb_sta_phi_ptRes_barrel.Draw("colz")
+	c1.SaveAs("{}/TH2F_glb_sta_phi_ptRes_barrel.png".format(fileOut))
 	TH2F_glb_sta_pt_ptRes_type_2.Draw("colz")
 	c1.SaveAs("{}/TH2F_glb_sta_pt_ptRes_type_2.png".format(fileOut)) 
 

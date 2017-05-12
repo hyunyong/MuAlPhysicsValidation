@@ -200,9 +200,9 @@ def makeLegend(legend, histogram):
 def makeLegend1D(legend, histogram):
 	legend.SetTextSize(0.03)
 	legend.SetFillStyle(0)
-	#legend.SetHeader(histogram[0].GetTitle())
 	for TH2FCount, histo in enumerate(histogram):
 		legend.AddEntry(histo,fileListName[TH2FCount],"lep")
+	legend.Draw()
 
 
 
@@ -216,7 +216,7 @@ def make1D(TH1F_name):
 	histoBounds = TH1F_temp_input[0].GetXaxis().GetXmin(), TH1F_temp_input[0].GetXaxis().GetXmax()
 	
 	temp = []
-	legend =  TLegend(0.62,0.68,0.65,0.88)
+	legend =  TLegend(0.65,0.68,0.7,0.88)
 	draw1D(TH1F_temp_input, histoBounds, legend)
 	c1.SaveAs('{}/{}.png'.format(outputFolderName,TH1F_name))
 

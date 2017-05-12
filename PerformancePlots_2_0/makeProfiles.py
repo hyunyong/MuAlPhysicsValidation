@@ -24,10 +24,10 @@ execfile("constants.py")
 #fileListName = [ "6DOF ideal Cov", "3DOF"]
 #colors = [4,2]
 
-outputFolderName = "example"
-fileList = ["out.root"]
-fileListName = [ "6DOF ideal dia"]
-colors = [4]
+outputFolderName = "Legacy_Prompt"
+fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root"]
+fileListName = [ "Legacy","Prompt"]
+colors = [2,1]
 files = []
 TH2F_temp = []
 
@@ -46,24 +46,15 @@ for count, file in enumerate(fileList):
 
 if isMC:
 	makeProfile("glb_gen_pt_v_ptRes", "res", nBins, "gaus", drawBinPlots,ptResMeanRange,ptResSigmaRange)
-	makeProfile("glb_gen_pt_v_ptRes", "res", nBins, "mean", drawBinPlots, ptResMeanRange,ptResSigmaRange)
-
-
 	makeProfile("sta_gen_pt_v_ptRes" , "res", nBins,"gaus",drawBinPlots,ptResSTAMeanRange,ptResSTASigmaRange)
 	makeProfile("sta_gen_eta_v_ptRes", "res", nBins,"gaus",drawBinPlots,ptResSTAMeanRange,ptResSTASigmaRange)
-
-	
 	makeProfile("TH2F_gen_glb_eta_ptPull","pull",nBins,"gaus",drawBinPlots,ptPullGLBMeanRange,ptPullGLBSigmaRange)
 	makeProfile("TH2F_gen_glb_pt_ptPull","pull",nBins,"gaus",drawBinPlots,ptPullGLBMeanRange,ptPullGLBSigmaRange) 
-
-
-	
 	makeProfile("gen_glb_eta_v_ptRes","res",nBins, "gaus", drawBinPlots, ptResGLBMeanRange, ptResGLBSigmaRange)
 	makeProfile("gen_glb_phi_v_ptRes","res",nBins, "gaus", drawBinPlots, ptResGLBMeanRange, ptResGLBSigmaRange)
 	makeProfile("gen_glb_pt_v_ptRes","res",nBins, "gaus", drawBinPlots, ptResGLBMeanRange, ptResGLBSigmaRange) 
 
-
-makeProfile("TH2F_glb_sta_eta_ptPull","pull",nBins,"gaus",True,ptPullSTAMeanRange,ptPullSTASigmaRange)
+makeProfile("TH2F_glb_sta_eta_ptPull","pull",nBins,"gaus",drawBinPlots,ptPullSTAMeanRange,ptPullSTASigmaRange)
 makeProfile("TH2F_glb_sta_pt_ptPull" ,"pull", nBins,"gaus",drawBinPlots,ptPullSTAMeanRange,ptPullSTASigmaRange)
 
 
@@ -91,12 +82,12 @@ makeProfile("TH2F_glb_sta_pt_ptPull","pull",nBins,"gaus",drawBinPlots,ptPullSTAM
 
 
 
-makeProfile("glb_sta_eta_v_ptRes","res",nBins, "gaus", False,ptResMeanRange,ptResSigmaRange)
-makeProfile("glb_sta_phi_v_ptRes","res",nBins, "gaus", False,ptResMeanRange,ptResSigmaRange)
+makeProfile("glb_sta_eta_v_ptRes","res",nBins, "gaus", drawBinPlots,ptResMeanRange,ptResSigmaRange)
+makeProfile("glb_sta_phi_v_ptRes","res",nBins, "gaus", drawBinPlots,ptResMeanRange,ptResSigmaRange)
 
 makeProfile("sta_glb_pt_HybridSTA_Mass","mass",nBins, "gaus", drawBinPlots,massMeanRange,massSigmaRange)
-makeProfile("sta_glb_phi_HybridSTA_Mass","mass",nBins, "mean", True,massMeanRange,massSigmaRange)
-makeProfile("sta_glb_eta_HybridSTA_Mass","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange)
+makeProfile("sta_glb_phi_HybridSTA_Mass","mass",nBins, "gaus", drawBinPlots,massMeanRange,massSigmaRange)
+makeProfile("sta_glb_eta_HybridSTA_Mass","mass",nBins, "gaus", drawBinPlots,massMeanRange,massSigmaRange)
 
 
 

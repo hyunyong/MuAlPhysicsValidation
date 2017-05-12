@@ -1,7 +1,7 @@
 for counter, event in enumerate(recoMuons):	
 
 	if counter % 1000 == 0: print counter, (counter +0.0)/event.GetEntries()
-	#if counter > 10000: break
+	if counter > 10000: break
 	if verbosity > 10:
 		print "event eta " , event.glb_eta
 		print "event pt " , event.glb_pt

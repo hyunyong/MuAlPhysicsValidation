@@ -38,8 +38,6 @@ def fitCut(hist, sigmas, opts):
     lower, upper = hist.GetMean()-sigmas*hist.GetRMS(), hist.GetMean()+sigmas*hist.GetRMS()
     hist.Fit("gaus",opts, "", lower, upper)
 
-
-
 def makeProfile(TH2F_name, dirName, lnBins, fitType, drawBinPlots, meanRange, sigmaRange):
 	TH2F_temp_input = []
 	TH1F_fit_mean_output = []

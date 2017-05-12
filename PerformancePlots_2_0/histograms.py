@@ -14,7 +14,7 @@ outFile = TFile("{}.root".format(fileOut), "recreate")
 verbosity = 0
 
 isMC = False
-isNewMuAlAnalyzer = False
+isNewMuAlAnalyzer = True
 
 
 ptBins = 48
@@ -36,8 +36,6 @@ ptResMin = -0.1
 ptResMax = 0.1
 #ptResMin = -0.7 for other definition as seen in code but commented out
 #ptResMax = 0.7
-
-
 
 
 massBins = 48
@@ -134,11 +132,11 @@ TH2F_gen_sta_pt_ptRes_type_2 = TH2F("gen_sta_pt_v_ptRes_type_2"," gen vs glb p_{
 # recoDimuon plots
 #glb gen 
 
-TH2F_sta_glb_pt_HybridSTA_Mass = TH2F("sta_glb_pt_HybridSTA_Mass"," sta glb Hydrid Z' Mass ;p_{T} mu STA;GeV",ptBins, ptMin, ptMax ,massBins, massMin, massMax )
-TH2F_sta_glb_eta_HybridSTA_Mass = TH2F("sta_glb_eta_HybridSTA_Mass"," sta glb Hydrid Z' Mass ;#eta mu STA;GeV",etaBins, etaMin, etaMax ,massBins, massMin, massMax )
-TH2F_sta_glb_phi_HybridSTA_Mass = TH2F("sta_glb_phi_HybridSTA_Mass"," sta glb Hydrid Z' Mass ;#phi mu STA;GeV",phiBins, phiMin, phiMax ,massBins, massMin, massMax )
+TH2F_sta_glb_pt_HybridSTA_Mass = TH2F("sta_glb_pt_HybridSTA_Mass"," sta glb Hydrid Z Mass ;p_{T} mu STA;GeV",ptBins, ptMin, ptMax ,massBins, massMin, massMax )
+TH2F_sta_glb_eta_HybridSTA_Mass = TH2F("sta_glb_eta_HybridSTA_Mass"," sta glb Hydrid Z Mass ;#eta mu STA;GeV",etaBins, etaMin, etaMax ,massBins, massMin, massMax )
+TH2F_sta_glb_phi_HybridSTA_Mass = TH2F("sta_glb_phi_HybridSTA_Mass"," sta glb Hydrid Z Mass ;#phi mu STA;GeV",phiBins, phiMin, phiMax ,massBins, massMin, massMax )
 
-#TH2F_sta_glb_pt_HybridSTA_Mass = TH2F("sta_glb_pt_HybridSTA_Mass"," sta Hydrid Z' Mass ;p_{T};GeV",ptBins, ptMin, ptMax ,massBins, massMin, massMax )
+#TH2F_sta_glb_pt_HybridSTA_Mass = TH2F("sta_glb_pt_HybridSTA_Mass"," sta Hydrid Z Mass ;p_{T};GeV",ptBins, ptMin, ptMax ,massBins, massMin, massMax )
 
 #muonTypes = ["sta","glb_trk","glb","glb_pic","glb_gen"]
 #if not isMC: del muonTypes[-1] 

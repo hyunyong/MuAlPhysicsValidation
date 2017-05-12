@@ -12,7 +12,7 @@ c1 = TCanvas("c1", "c1", 600, 600)
 
 nBins = 10
 nGausFit = 1.5
-drawBinPlots = False
+drawBinPlots = True
 nBins = 16
 
 ptResMeanRange = -.001,.002
@@ -34,18 +34,15 @@ ptPullSTASigmaRange = 0, 30
 ptPullGLBMeanRange = -.3,.3
 ptPullGLBSigmaRange = 0, 3
 
-
 massMeanRange = 60, 120
 massSigmaRange = 0, 40
-
 
 nChi2MeanRange = .5, 2
 nChi2RMSRange = 0, 1
 
-
 nHitsMeanRange = 30, 60
 nHitsRMSRange = 8, 12
 
-isMC = True
+isMC = False
 
 verbose = 5

@@ -27,6 +27,10 @@ phiBins = 48
 phiMin = -3.2
 phiMax = 3.2
 
+phiResBins = 48
+phiResMin = -100
+phiResMax = 100
+
 etaBins = 48
 etaMin = -2.4
 etaMax = 2.4
@@ -75,8 +79,13 @@ TH2F_sta_gen_eta_ptRes = TH2F("sta_gen_eta_v_ptRes"," sta vs gen p_{T}Res ;#eta;
 ## phi
 ##
 
-TH1F_sta_glb_delta_phi_barrel = TH1F("TH1F_sta_glb_delta_phi_barrel", "sta n#chi^{2} |#eta| < 0.9; n#chi^2",nChi2Bins, nChi2Min, nChi2Max )
-TH1F_sta_glb_delta_phi_endcap = TH1F("TH1F_sta_glb_delta_phi_endcap", "sta n#chi^{2} |#eta| > 0.9; n#chi^2",nChi2Bins, nChi2Min, nChi2Max )
+TH1F_sta_glb_delta_phi_barrel = TH1F("TH1F_sta_glb_delta_phi_barrel", "(#phi_{GLB}-#phi_{STA})/#phi_{GLB Error}  |#eta| < 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
+TH1F_sta_glb_delta_phi_endcap = TH1F("TH1F_sta_glb_delta_phi_endcap", "(#phi_{GLB}-#phi_{STA})/#phi_{GLB Error}  |#eta| > 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
+TH1F_sta_glb_delta_phi = TH1F("TH1F_sta_glb_delta_phi", "(#phi_{GLB}-#phi_{STA})/#phi_{GLB Error}; #delta #phi",phiResBins, phiResMin, phiResMax )
+
+TH1F_sta_TRK_delta_phi_barrel = TH1F("TH1F_sta_TRK_delta_phi_barrel", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}  |#eta| < 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
+TH1F_sta_TRK_delta_phi_endcap = TH1F("TH1F_sta_TRK_delta_phi_endcap", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}  |#eta| > 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
+TH1F_sta_TRK_delta_phi = TH1F("TH1F_sta_TRK_delta_phi", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}; #delta #phi",phiResBins, phiResMin, phiResMax )
 
 
 
@@ -117,6 +126,8 @@ TH2F_gen_glb_pt_ptPull = TH2F("TH2F_gen_glb_pt_ptPull", "gen glb p_{T} Pull;p_{T
 
 TH2F_glb_sta_eta_ptRes = TH2F("glb_sta_eta_v_ptRes"," glb vs sta p_{T}Res ;#eta;pTRes",etaBins, etaMin, etaMax ,ptResBins, ptResMin, ptResMax )
 TH2F_glb_sta_phi_ptRes = TH2F("glb_sta_phi_v_ptRes"," glb vs sta p_{T}Res ;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResMin, ptResMax )
+TH2F_glb_sta_phi_ptRes_endcap = TH2F("glb_sta_phi_v_ptRes_endcap"," glb vs sta p_{T}Res |#eta| > 0.9;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResMin, ptResMax )
+TH2F_glb_sta_phi_ptRes_barrel = TH2F("glb_sta_phi_v_ptRes_barrel"," glb vs sta p_{T}Res |#eta| < 0.9;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResMin, ptResMax )
 
 TH2F_gen_glb_eta_ptRes = TH2F("gen_glb_eta_v_ptRes"," gen vs glb p_{T}Res ;#eta;pTRes",etaBins, etaMin, etaMax ,ptResBins, ptResGLB[0], ptResGLB[1] )
 TH2F_gen_glb_phi_ptRes = TH2F("gen_glb_phi_v_ptRes"," gen vs glb p_{T}Res ;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResGLB[0], ptResGLB[1] )

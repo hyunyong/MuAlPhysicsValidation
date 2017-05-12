@@ -1,47 +1,30 @@
-#import ROOT
 from ROOT import TFile, TTree, TH1F, TCanvas, TProfile, TH2F,  TCollection, TLegend, gStyle
-#import histograms
 import  math, sys, os
 
 gStyle.SetOptStat(0);
 gStyle.SetLegendBorderSize(0);
 gStyle.SetLegendFillColor(0);
-#gErrorIgnoreLevel=kError
 
 execfile("functions.py")
 execfile("constants.py")
 
-#c1 = TCanvas("c1", "c1", 600, 400)
-
-
-
-#open files
-
-#fileList = ["out_500_200k_ideal_APEcov.root", "out_500_200k_ideal_diag.root"]
-#fileListName = ["Cov", "Diag"]
-#fileList = ["Run2016G.root","mc_zMuMu.root"]
-#fileList = ["6DOF_ideal_cov.root","3DOF.root"]
-#fileListName = [ "6DOF ideal Cov", "3DOF"]
-#colors = [4,2]
-
-outputFolderName = "Legacy_Prompt"
-fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root"]
-fileListName = [ "Legacy","Prompt"]
+#outputFolderName = "MuAlRefit_Legacy_Prompt"
+##fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root"]
+#fileListName = [ "Legacy","Prompt"]
+outputFolderName = "MuAlRefit_Legacy_local"
+fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Legacy_dbLocal.root"]
+fileListName = [ "Legacy","Legacy_loc"]
 colors = [2,1]
+
 files = []
 TH2F_temp = []
-
 if not os.path.exists(outputFolderName):
 	os.makedirs(outputFolderName)
-
 for count, file in enumerate(fileList):
 	files.append( TFile.Open(file, "read"))
 
-
 ########################################################################################
-##
 ## Draw Profiles
-##
 ########################################################################################
 
 if isMC:

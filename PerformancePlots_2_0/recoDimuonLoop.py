@@ -1,9 +1,7 @@
 for counter, event in enumerate(recoDimuons):	
 
 	if counter % 1000 == 0: print counter, (counter +0.0)/event.GetEntries()
-	if counter > 10000: break
-
-
+	#if counter > 10000: break
 
 	##
 	##	dimuon mass

@@ -1,13 +1,6 @@
-
-
 c1 = TCanvas("c1", "c1", 600, 600)
-
-
-
 ########################################################################################
-##
 ## Make Profile Constants
-##
 ########################################################################################
 
 nBins = 10
@@ -15,12 +8,11 @@ nGausFit = 1.5
 drawBinPlots = True
 nBins = 16
 
-ptResMeanRange = -.001,.002
+ptResMeanRange = -.003,.003
 ptResSigmaRange = .00, .008
 
 ptResGLBMeanRange = -.01,.01
 ptResGLBSigmaRange = .00, .2
-
 
 ptResSTAMeanRange = -.5,.5
 ptResSTASigmaRange = 0, .6
@@ -35,7 +27,7 @@ ptPullGLBMeanRange = -.3,.3
 ptPullGLBSigmaRange = 0, 3
 
 massMeanRange = 80, 100
-massSigmaRange = 0, 20
+massSigmaRange = 0, 13
 
 nChi2MeanRange = .5, 2
 nChi2RMSRange = 0, 1

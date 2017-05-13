@@ -9,10 +9,25 @@ gStyle.SetLegendFillColor(0);
 execfile("functions.py")
 execfile("constants.py")
 
-outputFolderName = "MuAlRefit_Legacy_local"
+#outputFolderName = "MuAlRefit_LegacyTest"
+#fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root","MuAlRefit_Legacy_GeoOld_APEold.root","MuAlRefit_Legacy_APEold.root"]
+#fileListName = [ "Legacy","Prompt","3DOF_oldAPE","oldAPE"]
+#colors = [ROOT.kBlack,ROOT.kRed,ROOT.kBlue,ROOT.kGreen]
+
+#outputFolderName = "MuAlRefit_LegacyTest"
+#fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root","MuAlRefit_Legacy_APEold.root"]
+#fileListName = [ "Legacy","Prompt","oldAPE"]
+#colors = [ROOT.kBlack,ROOT.kRed,ROOT.kGreen]
+
+outputFolderName = "MuAlRefit_LegacyTest_LegProAPEx2"
 fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root","MuAlRefit_Legacy_APEminuitx2.root"]
-fileListName = [ "Legacy","Prompt","Legacy APE minuit"]
+fileListName = [ "Legacy","Prompt","APE minuit"]
 colors = [ROOT.kBlack,ROOT.kRed,ROOT.kGreen]
+
+#outputFolderName = "MuAlRefit_LegacyTest"
+#fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root"]
+#fileListName = [ "Legacy","Prompt"]
+#colors = [ROOT.kBlack,ROOT.kRed]
 
 files = []
 TH2F_temp = []

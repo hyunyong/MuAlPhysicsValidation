@@ -15,9 +15,11 @@ maxEntries = 3000000
 
 samples = [
 [ch_Data2016H, "2016H Legacy", "2016H Legacy",[ ROOT.kBlack, 24 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Legacy/MuAlRefit_Legacy.root"],
+[ch_Data2016H, "2016H Legacy APEold", "2016H Legacy APEold",[ ROOT.kBlue, 24 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Legacy_APEold/MuAlRefit_Legacy_APEold.root"],
+[ch_Data2016H, "2016H Legacy 3DOF APEold", "2016H Legacy 3DOF APEold",[ ROOT.kGreen, 24 ], maxEntries,"../MuAlAnalyzer/MuAlRefit_Legacy_GeoOld_APEold/MuAlRefit_Legacy_GeoOld_APEold.root"],
+[ch_Data2016H, "2016H Prompt", "2016H Prompt",[ ROOT.kRed,   24 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Prompt/MuAlRefit_Prompt.root"],
 #[ch_Data2016H, "2016H Legacy loc", "2016H Legacy loc",[ ROOT.kBlue, 24 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Legacy_dbLocal/MuAlRefit_Legacy_dbLocal.root"],
 #[ch_Data2016H, "2016H Legacy APE min", "2016H APE min",[ ROOT.kGreen, 24 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Legacy_APEminuitx2/MuAlRefit_Legacy_APEminuitx2.root"],
-[ch_Data2016H, "2016H Prompt", "2016H Prompt",[ ROOT.kRed,   24 ], maxEntries, "../MuAlAnalyzer/MuAlRefit_Prompt/MuAlRefit_Prompt.root"],
 ]
 
 execfile("plot_checkSamples.py")
@@ -42,7 +44,9 @@ execfile("plot_fillProfiles.py")
 # Don't combine more than 4 histos on one plot
 combineHistos = [ 
   [0,1],
+  [0,2],
   [0,3],
+  [0,1,2,3]
   [0,2,3]
 ]
 

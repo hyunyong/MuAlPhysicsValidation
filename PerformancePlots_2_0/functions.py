@@ -171,7 +171,9 @@ def makeLegend1D(legend, histogram):
 def make1D(TH1F_name):
   TH1F_temp_input = []
   for fileCount, file in enumerate(files):
-    TH1F_temp_input.append(file.Get(TH1F_name))
+    TH1F_scaled = file.Get(TH1F_name)
+    TH1F_scaled.Scale(1./TH1F_scaled.GetEntries())
+    TH1F_temp_input.append(TH1F_scaled)
   histoBounds = TH1F_temp_input[0].GetXaxis().GetXmin(), TH1F_temp_input[0].GetXaxis().GetXmax()
   temp = []
   legend =  TLegend(0.65,0.68,0.7,0.88)

@@ -14,8 +14,6 @@ outFile = TFile("{}.root".format(fileOut), "recreate")
 verbosity = 0
 
 isMC = False
-isNewMuAlAnalyzer = True
-
 
 ptBins = 48
 ptMin = 0
@@ -133,20 +131,14 @@ TH2F_gen_glb_eta_ptRes = TH2F("gen_glb_eta_v_ptRes"," gen vs glb p_{T}Res ;#eta;
 TH2F_gen_glb_phi_ptRes = TH2F("gen_glb_phi_v_ptRes"," gen vs glb p_{T}Res ;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResGLB[0], ptResGLB[1] )
 TH2F_gen_glb_pt_ptRes = TH2F("gen_glb_pt_v_ptRes"," gen vs glb p_{T}Res ;p_{T};pTRes",ptBins, ptMin, ptMax ,ptResBins, ptResGLB[0], ptResGLB[1] )
 
-TH2F_glb_sta_eta_ptRes_type_2 = TH2F("glb_sta_eta_v_ptRes_type_2"," glb vs sta p_{T}Res (type 2) ;#eta;pTRes",etaBins, etaMin, etaMax ,ptResBins,ptResSTAType2[0], ptResSTAType2[1] )
-TH2F_glb_sta_phi_ptRes_type_2 = TH2F("glb_sta_phi_v_ptRes_type_2"," glb vs sta p_{T}Res (type 2) ;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResSTAType2[0], ptResSTAType2[1])
-TH2F_glb_sta_pt_ptRes_type_2 = TH2F("glb_sta_pt_v_ptRes_type_2"," glb vs sta p_{T}Res (type 2) ;p_{T};pTRes",ptBins, ptMin, ptMax ,ptResBins, ptResSTAType2[0], ptResSTAType2[1])
+#TH2F_glb_sta_eta_ptRes_type_2 = TH2F("glb_sta_eta_v_ptRes_type_2"," glb vs sta p_{T}Res (type 2) ;#eta;pTRes",etaBins, etaMin, etaMax ,ptResBins,ptResSTAType2[0], ptResSTAType2[1] )
+#TH2F_glb_sta_phi_ptRes_type_2 = TH2F("glb_sta_phi_v_ptRes_type_2"," glb vs sta p_{T}Res (type 2) ;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResSTAType2[0], ptResSTAType2[1])
+#TH2F_glb_sta_pt_ptRes_type_2 = TH2F("glb_sta_pt_v_ptRes_type_2"," glb vs sta p_{T}Res (type 2) ;p_{T};pTRes",ptBins, ptMin, ptMax ,ptResBins, ptResSTAType2[0], ptResSTAType2[1])
 
 
-TH2F_gen_sta_eta_ptRes_type_2 = TH2F("gen_sta_eta_v_ptRes_type_2"," gen vs glb p_{T}Res (type 2) ;#eta;pTRes",etaBins, etaMin, etaMax ,ptResBins, ptResSTAType2[0], ptResSTAType2[1])
-TH2F_gen_sta_phi_ptRes_type_2 = TH2F("gen_sta_phi_v_ptRes_type_2"," gen vs glb p_{T}Res (type 2) ;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResSTAType2[0], ptResSTAType2[1] )
-TH2F_gen_sta_pt_ptRes_type_2 = TH2F("gen_sta_pt_v_ptRes_type_2"," gen vs glb p_{T}Res (type 2) ;p_{T};pTRes",ptBins, ptMin, ptMax ,ptResBins, ptResSTAType2[0], ptResSTAType2[1])
-
-
-
-
-
-
+#TH2F_gen_sta_eta_ptRes_type_2 = TH2F("gen_sta_eta_v_ptRes_type_2"," gen vs glb p_{T}Res (type 2) ;#eta;pTRes",etaBins, etaMin, etaMax ,ptResBins, ptResSTAType2[0], ptResSTAType2[1])
+#TH2F_gen_sta_phi_ptRes_type_2 = TH2F("gen_sta_phi_v_ptRes_type_2"," gen vs glb p_{T}Res (type 2) ;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResSTAType2[0], ptResSTAType2[1] )
+#TH2F_gen_sta_pt_ptRes_type_2 = TH2F("gen_sta_pt_v_ptRes_type_2"," gen vs glb p_{T}Res (type 2) ;p_{T};pTRes",ptBins, ptMin, ptMax ,ptResBins, ptResSTAType2[0], ptResSTAType2[1])
 
 # recoDimuon plots
 #glb gen 

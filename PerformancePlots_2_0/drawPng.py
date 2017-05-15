@@ -27,12 +27,12 @@ if savePng:
 		##	ptRes
 		##
 
-		TH2F_gen_sta_eta_ptRes_type_2.Draw("colz")
-		c1.SaveAs("{}/TH2F_gen_sta_eta_ptRes_type_2.png".format(fileOut))
-		TH2F_gen_sta_phi_ptRes_type_2.Draw("colz")
-		c1.SaveAs("{}/TH2F_gen_sta_phi_ptRes_type_2.png".format(fileOut))
-		TH2F_gen_sta_pt_ptRes_type_2.Draw("colz")
-		c1.SaveAs("{}/TH2F_gen_sta_pt_ptRes_type_2.png".format(fileOut)) 
+#		TH2F_gen_sta_eta_ptRes_type_2.Draw("colz")
+#		c1.SaveAs("{}/TH2F_gen_sta_eta_ptRes_type_2.png".format(fileOut))
+#		TH2F_gen_sta_phi_ptRes_type_2.Draw("colz")
+#		c1.SaveAs("{}/TH2F_gen_sta_phi_ptRes_type_2.png".format(fileOut))
+#		TH2F_gen_sta_pt_ptRes_type_2.Draw("colz")
+#		c1.SaveAs("{}/TH2F_gen_sta_pt_ptRes_type_2.png".format(fileOut)) 
 
 		TH2F_gen_glb_eta_ptRes.Draw("colz")
 		c1.SaveAs("{}/TH2F_gen_glb_eta_ptRes.png".format(fileOut))
@@ -111,16 +111,16 @@ if savePng:
 	c1.SaveAs("{}/TH2F_glb_sta_phi_ptRes.png".format(fileOut))
 
 
-	TH2F_glb_sta_eta_ptRes_type_2.Draw("colz")
-	c1.SaveAs("{}/TH2F_glb_sta_eta_ptRes_type_2.png".format(fileOut))
-	TH2F_glb_sta_phi_ptRes_type_2.Draw("colz")
-	c1.SaveAs("{}/TH2F_glb_sta_phi_ptRes_type_2.png".format(fileOut))
+#	TH2F_glb_sta_eta_ptRes_type_2.Draw("colz")
+#	c1.SaveAs("{}/TH2F_glb_sta_eta_ptRes_type_2.png".format(fileOut))
+#	TH2F_glb_sta_phi_ptRes_type_2.Draw("colz")
+#	c1.SaveAs("{}/TH2F_glb_sta_phi_ptRes_type_2.png".format(fileOut))
 	TH2F_glb_sta_phi_ptRes_endcap.Draw("colz")
 	c1.SaveAs("{}/TH2F_glb_sta_phi_ptRes_endcap.png".format(fileOut))
 	TH2F_glb_sta_phi_ptRes_barrel.Draw("colz")
 	c1.SaveAs("{}/TH2F_glb_sta_phi_ptRes_barrel.png".format(fileOut))
-	TH2F_glb_sta_pt_ptRes_type_2.Draw("colz")
-	c1.SaveAs("{}/TH2F_glb_sta_pt_ptRes_type_2.png".format(fileOut)) 
+#	TH2F_glb_sta_pt_ptRes_type_2.Draw("colz")
+#	c1.SaveAs("{}/TH2F_glb_sta_pt_ptRes_type_2.png".format(fileOut)) 
 
 
 

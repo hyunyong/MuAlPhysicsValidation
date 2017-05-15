@@ -4,11 +4,15 @@ from random import randint
 import math, sys, os
 from math import fabs
 #RUN WITH:
-#python make_2d_plots.py ../MuAlAnalyzer/MuAlRefit_Legacy/MuAlRefit_Legacy.root MuAlRefit_Legacy -b
+#python make_2d_plots.py ../MuAlAnalyzer/MuAlRefit_Legacy/MuAlRefit_Legacy.root MuAlRefit_Legacy std -b # std,pos,neg,equal
 
 # input arguments, first is input root file, second is output root file 
 fileIn = sys.argv[1]
 fileOut = sys.argv[2]
+method = sys.argv[3]
+oldTTrees = sys.argv[4]=="oldTTrees"
+if(method!="std" and method!="pos" and method!="neg" and method!="equal"):
+  print "WARNIGN! method is unknown, options are std,pos,neg,equal";
 
 # read the input root file
 f            = TFile.Open(fileIn, "read")
@@ -28,45 +32,6 @@ execfile("histograms.py")
 execfile("recoMuonLoop.py")
 execfile("recoDimuonLoop.py")
 execfile("drawPng.py")
-
-	#for counter2, types in enumerate(TH2F_pt_ptRes):
-
-	#	name = TH2F_pt_ptRes[counter2].GetName()
-	#	values = returnValues(name)
-	#	TH2F_pt_ptRes[counter2].Fill(refPt,(values[2]-values[3])/values[3] )
-
-	#	name = TH2F_eta_ptRes[counter2].GetName()
-	#	values = returnValues(name)
-	#	TH2F_eta_ptRes[counter2].Fill(refEta,(values[2]-values[3])/values[3] )
-
-	#	name = TH2F_phi_ptRes[counter2].GetName()
-	#	values = returnValues(name)
-	#	TH2F_phi_ptRes[counter2].Fill(refPhi,(values[2]-values[3])/values[3] )
-
-
-	#	name =  TProfile_ptRes[counter2].GetName()
-	#	values = returnValues(name)
-	#	TProfile_ptRes[counter2].Fill(values[0],values[1],(values[2]-values[3])/values[3])
-
-	#	name =  TProfile_pt_ptRes[counter2].GetName()
-	#	values = returnValues(name)
-	#	TProfile_ptRes[counter2].Fill(values[0],values[1],(values[2]-values[3])/values[3])
-
-	#print counter, values[0], values[1],values[2], values[3]
-
-#for counter, types in enumerate(TH2F_pt_ptRes):
-#	TH2F_pt_ptRes[counter].Draw("colz")
-#	c1.SaveAs(TH2F_pt_ptRes[counter].GetName()+".png")
-#
-#	TH2F_phi_ptRes[counter].Draw("colz")
-#	c1.SaveAs(TH2F_phi_ptRes[counter].GetName()+".png")
-
-#	TH2F_eta_ptRes[counter].Draw("colz")
-#	c1.SaveAs(TH2F_eta_ptRes[counter].GetName()+".png")
-#	TProfile_ptRes[counter].Draw("colz")
-#	c1.SaveAs(TProfile_ptRes[counter].GetName()+".png")
-#leadingMuonPt.Draw()
-#1.SaveAs("leadingMuonPt.root")
 
 outFile.Write()
 outFile.Close()

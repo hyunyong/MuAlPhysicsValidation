@@ -7,3 +7,6 @@ PerformancePlots/*/*txt
 PerformancePlots/*/C
 PerformancePlots/*/PNG
 PerformancePlots/*/PDF
+PerformancePlots_2_0/Zmumu_*
+PerformancePlots_2_0/MuAlRefit*
+PerformancePlots_2_0/*root

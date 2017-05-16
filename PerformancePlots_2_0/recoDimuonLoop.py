@@ -4,9 +4,9 @@ for counter, event in enumerate(recoDimuons):
     if counter > Event_ro_RUN: break
   
   # Di-MU MASS
-  if ( event.sta and event.glb and event.pos_glb_trk_pt > thresholdPt and event.neg_glb_trk_pt > thresholdPt and fabs(event.pos_glb_trk_eta)<2.4 and fabs(event.neg_glb_trk_eta)<2.4):
-    if verbosity > 10:
-	print "sta m " , event.sta_m
+  if ( event.pos_glb_trk_pt > thresholdPt and event.neg_glb_trk_pt > thresholdPt and fabs(event.pos_glb_trk_eta)<2.4 and fabs(event.neg_glb_trk_eta)<2.4):
+    if not oldTTrees:
+      if(event.recoMu_pos_IsoPF04 < 0.15 and event.recoMu_neg_IsoPF04 < 0.15): continue;
     
     # HybridZ
     RandmonNumber=randint(0,1) # generate or 0 or 1

@@ -4,7 +4,11 @@ nPos = 0
 nMinPosNeg = 0
 if(method=="equal"):
   for counter0, event in enumerate(recoMuons):
-    if(event.glb_trk_pt < thresholdPt or fabs(event.glb_trk_eta)>2.4  ): continue
+    if(event.glb_trk_pt < thresholdPt or fabs(event.glb_trk_eta)>2.4 or not event.glb or not event.sta or event.sta_pt== 0.0 or event.glb_pt == 0.0  ): continue
+    if not oldTTrees:
+      if(event.recoMu_IsoPF04 < 0.15): continue;
+    if(Event_ro_RUN>0):
+      if nMuonPassed > Event_ro_RUN: break
     if event.q<0: nNeg+=1
     if event.q>0: nPos+=1
   if nNeg<nPos: nMinPosNeg = nNeg
@@ -14,7 +18,9 @@ if(method=="equal"):
 nMuonPassed, nMuonPos, nMuonNeg = 0, 0, 0
 for counter, event in enumerate(recoMuons):
   if counter % 100000 == 0: print counter, (counter +0.0)/event.GetEntries()
-  if(event.glb_trk_pt < thresholdPt or fabs(event.glb_trk_eta)>2.4  ): continue
+  if(event.glb_trk_pt < thresholdPt or fabs(event.glb_trk_eta)>2.4 or not event.glb or not event.sta or event.sta_pt== 0.0 or event.glb_pt == 0.0  ): continue
+  if not oldTTrees:
+    if(event.recoMu_IsoPF04 < 0.15): continue;
   if(Event_ro_RUN>0):
     if nMuonPassed > Event_ro_RUN: break
 
@@ -64,18 +70,13 @@ for counter, event in enumerate(recoMuons):
       TH2F_glb_sta_pt_ptPull.Fill(event.glb_pt,pTPull)
   
   # pT RES
-  if  event.glb and event.sta and event.sta_pt != 0.0 and event.glb_pt != 0.0:
-    ptResGLBSTA = event.q*(1.0/event.sta_pt-1.0/event.glb_pt)
-    TH2F_glb_sta_eta_ptRes.Fill(event.glb_eta, ptResGLBSTA)
-    TH2F_glb_sta_phi_ptRes.Fill(event.glb_phi, ptResGLBSTA)
-    if abs(event.glb_eta) > 0.9 :
-	TH2F_glb_sta_phi_ptRes_endcap.Fill(event.glb_phi, ptResGLBSTA)
-    if abs(event.glb_eta) < 0.9 :
-	TH2F_glb_sta_phi_ptRes_barrel.Fill(event.glb_phi, ptResGLBSTA)
-    ptResGLBSTA = (event.sta_pt-event.glb_pt)/event.glb_pt
-#    TH2F_glb_sta_eta_ptRes_type_2.Fill(event.glb_eta, ptResGLBSTA)
-#    TH2F_glb_sta_phi_ptRes_type_2.Fill(event.glb_phi, ptResGLBSTA)
-#    TH2F_glb_sta_pt_ptRes_type_2.Fill(event.glb_pt, ptResGLBSTA)  
+  ptResGLBSTA = event.q*(1.0/event.sta_pt-1.0/event.glb_trk_pt)
+  TH2F_glb_sta_eta_ptRes.Fill(event.glb_eta, ptResGLBSTA)
+  TH2F_glb_sta_phi_ptRes.Fill(event.glb_phi, ptResGLBSTA)
+  if abs(event.glb_eta) > 0.9 :
+    TH2F_glb_sta_phi_ptRes_endcap.Fill(event.glb_phi, ptResGLBSTA)
+  if abs(event.glb_eta) < 0.9 :
+    TH2F_glb_sta_phi_ptRes_barrel.Fill(event.glb_phi, ptResGLBSTA)
   # GEN
   if isMC and event.glb_gen:
     ptResGLB = (event.glb_pt-event.glb_gen_pt)/event.glb_gen_pt
@@ -85,7 +86,7 @@ for counter, event in enumerate(recoMuons):
     TH2F_sta_gen_pt_ptRes.Fill(event.glb_gen_pt, ptResSTA)
     TH2F_sta_gen_eta_ptRes.Fill(event.glb_gen_eta, ptResSTA)
     
-    if event.glb and event.glb_gen and  event.sta_pt != 0.0 and event.glb_pt != 0.0:
+    if event.glb_gen:
 	# pT PULL
 	glb_qoverp = event.q/event.glb_pt
 	gen_qoverp = event.q/event.glb_gen_pt
@@ -94,10 +95,6 @@ for counter, event in enumerate(recoMuons):
 	TH2F_gen_glb_pt_ptPull.Fill(event.glb_gen_pt,pTPull)
 	# pT RES
 	ptResGENGLB = (event.glb_pt-event.glb_gen_pt)/event.glb_gen_pt
-#	TH2F_gen_sta_eta_ptRes_type_2.Fill(event.glb_gen_eta, ptResGLBSTA)
-#	TH2F_gen_sta_phi_ptRes_type_2.Fill(event.glb_gen_phi, ptResGLBSTA)
-#	TH2F_gen_sta_pt_ptRes_type_2.Fill(event.glb_gen_pt, ptResGLBSTA)
-
 	TH2F_gen_glb_eta_ptRes.Fill(event.glb_gen_eta, ptResGENGLB)
 	TH2F_gen_glb_phi_ptRes.Fill(event.glb_gen_phi, ptResGENGLB)
 	TH2F_gen_glb_pt_ptRes.Fill(event.glb_gen_pt, ptResGENGLB)

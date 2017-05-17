@@ -6,7 +6,7 @@ if(method=="equal"):
   for counter0, event in enumerate(recoMuons):
     if(event.glb_trk_pt < thresholdPt or fabs(event.glb_trk_eta)>2.4 or not event.glb or not event.sta or event.sta_pt== 0.0 or event.glb_pt == 0.0  ): continue
     if not oldTTrees:
-      if(event.recoMu_IsoPF04 < 0.15): continue;
+      if(event.recoMu_IsoPF04 > 0.15): continue;
     if(Event_ro_RUN>0):
       if nMuonPassed > Event_ro_RUN: break
     if event.q<0: nNeg+=1
@@ -20,7 +20,7 @@ for counter, event in enumerate(recoMuons):
   if counter % 100000 == 0: print counter, (counter +0.0)/event.GetEntries()
   if(event.glb_trk_pt < thresholdPt or fabs(event.glb_trk_eta)>2.4 or not event.glb or not event.sta or event.sta_pt== 0.0 or event.glb_pt == 0.0  ): continue
   if not oldTTrees:
-    if(event.recoMu_IsoPF04 < 0.15): continue;
+    if(event.recoMu_IsoPF04 > 0.15): continue;
   if(Event_ro_RUN>0):
     if nMuonPassed > Event_ro_RUN: break
 

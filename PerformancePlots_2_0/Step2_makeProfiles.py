@@ -10,66 +10,27 @@ execfile("functions.py")
 execfile("constants.py")
 oldTTrees = False
 
-for Samples in range(2):
-  oldTTrees = True
-  if Samples==0:
-    outputFolderName = "MuAlRefit_Zmumu_3dof_6dof"
-    fileList = ["MuAlRefit_Zmumu_DT3DOF_CSCideal_APEdia.root","MuAlRefit_Zmumu_DT6DOF_CSCideal_APEcovx2.root"]#    fileListName = [ "Legacy","Legacy pos","Legacy neg"]
-    fileListName = [ "3dof","6dof"]
-    colors = [ROOT.kRed,ROOT.kBlack]
-  if Samples==1:
-    outputFolderName = "MuAlRefit_Zmumu_6dof_6dofpos_6dofneg"
-    fileList = ["MuAlRefit_Zmumu_DT6DOF_CSCideal_APEcovx2.root","MuAlRefit_Zmumu_DT6DOF_CSCideal_APEcovx2_pos.root","MuAlRefit_Zmumu_DT6DOF_CSCideal_APEcovx2_neg.root"]#    fileListName = [ "Legacy","Legacy pos","Legacy neg"]
-    fileListName = [ "6dof","6dof pos","6dof neg"]
-    colors = [ROOT.kRed,ROOT.kBlack,ROOT.kBlue]
+tot_fileList     = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root","MuAlRefit_Legacy_Zsel.root","MuAlRefit_Prompt_Zsel.root"]
+tot_fileListName = ["Legacy","Prompt","Legacy Zsel","Prompt Zsel"]
+tot_colors       = [ROOT.kRed,ROOT.kBlack,ROOT.kBlue,ROOT.kGreen]
 
-#  if Samples==0:
-#    outputFolderName = "MuAlRefit_3dof_pos_neg"
-#    fileList = ["MuAlRefit_Legacy_GeoOld_APEold.root","MuAlRefit_Legacy_GeoOld_APEold_pos.root","MuAlRefit_Legacy_GeoOld_APEold_neg.root"]#    fileListName = [ "Legacy","Legacy pos","Legacy neg"]
-#    fileListName = [ "3dof","3dof pos","3dof neg"]
-#    colors = [ROOT.kRed,ROOT.kBlack,ROOT.kBlue]
+Combinations      = [[0,1,2,3],[0,1],[2,3],[0,2],[1,3]]
+tot_outputFolderName  = ["Out_Leg_Pro_LegZsel_ProZsel","Out_Leg_Pro","Out_LegZsel_ProZsel","Out_Leg_LegZsel","Out_Pro_ProZsel"]
 
-#  if Samples==0:
-#    outputFolderName = "MuAlRefit_Leg_Legpos_Legneg"
-#    fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Legacy_pos.root","MuAlRefit_Legacy_neg.root"]
-#    fileListName = [ "Legacy","Legacy pos","Legacy neg"]
-#    colors = [ROOT.kRed,ROOT.kBlack,ROOT.kBlue]
-#  if Samples==1:
-#    outputFolderName = "MuAlRefit_Leg_Eq"
-#    fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Legacy_equal.root"]
-#    fileListName = [ "Legacy","Legacy pos=nef"]
-#    colors = [ROOT.kRed,ROOT.kBlack]
+iC = 0
+for Comb in Combinations:
+  outputFolderName = tot_outputFolderName[iC]
+  fileList = []
+  for iF in Comb: fileList.append(tot_fileList[iF])
+  fileListName = []
+  for iF in Comb: fileListName.append(tot_fileListName[iF])
+  colors = []
+  for iF in Comb: colors.append(tot_colors[iF])
+  print "Running on:"
+  print fileList, fileListName
+  print "Output", outputFolderName
+  iC += 1
 
-#  if Samples==0:
-#    outputFolderName = "MuAlRefit_Leg_Pro_3DOFapeOld_apeOld"
-#    fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root","MuAlRefit_Legacy_GeoOld_APEold.root","MuAlRefit_Legacy_APEold.root"]
-#    fileListName = [ "Legacy","Prompt","3DOF_oldAPE","oldAPE"]
-#    colors = [ROOT.kBlack,ROOT.kRed,ROOT.kBlue,ROOT.kGreen]
-# 
-#  if Samples==1:
-#    outputFolderName = "MuAlRefit_Leg_Pro_apeOld"
-#    fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root","MuAlRefit_Legacy_APEold.root"]
-#    fileListName = [ "Legacy","Prompt","oldAPE"]
-#    colors = [ROOT.kBlack,ROOT.kRed,ROOT.kGreen]
-#  if Samples==2:
-#    outputFolderName = "MuAlRefit_Leg_Pro_APEx2"
-#    fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root","MuAlRefit_Legacy_APEminuitx2.root"]
-#    fileListName = [ "Legacy","Prompt","APE minuit"]
-#    colors = [ROOT.kBlack,ROOT.kRed,ROOT.kGreen]
-#  if Samples==3:
-#    outputFolderName = "MuAlRefit_Leg_Pro_3DOF"
-#    fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root","MuAlRefit_Legacy_GeoOld_APEold.root"]
-#    fileListName = [ "Legacy","Prompt","3DOF_oldAPE"]
-#    colors = [ROOT.kBlack,ROOT.kRed,ROOT.kGreen]
-#  if Samples==4:
-#    outputFolderName = "MuAlRefit_Leg_Pro"
-#    fileList = ["MuAlRefit_Legacy.root","MuAlRefit_Prompt.root"]
-#    fileListName = [ "Legacy","Prompt"]
-#    colors = [ROOT.kBlack,ROOT.kRed]
-
-  print "Running on: ",fileList
-  print "Output: ",outputFolderName,"----------------------------------"
-  
   files = []
   TH2F_temp = []
   if not os.path.exists(outputFolderName):

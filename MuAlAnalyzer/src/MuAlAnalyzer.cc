@@ -43,6 +43,13 @@
 #include "TTree.h"
 #include "TLorentzVector.h"
 
+
+#include "DataFormats/TrackReco/interface/TrackFwd.h"
+#include "DataFormats/TrackReco/interface/Track.h"
+#include "DataFormats/TrackingRecHit/interface/TrackingRecHitFwd.h"
+#include "DataFormats/TrackingRecHit/interface/TrackingRecHit.h"
+#include "RecoMuon/TransientTrackingRecHit/interface/MuonTransientTrackingRecHitBuilder.h"
+
 //
 // class declaration
 //
@@ -103,11 +110,20 @@ class MuAlAnalyzer : public edm::EDAnalyzer {
   Float_t b_recoMu_glb_eta;
   Float_t b_recoMu_glb_phi;
   Float_t b_recoMu_glb_phi_error;
+  //Float_t b_recoMu_sta_phi_error;
+  //Float_t b_recoMu_trk_phi_error;
   Float_t b_recoMu_glb_nchi2;
   Float_t b_recoMu_glb_chi2;
   Float_t b_recoMu_glb_pterror;
   Float_t b_recoMu_glb_qoverpterror;
   Int_t   b_recoMu_glb_nhits;
+
+  Float_t b_recoMu_sta_innerPosition_phi;
+  Float_t b_recoMu_sta_innerPosition_eta;
+
+  Float_t b_recoMu_sta_innerMomentum_phi;
+  Float_t b_recoMu_sta_innerMomentum_pt;
+  Float_t b_recoMu_sta_innerMomentum_eta;
 
 
   // GEN muons matched to GLB muons
@@ -278,6 +294,17 @@ MuAlAnalyzer::MuAlAnalyzer( const edm::ParameterSet& iConfig ) {
     m_tree_recoMuons->Branch("glb_pt_error",&b_recoMu_glb_pterror,"glb_pt_error/F");
     m_tree_recoMuons->Branch("glb_qoverpterror",&b_recoMu_glb_qoverpterror,"glb_qoverpterror/F");
     m_tree_recoMuons->Branch("glb_nhits",&b_recoMu_glb_nhits,"glb_nhits/I");
+     
+
+
+    m_tree_recoMuons->Branch("sta_innerPosition_phi",&b_recoMu_sta_innerPosition_phi,"sta_innerPosition_phi/F");
+    m_tree_recoMuons->Branch("sta_innerPosition_eta",&b_recoMu_sta_innerPosition_eta,"sta_innerPosition_eta/F");
+
+    m_tree_recoMuons->Branch("sta_innerMomentum_phi",&b_recoMu_sta_innerMomentum_phi,"sta_innerMomentum_phi/F");
+    m_tree_recoMuons->Branch("sta_innerMomentum_pt",&b_recoMu_sta_innerMomentum_pt,"sta_innerMomentum_pt/F");
+    m_tree_recoMuons->Branch("sta_innerMomentum_eta",&b_recoMu_sta_innerMomentum_eta,"sta_innerMomentum_eta/F");
+
+
 
     if ( m_fillGenMuons ) {
 	// GEN muons matched to GLB muons
@@ -570,6 +597,23 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
     b_recoMu_glb_qoverpterror  = recoMuonsSelected[i]->globalTrack()->qoverpError();
     b_recoMu_glb_nhits  = recoMuonsSelected[i]->globalTrack()->numberOfValidHits();
 
+
+     //edm::OwnVector<TrackingRecHit> muonHits; // no tracking rec hits stored in refit
+    //for (trackingRecHit_iterator hit = recoMuonsSelected[i]->outerTrack()->recHitsBegin(); hit != recoMuonsSelected[i]->outerTrack()->recHitsEnd(); ++hit) {
+    //  b_recoMu_sta_innerPosition_phi =  (*hit)->localPosition().x();
+      //DetId hitId  = (*hit)->geographicalId();
+      //if ( hitId.subdetId() == MuonSubdetId::DT ) {
+      //   b_recoMu_sta_innerPosition_phi =  hitId->localPosition().x()
+      //} 
+    //}
+
+    b_recoMu_sta_innerPosition_phi = recoMuonsSelected[i]->outerTrack()->innerPosition().phi();
+    b_recoMu_sta_innerPosition_eta = recoMuonsSelected[i]->outerTrack()->innerPosition().eta();
+
+    b_recoMu_sta_innerMomentum_phi = recoMuonsSelected[i]->outerTrack()->innerMomentum().phi();
+    b_recoMu_sta_innerMomentum_pt = recoMuonsSelected[i]->outerTrack()->innerMomentum().Rho();
+    b_recoMu_sta_innerMomentum_eta = recoMuonsSelected[i]->outerTrack()->innerMomentum().eta();
+
 	  b_recoMu_glb_trk_pt  = recoMuonsSelected[i]->innerTrack()->pt();
 	  b_recoMu_glb_trk_eta = recoMuonsSelected[i]->innerTrack()->eta();
 	  b_recoMu_glb_trk_phi = recoMuonsSelected[i]->innerTrack()->phi();
@@ -638,6 +682,13 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
     b_recoMu_glb_pterror  = -1.0;
     b_recoMu_glb_qoverpterror = -1.0;
     b_recoMu_glb_nhits  = -1.0;
+
+    b_recoMu_sta_innerPosition_phi = -100.0 ;
+    b_recoMu_sta_innerPosition_eta = -100.0 ;
+
+    b_recoMu_sta_innerMomentum_phi = -100.0 ;
+    b_recoMu_sta_innerMomentum_pt = -100.0 ;
+    b_recoMu_sta_innerMomentum_eta = -100.0 ;
 
 	  b_recoMu_glb_trk_pt    = -1.0;
 	  b_recoMu_glb_trk_eta   = 10.0;

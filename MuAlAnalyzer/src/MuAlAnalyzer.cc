@@ -30,6 +30,7 @@
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
+#include "DataFormats/MuonReco/interface/MuonSelectors.h"
 #include "DataFormats/MuonReco/interface/Muon.h"
 #include "DataFormats/MuonReco/interface/MuonFwd.h"
 #include "DataFormats/TrackReco/interface/Track.h"
@@ -103,6 +104,7 @@ class MuAlAnalyzer : public edm::EDAnalyzer {
   // RECO muons
   TTree * m_tree_recoMuons;
   Int_t b_recoMu_q; // muon charge
+  Int_t b_recoMu_IsoPF04; // muon charge
 
   // GLB muons
   Bool_t  b_recoMu_glb;
@@ -152,6 +154,9 @@ class MuAlAnalyzer : public edm::EDAnalyzer {
   Float_t b_recoMu_sta_phi;
   Float_t b_recoMu_sta_nchi2;
   Float_t b_recoMu_sta_chi2;
+
+  Float_t b_recoMu_pos_IsoPF04;
+  Float_t b_recoMu_neg_IsoPF04;
 
   // positive GLB muons
   Bool_t  b_recoMu_pos_glb;
@@ -238,8 +243,8 @@ class MuAlAnalyzer : public edm::EDAnalyzer {
 MuAlAnalyzer::MuAlAnalyzer( const edm::ParameterSet& iConfig ) {
 
   m_debugLevel = iConfig.getParameter<int>("debugLevel");
-
   m_fillGenMuons = iConfig.getParameter<bool>("fillGenMuons");
+  //primaryVerticesToken_ = consumes<reco::VertexCollection>(iConfig.getParameter<edm::InputTag>("primaryVertices"));
   if ( m_fillGenMuons ){
     m_genParticles = iConfig.getParameter<edm::InputTag>("genParticles");
     recoGenParticleToken_ = consumes<reco::GenParticleCollection,edm::InEvent>( m_genParticles );
@@ -282,6 +287,7 @@ MuAlAnalyzer::MuAlAnalyzer( const edm::ParameterSet& iConfig ) {
     m_tree_recoMuons = fs->make<TTree>("recoMuons", "recoMuons");
 
     m_tree_recoMuons->Branch("q",&b_recoMu_q,"q/I");
+    m_tree_recoMuons->Branch("recoMu_IsoPF04",&b_recoMu_IsoPF04,"recoMu_IsoPF04/F");
 
     // GLB muons
     m_tree_recoMuons->Branch("glb",&b_recoMu_glb,"glb/O");
@@ -338,6 +344,8 @@ MuAlAnalyzer::MuAlAnalyzer( const edm::ParameterSet& iConfig ) {
 
   if ( m_fillRecoDimuons ) {
     m_tree_recoDimuons = fs->make<TTree>("recoDimuons", "recoDimuons");
+    m_tree_recoDimuons->Branch("recoMu_pos_IsoPF04",&b_recoMu_pos_IsoPF04,"recoMu_pos_IsoPF04/F");
+    m_tree_recoDimuons->Branch("recoMu_neg_IsoPF04",&b_recoMu_neg_IsoPF04,"recoMu_neg_IsoPF04/F");
     // GLB muons: positive
     m_tree_recoDimuons->Branch("pos_glb",&b_recoMu_pos_glb,"pos_glb/O");
     m_tree_recoDimuons->Branch("pos_glb_pt",&b_recoMu_pos_glb_pt,"pos_glb_pt/F");
@@ -544,33 +552,40 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
   //                              RECO Muons                                    
   //****************************************************************************
 
+  // Vertex
+  //edm::Handle<reco::VertexCollection> primaryVertices;
+  //iEvent.getByToken(primaryVerticesToken_, primaryVertices);
+  //if (primaryVertices->empty()) return; // skip the event if no PV found
+  //const reco::Vertex &PV = primaryVertices->front();
+  // Muons
   std::vector<const reco::Muon*> recoMuonsSelected;
   std::vector<int> recoMuonsGlbMatchToGen;
 
+  bool ZtightSele = true;
+  bool ZtightSele_pass = false;
+
   if ( m_fillRecoMuons ) {
 
-    //    consumes<reco::MuonCollection,edm::InRun>(m_recoMuons);
     edm::Handle<reco::MuonCollection> recoMuonCollection;
-    //	  iEvent.getByLabel(m_recoMuons, recoMuonCollection);
     iEvent.getByToken(recoMuonCollectionToken_, recoMuonCollection);
 
     edm::Handle<reco::BeamSpot> beamspot;
-    //    iEvent.getByLabel("offlineBeamSpot", beamspot);
     iEvent.getByToken(recoBeamSpotToken_, beamspot);
 
     if ( recoMuonCollection.isValid() ) {
-	for (reco::MuonCollection::const_iterator muon = recoMuonCollection->begin();  muon != recoMuonCollection->end();  ++muon) {
-	  if ( muon->isGlobalMuon() && muon->isStandAloneMuon() ) {
-	    if (    muon->globalTrack()->normalizedChi2()   < 10
-		  && muon->innerTrack()->numberOfValidHits() > 10
-		  && muon->numberOfMatchedStations() > 1
-		  && fabs( muon->innerTrack()->dxy( beamspot->position() ) ) < 0.2 && muon->innerTrack()->pt() > 30.0 && TMath::Abs(muon->innerTrack()->eta()) < 2.4) {
-		recoMuonsSelected.push_back(&*muon);
+	for (reco::MuonCollection::const_iterator Mymuon = recoMuonCollection->begin();  Mymuon != recoMuonCollection->end();  ++Mymuon) {
+	  if ( Mymuon->isGlobalMuon() && Mymuon->isStandAloneMuon() ) {
+	    if ( Mymuon->globalTrack()->normalizedChi2()   < 10
+		  && Mymuon->innerTrack()->numberOfValidHits() > 10
+		  && Mymuon->numberOfMatchedStations() > 1
+		  && fabs( Mymuon->innerTrack()->dxy( beamspot->position() ) ) < 0.2 && Mymuon->innerTrack()->pt() > 30.0 && TMath::Abs(Mymuon->innerTrack()->eta()) < 2.4) {
+		recoMuonsSelected.push_back(&*Mymuon);
 	    }
 	  }
 	}
     }
 
+<<<<<<< HEAD
     b_n_recoMuons = recoMuonsSelected.size();
 
     // vector GEN muons matched to GLB muons: preset to default "-1"
@@ -628,49 +643,128 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
 	    b_recoMu_glb_pic_pt  = -1.0;
 	    b_recoMu_glb_pic_eta = 10.0;
 	    b_recoMu_glb_pic_phi =  5.0;
+=======
+    if( ZtightSele ){
+	if( recoMuonsSelected.size()==2 ){
+	  TLorentzVector mu1, mu2;
+	  mu1.SetPtEtaPhiM( recoMuonsSelected[0]->innerTrack()->pt(), recoMuonsSelected[0]->innerTrack()->eta(), recoMuonsSelected[0]->innerTrack()->phi(), 0.105658);
+	  mu2.SetPtEtaPhiM( recoMuonsSelected[1]->innerTrack()->pt(), recoMuonsSelected[1]->innerTrack()->eta(), recoMuonsSelected[1]->innerTrack()->phi(), 0.105658);
+	  if(recoMuonsSelected[0]->charge()*recoMuonsSelected[1]->charge()==-1 and fabs((mu1+mu2).M()-91)<30 ){
+	    ZtightSele_pass = true;
+>>>>>>> 12583ba145d4f6d9b55d4eb2924346d5858ef6c6
 	  }
+	}
+    }
+    if ((ZtightSele and ZtightSele_pass) or !ZtightSele){
 
-	  // Match GEN to GLB muons
-	  if ( m_fillGenMuons ) {     
-	    int     j_min       =   -1; // index of genMuons[j_min] with smallest dR
-	    Float_t dR_min      = 10.0; // large start value for smallest dR
-	    Float_t dR_limit    =  0.1;
-	    b_recoMu_glb_gen_dR = -1.0;
+	b_n_recoMuons = recoMuonsSelected.size();
+	// vector GEN muons matched to GLB muons: preset to default "-1"
+	for ( unsigned i = 0; i < recoMuonsSelected.size(); ++i ) recoMuonsGlbMatchToGen.push_back(-1);
 
-	    // loop over GEN muons and find a GEN muon with smallest dR w.r.t. the GLB muon [i]
-	    for ( unsigned j = 0; j < genMuons.size(); ++j ) {
-		// Use only GEN muons that are NOT already matched to GLB muons
-		if ( genMuonsMatchToGlb[j] == -1 ) {
-		  Float_t dEta = recoMuonsSelected[i]->globalTrack()->eta() - genMuons[j]->eta();
-		  Float_t dPhi = My_dPhi( recoMuonsSelected[i]->globalTrack()->phi(), genMuons[j]->phi() );
-		  Float_t dR = sqrt( dEta*dEta + dPhi*dPhi );
-		  if ( dR < dR_min ) {
-		    dR_min = dR;
-		    j_min  = j;
+	if ( m_debugLevel > 10 ) std::cout << "RECO muons selected: " << b_n_recoMuons << std::endl;
+
+	// Loop over selected RECO muons
+	// Set branches, fill tree and print stored information
+	for ( unsigned i = 0; i < recoMuonsSelected.size(); ++i ) {
+
+	  b_recoMu_q = recoMuonsSelected[i]->charge();
+	  //https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideMuonIdRun2#Tight_Muon
+	  //https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideMuonIdRun2#Muon_Isolation
+	  //bool isTight = muon::isTightMuon(PV,recoMuonsSelected[i]);
+	  std::cout<<"b_recoMu_IsoPF04 "<<recoMuonsSelected[i]->pfIsolationR04().sumChargedHadronPt<<" + "<<std::max(0., recoMuonsSelected[i]->pfIsolationR04().sumNeutralHadronEt + recoMuonsSelected[i]->pfIsolationR04().sumPhotonEt - 0.5*recoMuonsSelected[i]->pfIsolationR04().sumPUPt)<<" / "<<recoMuonsSelected[i]->pt()<<std::endl;
+	  b_recoMu_IsoPF04 = (recoMuonsSelected[i]->pfIsolationR04().sumChargedHadronPt + std::max(0., recoMuonsSelected[i]->pfIsolationR04().sumNeutralHadronEt + recoMuonsSelected[i]->pfIsolationR04().sumPhotonEt - 0.5*recoMuonsSelected[i]->pfIsolationR04().sumPUPt))/recoMuonsSelected[i]->pt();
+
+	  if ( recoMuonsSelected[i]->isGlobalMuon() ) {
+	    b_recoMu_glb       = true;
+
+	    b_recoMu_glb_pt    = recoMuonsSelected[i]->globalTrack()->pt();
+	    b_recoMu_glb_eta   = recoMuonsSelected[i]->globalTrack()->eta();
+	    b_recoMu_glb_phi   = recoMuonsSelected[i]->globalTrack()->phi();
+	    b_recoMu_glb_nchi2 = recoMuonsSelected[i]->globalTrack()->normalizedChi2();
+	    b_recoMu_glb_phi_error  = recoMuonsSelected[i]->globalTrack()->phiError();
+	    b_recoMu_glb_chi2  = recoMuonsSelected[i]->globalTrack()->chi2();
+	    b_recoMu_glb_pterror  = recoMuonsSelected[i]->globalTrack()->ptError();
+	    b_recoMu_glb_qoverpterror  = recoMuonsSelected[i]->globalTrack()->qoverpError();
+	    b_recoMu_glb_nhits  = recoMuonsSelected[i]->globalTrack()->numberOfValidHits();
+
+	    b_recoMu_glb_trk_pt  = recoMuonsSelected[i]->innerTrack()->pt();
+	    b_recoMu_glb_trk_eta = recoMuonsSelected[i]->innerTrack()->eta();
+	    b_recoMu_glb_trk_phi = recoMuonsSelected[i]->innerTrack()->phi();
+
+	    if( recoMuonsSelected[i]->pickyTrack().isNonnull() ) {
+		b_recoMu_glb_pic     = true;
+		b_recoMu_glb_pic_pt  = recoMuonsSelected[i]->pickyTrack()->pt();
+		b_recoMu_glb_pic_eta = recoMuonsSelected[i]->pickyTrack()->eta();
+		b_recoMu_glb_pic_phi = recoMuonsSelected[i]->pickyTrack()->phi();
+	    } else {
+		b_recoMu_glb_pic     = false;
+		b_recoMu_glb_pic_pt  = -1.0;
+		b_recoMu_glb_pic_eta = 10.0;
+		b_recoMu_glb_pic_phi =  5.0;
+	    }
+
+	    // Match GEN to GLB muons
+	    if ( m_fillGenMuons ) {     
+		int     j_min       =   -1; // index of genMuons[j_min] with smallest dR
+		Float_t dR_min      = 10.0; // large start value for smallest dR
+		Float_t dR_limit    =  0.1;
+		b_recoMu_glb_gen_dR = -1.0;
+
+		// loop over GEN muons and find a GEN muon with smallest dR w.r.t. the GLB muon [i]
+		for ( unsigned j = 0; j < genMuons.size(); ++j ) {
+		  // Use only GEN muons that are NOT already matched to GLB muons
+		  if ( genMuonsMatchToGlb[j] == -1 ) {
+		    Float_t dEta = recoMuonsSelected[i]->globalTrack()->eta() - genMuons[j]->eta();
+		    Float_t dPhi = My_dPhi( recoMuonsSelected[i]->globalTrack()->phi(), genMuons[j]->phi() );
+		    Float_t dR = sqrt( dEta*dEta + dPhi*dPhi );
+		    if ( dR < dR_min ) {
+			dR_min = dR;
+			j_min  = j;
+		    }
 		  }
 		}
-	    }
 
-	    // store the smallest dR for possible future analysis
-	    if ( j_min != -1 ) b_recoMu_glb_gen_dR = dR_min;
+		// store the smallest dR for possible future analysis
+		if ( j_min != -1 ) b_recoMu_glb_gen_dR = dR_min;
 
-	    // check if GEN muon with smalles dR is matched to the GLB muon [i]
-	    if ( j_min != -1 && dR_min < dR_limit && recoMuonsSelected[i]->charge() == genMuons[j_min]->charge() ) {
-		genMuonsMatchToGlb[j_min] = i;
-		recoMuonsGlbMatchToGen[i] = j_min;
-		b_recoMu_glb_gen          = true;
-		b_recoMu_glb_gen_motherId = genMuonsMotherId[j_min];
-		b_recoMu_glb_gen_pt       = genMuons[j_min]->pt();
-		b_recoMu_glb_gen_eta      = genMuons[j_min]->eta();
-		b_recoMu_glb_gen_phi      = genMuons[j_min]->phi();
-	    } else {
-		b_recoMu_glb_gen          = false;
-		b_recoMu_glb_gen_motherId =    0;
-		b_recoMu_glb_gen_pt       = -1.0;
-		b_recoMu_glb_gen_eta      = 10.0;
-		b_recoMu_glb_gen_phi      =  5.0;
+		// check if GEN muon with smalles dR is matched to the GLB muon [i]
+		if ( j_min != -1 && dR_min < dR_limit && recoMuonsSelected[i]->charge() == genMuons[j_min]->charge() ) {
+		  genMuonsMatchToGlb[j_min] = i;
+		  recoMuonsGlbMatchToGen[i] = j_min;
+		  b_recoMu_glb_gen          = true;
+		  b_recoMu_glb_gen_motherId = genMuonsMotherId[j_min];
+		  b_recoMu_glb_gen_pt       = genMuons[j_min]->pt();
+		  b_recoMu_glb_gen_eta      = genMuons[j_min]->eta();
+		  b_recoMu_glb_gen_phi      = genMuons[j_min]->phi();
+		} else {
+		  b_recoMu_glb_gen          = false;
+		  b_recoMu_glb_gen_motherId =    0;
+		  b_recoMu_glb_gen_pt       = -1.0;
+		  b_recoMu_glb_gen_eta      = 10.0;
+		  b_recoMu_glb_gen_phi      =  5.0;
+		}
 	    }
+	  } else {
+	    b_recoMu_glb       = false;
+	    b_recoMu_glb_pt    = -1.0;
+	    b_recoMu_glb_eta   = 10.0;
+	    b_recoMu_glb_phi   =  5.0;
+	    b_recoMu_glb_phi_error = -1.0;
+	    b_recoMu_glb_nchi2 = -1.0;
+	    b_recoMu_glb_chi2  = -1.0;
+	    b_recoMu_glb_pterror  = -1.0;
+	    b_recoMu_glb_qoverpterror = -1.0;
+	    b_recoMu_glb_nhits  = -1.0;
+
+	    b_recoMu_glb_trk_pt    = -1.0;
+	    b_recoMu_glb_trk_eta   = 10.0;
+	    b_recoMu_glb_trk_phi   =  5.0;
+
+	    b_recoMu_glb_pic_pt    = -1.0;
+	    b_recoMu_glb_pic_eta   = 10.0;
+	    b_recoMu_glb_pic_phi   =  5.0;
 	  }
+<<<<<<< HEAD
 	} else {
 	  b_recoMu_glb       = false;
 	  b_recoMu_glb_pt    = -1.0;
@@ -698,60 +792,64 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
 	  b_recoMu_glb_pic_eta   = 10.0;
 	  b_recoMu_glb_pic_phi   =  5.0;
 	}
+=======
+>>>>>>> 12583ba145d4f6d9b55d4eb2924346d5858ef6c6
 
-	if (recoMuonsSelected[i]->isStandAloneMuon()) {
-	  b_recoMu_sta       = true;
-	  b_recoMu_sta_pt    = recoMuonsSelected[i]->standAloneMuon()->pt();
-	  b_recoMu_sta_eta   = recoMuonsSelected[i]->standAloneMuon()->eta();
-	  b_recoMu_sta_phi   = recoMuonsSelected[i]->standAloneMuon()->phi();
-	  b_recoMu_sta_nchi2 = recoMuonsSelected[i]->standAloneMuon()->normalizedChi2();
-	  b_recoMu_sta_chi2  = recoMuonsSelected[i]->standAloneMuon()->chi2();
-	} else {
-	  b_recoMu_sta       = false;
-	  b_recoMu_sta_pt    = -1.0;
-	  b_recoMu_sta_eta   = 10.0;
-	  b_recoMu_sta_phi   =  5.0;
-	  b_recoMu_sta_nchi2 = -1.0;
-	  b_recoMu_sta_chi2  = -1.0;
+	  if (recoMuonsSelected[i]->isStandAloneMuon()) {
+	    b_recoMu_sta       = true;
+	    b_recoMu_sta_pt    = recoMuonsSelected[i]->standAloneMuon()->pt();
+	    b_recoMu_sta_eta   = recoMuonsSelected[i]->standAloneMuon()->eta();
+	    b_recoMu_sta_phi   = recoMuonsSelected[i]->standAloneMuon()->phi();
+	    b_recoMu_sta_nchi2 = recoMuonsSelected[i]->standAloneMuon()->normalizedChi2();
+	    b_recoMu_sta_chi2  = recoMuonsSelected[i]->standAloneMuon()->chi2();
+	  } else {
+	    b_recoMu_sta       = false;
+	    b_recoMu_sta_pt    = -1.0;
+	    b_recoMu_sta_eta   = 10.0;
+	    b_recoMu_sta_phi   =  5.0;
+	    b_recoMu_sta_nchi2 = -1.0;
+	    b_recoMu_sta_chi2  = -1.0;
+	  }
+
+	  m_tree_recoMuons->Fill();
+
+	  if ( m_debugLevel > 10 ) std::cout << " " << i << ":"
+	    << " q "        << b_recoMu_q << "\n"
+		<< "     IsoPF04 " << b_recoMu_IsoPF04
+		<< "     glb " << b_recoMu_glb
+		<< " pt " << b_recoMu_glb_pt
+		<< " eta " << b_recoMu_glb_eta
+		<< " phi " << b_recoMu_glb_phi
+		<< " phi error " << b_recoMu_glb_phi_error << "\n"
+		<< " nchi2 " << b_recoMu_glb_nchi2
+		<< " chi2 " << b_recoMu_glb_chi2 << "\n"
+		<< " pT error " << b_recoMu_glb_pterror << "\n"
+		<< " q over pt error " << b_recoMu_glb_qoverpterror << "\n"
+		<< " nhits " << b_recoMu_glb_nhits << "\n"
+		<< "       trk pt " <<  b_recoMu_glb_trk_pt
+		<< " eta " << b_recoMu_glb_trk_eta
+		<< " phi " << b_recoMu_glb_trk_phi << "\n"
+		<< "       pic pt " << b_recoMu_glb_pic_pt
+		<< " eta " << b_recoMu_glb_pic_eta
+		<< " phi " << b_recoMu_glb_pic_phi << "\n"
+		<< "       glb_gen " << b_recoMu_glb_gen
+		<< " motherId " << b_recoMu_glb_gen_motherId
+		<< " dR " << b_recoMu_glb_gen_dR
+		<< " pt "       << b_recoMu_glb_gen_pt
+		<< " eta "      << b_recoMu_glb_gen_eta
+		<< " phi "      << b_recoMu_glb_gen_phi << "\n"
+		<< "     sta " <<  b_recoMu_sta
+		<< " pt " << b_recoMu_sta_pt
+		<< " eta " << b_recoMu_sta_eta
+		<< " phi " << b_recoMu_sta_phi
+		<< " nchi2 " << b_recoMu_sta_nchi2
+		<< " chi2 " << b_recoMu_sta_chi2
+		<< std::endl;
 	}
-
-	m_tree_recoMuons->Fill();
-
-	if ( m_debugLevel > 10 ) std::cout << " " << i << ":"
-	  << " q "        << b_recoMu_q << "\n"
-	    << "     glb " << b_recoMu_glb
-	    << " pt " << b_recoMu_glb_pt
-	    << " eta " << b_recoMu_glb_eta
-	    << " phi " << b_recoMu_glb_phi
-	    << " phi error " << b_recoMu_glb_phi_error << "\n"
-	    << " nchi2 " << b_recoMu_glb_nchi2
-	    << " chi2 " << b_recoMu_glb_chi2 << "\n"
-      << " pT error " << b_recoMu_glb_pterror << "\n"
-      << " q over pt error " << b_recoMu_glb_qoverpterror << "\n"
-      << " nhits " << b_recoMu_glb_nhits << "\n"
-	    << "       trk pt " <<  b_recoMu_glb_trk_pt
-	    << " eta " << b_recoMu_glb_trk_eta
-	    << " phi " << b_recoMu_glb_trk_phi << "\n"
-	    << "       pic pt " << b_recoMu_glb_pic_pt
-	    << " eta " << b_recoMu_glb_pic_eta
-	    << " phi " << b_recoMu_glb_pic_phi << "\n"
-	    << "       glb_gen " << b_recoMu_glb_gen
-	    << " motherId " << b_recoMu_glb_gen_motherId
-	    << " dR " << b_recoMu_glb_gen_dR
-	    << " pt "       << b_recoMu_glb_gen_pt
-	    << " eta "      << b_recoMu_glb_gen_eta
-	    << " phi "      << b_recoMu_glb_gen_phi << "\n"
-	    << "     sta " <<  b_recoMu_sta
-	    << " pt " << b_recoMu_sta_pt
-	    << " eta " << b_recoMu_sta_eta
-	    << " phi " << b_recoMu_sta_phi
-	    << " nchi2 " << b_recoMu_sta_nchi2
-	    << " chi2 " << b_recoMu_sta_chi2
-	    << std::endl;
     }
   }
 
-  if (m_fillRecoMuons && m_fillRecoDimuons && recoMuonsSelected.size() > 1) {
+  if (m_fillRecoMuons && m_fillRecoDimuons && (((ZtightSele and ZtightSele_pass) or !ZtightSele))) {
 
     std::vector<int> iPos;
     std::vector<int> iNeg;
@@ -786,6 +884,13 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
 
 	recoMuonPos = recoMuonsSelected[ iPos[i] ];
 	recoMuonNeg = recoMuonsSelected[ iNeg[i] ];
+
+
+	//https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideMuonIdRun2#Tight_Muon
+	//https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideMuonIdRun2#Muon_Isolation
+	//bool isTight = muon::isTightMuon(PV,recoMuonsSelected[i]);
+	b_recoMu_pos_IsoPF04 = (recoMuonPos->pfIsolationR04().sumChargedHadronPt + std::max(0., recoMuonPos->pfIsolationR04().sumNeutralHadronEt + recoMuonPos->pfIsolationR04().sumPhotonEt - 0.5*recoMuonPos->pfIsolationR04().sumPUPt))/recoMuonPos->pt();
+	b_recoMu_neg_IsoPF04 = (recoMuonNeg->pfIsolationR04().sumChargedHadronPt + std::max(0., recoMuonNeg->pfIsolationR04().sumNeutralHadronEt + recoMuonNeg->pfIsolationR04().sumPhotonEt - 0.5*recoMuonNeg->pfIsolationR04().sumPUPt))/recoMuonNeg->pt();
 
 	// Set branches for positive GLB muon
 	if ( recoMuonPos->isGlobalMuon() ) {

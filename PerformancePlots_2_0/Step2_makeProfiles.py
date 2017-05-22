@@ -60,9 +60,9 @@ for Comb in Combinations:
   make1D("TH1F_glb_nChi2_endcap")
   make1D("TH1F_glb_nChi2_barrel")
   if not oldTTrees:
-    make1D("TH1F_sta_TRK_delta_phi")     
-    make1D("TH1F_sta_TRK_delta_phi_barrel")     
-    make1D("TH1F_sta_TRK_delta_phi_endcap")     
+    make1D("TH1F_sta_trk_delta_phi")     
+    make1D("TH1F_sta_trk_delta_phi_barrel")     
+    make1D("TH1F_sta_trk_delta_phi_endcap")     
     make1D("TH1F_sta_glb_delta_phi")     
     make1D("TH1F_sta_glb_delta_phi_barrel")     
     make1D("TH1F_sta_glb_delta_phi_endcap")  

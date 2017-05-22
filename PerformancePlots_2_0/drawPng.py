@@ -52,14 +52,14 @@ if savePng:
 	c1.SaveAs("{}/TH1F_sta_glb_delta_phi_barrel.png".format(fileOut))
 	TH1F_sta_glb_delta_phi_endcap.Draw()
 	c1.SaveAs("{}/TH1F_sta_glb_delta_phi_endcap.png".format(fileOut)) 
-	TH1F_sta_TRK_delta_phi_barrel.Draw()
-	c1.SaveAs("{}/TH1F_sta_TRK_delta_phi_barrel.png".format(fileOut))
-	TH1F_sta_TRK_delta_phi_endcap.Draw()
-	c1.SaveAs("{}/TH1F_sta_TRK_delta_phi_endcap.png".format(fileOut))
+	TH1F_sta_trk_delta_phi_barrel.Draw()
+	c1.SaveAs("{}/TH1F_sta_trk_delta_phi_barrel.png".format(fileOut))
+	TH1F_sta_trk_delta_phi_endcap.Draw()
+	c1.SaveAs("{}/TH1F_sta_trk_delta_phi_endcap.png".format(fileOut))
 	TH1F_sta_glb_delta_phi.Draw()
 	c1.SaveAs("{}/TH1F_sta_glb_delta_phi.png".format(fileOut))
-	TH1F_sta_TRK_delta_phi.Draw()
-	c1.SaveAs("{}/TH1F_sta_TRK_delta_phi.png".format(fileOut))
+	TH1F_sta_trk_delta_phi.Draw()
+	c1.SaveAs("{}/TH1F_sta_trk_delta_phi.png".format(fileOut))
 
 	##
 	##	ptPull

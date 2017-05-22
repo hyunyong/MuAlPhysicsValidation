@@ -81,9 +81,9 @@ TH1F_sta_glb_delta_phi_barrel = TH1F("TH1F_sta_glb_delta_phi_barrel", "(#phi_{GL
 TH1F_sta_glb_delta_phi_endcap = TH1F("TH1F_sta_glb_delta_phi_endcap", "(#phi_{GLB}-#phi_{STA})/#phi_{GLB Error}  |#eta| > 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
 TH1F_sta_glb_delta_phi = TH1F("TH1F_sta_glb_delta_phi", "(#phi_{GLB}-#phi_{STA})/#phi_{GLB Error}; #delta #phi",phiResBins, phiResMin, phiResMax )
 
-TH1F_sta_TRK_delta_phi_barrel = TH1F("TH1F_sta_TRK_delta_phi_barrel", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}  |#eta| < 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
-TH1F_sta_TRK_delta_phi_endcap = TH1F("TH1F_sta_TRK_delta_phi_endcap", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}  |#eta| > 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
-TH1F_sta_TRK_delta_phi = TH1F("TH1F_sta_TRK_delta_phi", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}; #delta #phi",phiResBins, phiResMin, phiResMax )
+TH1F_sta_trk_delta_phi_barrel = TH1F("TH1F_sta_trk_delta_phi_barrel", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}  |#eta| < 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
+TH1F_sta_trk_delta_phi_endcap = TH1F("TH1F_sta_trk_delta_phi_endcap", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}  |#eta| > 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
+TH1F_sta_trk_delta_phi = TH1F("TH1F_sta_trk_delta_phi", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}; #delta #phi",phiResBins, phiResMin, phiResMax )
 
 
 

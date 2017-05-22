@@ -45,21 +45,21 @@ for counter, event in enumerate(recoMuons):
   # Phi Pull
   if not oldTTrees:
    TH1F_sta_glb_delta_phi.Fill(deltaPhiGLB)
-   TH1F_sta_TRK_delta_phi.Fill(deltaPhiTRK)
+   TH1F_sta_trk_delta_phi.Fill(deltaPhiTRK)
   # Barrel
   if abs(event.glb_eta) < 0.9 :
     TH1F_sta_nChi2_barrel.Fill(event.sta_nchi2)
     TH1F_glb_nChi2_barrel.Fill(event.glb_nchi2)
     if not oldTTrees:
       TH1F_sta_glb_delta_phi_barrel.Fill(deltaPhiGLB)
-      TH1F_sta_TRK_delta_phi_barrel.Fill(deltaPhiTRK)
+      TH1F_sta_trk_delta_phi_barrel.Fill(deltaPhiTRK)
   # Endcap
   if abs(event.glb_eta) > 0.9 :
     TH1F_sta_nChi2_endcap.Fill(event.sta_nchi2)
     TH1F_glb_nChi2_endcap.Fill(event.glb_nchi2)
     if not oldTTrees:
       TH1F_sta_glb_delta_phi_endcap.Fill(deltaPhiGLB)
-      TH1F_sta_TRK_delta_phi_endcap.Fill(deltaPhiTRK)
+      TH1F_sta_trk_delta_phi_endcap.Fill(deltaPhiTRK)
   # pT PULL
   if event.glb and event.sta and  event.sta_pt != 0.0 and event.glb_pt != 0.0:
     glb_qoverp = event.q/event.glb_pt

@@ -114,9 +114,11 @@ class MuAlAnalyzer : public edm::EDAnalyzer {
   Float_t b_recoMu_glb_pt_noVtX;
   Float_t b_recoMu_glb_eta_noVtX;
   Float_t b_recoMu_glb_phi_noVtX;
+  Float_t b_recoMu_glb_deltaR_noVtx;
   Float_t b_recoMu_glb_pt_VtX;
   Float_t b_recoMu_glb_eta_VtX;
   Float_t b_recoMu_glb_phi_VtX;
+  Float_t b_recoMu_glb_deltaR_Vtx;
   Float_t b_recoMu_glb_phi_error;
   Float_t b_recoMu_glb_nchi2;
   Float_t b_recoMu_glb_chi2;
@@ -315,10 +317,12 @@ MuAlAnalyzer::MuAlAnalyzer( const edm::ParameterSet& iConfig ) {
     m_tree_recoMuons->Branch("glb_pt_noVtx",&b_recoMu_glb_pt_noVtX,"glb_pt_noVtx/F");
     m_tree_recoMuons->Branch("glb_eta_noVtx",&b_recoMu_glb_eta_noVtX,"glb_eta_noVtx/F");
     m_tree_recoMuons->Branch("glb_phi_noVtx",&b_recoMu_glb_phi_noVtX,"glb_phi_noVtx/F");
+    m_tree_recoMuons->Branch("glb_deltaR_noVtx",&b_recoMu_glb_deltaR_noVtx,"glb_deltaR_noVtx/F");
 
     m_tree_recoMuons->Branch("glb_pt_Vtx",&b_recoMu_glb_pt_VtX,"glb_pt_Vtx/F");
     m_tree_recoMuons->Branch("glb_eta_Vtx",&b_recoMu_glb_eta_VtX,"glb_eta_Vtx/F");
     m_tree_recoMuons->Branch("glb_phi_Vtx",&b_recoMu_glb_phi_VtX,"glb_phi_Vtx/F");
+    m_tree_recoMuons->Branch("glb_deltaR_Vtx",&b_recoMu_glb_deltaR_Vtx,"glb_deltaR_Vtx/F");
 
     m_tree_recoMuons->Branch("glb_phi_error",&b_recoMu_glb_phi_error,"glb_phi_error/F");
     m_tree_recoMuons->Branch("glb_nchi2",&b_recoMu_glb_nchi2,"glb_nchi2/F");
@@ -697,6 +701,13 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
       b_recoMu_glb_eta   = recoMuonsSelected[i]->globalTrack()->eta();
       b_recoMu_glb_phi   = recoMuonsSelected[i]->globalTrack()->phi();
       if (i < recoMuons_noAtVtxCollection->size() && i < recoMuons_noAtVtxCollection->size()){
+      recoMuon.SetPtEtaPhiM(recoMuonsSelected[i]->globalTrack()->pt(), recoMuonsSelected[i]->globalTrack()->eta(), recoMuonsSelected[i]->globalTrack()->phi(), 0);
+      sta_noVtX.SetPtEtaPhiM(recoMuons_noAtVtx_Selected[i]->pt(),recoMuons_noAtVtx_Selected[i]->eta(), recoMuons_noAtVtx_Selected[i]->phi(), 0);
+      sta_VtX.SetPtEtaPhiM(recoMuons_AtVtx_Selected[i]->pt(),recoMuons_AtVtx_Selected[i]->eta(), recoMuons_AtVtx_Selected[i]->phi(), 0);
+      
+      b_recoMu_glb_deltaR_noVtx = recoMuon.DeltaR(sta_noVtX);
+      b_recoMu_glb_deltaR_Vtx = recoMuon.DeltaR(sta_VtX);
+        
       b_recoMu_glb_pt_noVtX = recoMuons_noAtVtx_Selected[i]->pt();
       b_recoMu_glb_phi_noVtX = recoMuons_noAtVtx_Selected[i]->phi();
       b_recoMu_glb_eta_noVtX = recoMuons_noAtVtx_Selected[i]->eta();
@@ -705,7 +716,7 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
       b_recoMu_glb_phi_VtX = recoMuons_AtVtx_Selected[i]->phi();
       b_recoMu_glb_eta_VtX = recoMuons_AtVtx_Selected[i]->eta();
     } else {
-      
+
       b_recoMu_glb_pt_noVtX = -1.0;
       b_recoMu_glb_eta_noVtX = 10.0;
       b_recoMu_glb_phi_noVtX = 5.0;
@@ -714,6 +725,8 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
       b_recoMu_glb_eta_VtX = 10.0;
       b_recoMu_glb_phi_VtX = 5.0;
 
+      b_recoMu_glb_deltaR_noVtx = -1.0;
+      b_recoMu_glb_deltaR_Vtx = -1.0;
     }
 
       b_recoMu_glb_nchi2 = recoMuonsSelected[i]->globalTrack()->normalizedChi2();
@@ -793,6 +806,9 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
       b_recoMu_glb_pt_VtX = -1.0;
       b_recoMu_glb_eta_VtX = 10.0;
       b_recoMu_glb_phi_VtX = 5.0;
+      
+      b_recoMu_glb_deltaR_noVtx = -1.0;
+      b_recoMu_glb_deltaR_Vtx = -1.0;
 
       b_recoMu_glb_phi_error = -1.0;
       b_recoMu_glb_nchi2 = -1.0;

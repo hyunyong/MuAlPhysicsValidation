@@ -43,6 +43,7 @@ Implementation:
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 #include "TTree.h"
 #include "TLorentzVector.h"
+#include "TRandom.h"
 
 //
 // class declaration
@@ -205,6 +206,7 @@ class MuAlAnalyzer : public edm::EDAnalyzer {
     Float_t b_recoDimu_glb_eta;
     Float_t b_recoDimu_glb_phi;
     Float_t b_recoDimu_glb_m;
+  
 
     Float_t b_recoDimu_glb_trk_pt;
     Float_t b_recoDimu_glb_trk_eta;
@@ -228,9 +230,26 @@ class MuAlAnalyzer : public edm::EDAnalyzer {
     Float_t b_recoDimu_sta_eta;
     Float_t b_recoDimu_sta_phi;
     Float_t b_recoDimu_sta_m;
+
+    Bool_t  b_recoDimu_hyb;
+    Float_t b_recoDimu_hyb_pt;
+    Float_t b_recoDimu_hyb_eta;
+    Float_t b_recoDimu_hyb_phi;
+    Float_t b_recoDimu_hyb_sta_pt;
+    Float_t b_recoDimu_hyb_sta_eta;
+    Float_t b_recoDimu_hyb_sta_phi;
+    Float_t b_recoDimu_hyb_m;
+    Int_t b_recoDimu_hyb_sta_q;
+
+
+    TRandom *random; 
+    int randomInt;
 };
 
 MuAlAnalyzer::MuAlAnalyzer( const edm::ParameterSet& iConfig ) {
+
+    random = new TRandom();
+     
 
   m_debugLevel = iConfig.getParameter<int>("debugLevel");
   m_fillGenMuons = iConfig.getParameter<bool>("fillGenMuons");
@@ -393,6 +412,7 @@ MuAlAnalyzer::MuAlAnalyzer( const edm::ParameterSet& iConfig ) {
     m_tree_recoDimuons->Branch("glb_eta",&b_recoDimu_glb_eta,"glb_eta/F");
     m_tree_recoDimuons->Branch("glb_phi",&b_recoDimu_glb_phi,"glb_phi/F");
     m_tree_recoDimuons->Branch("glb_m",&b_recoDimu_glb_m,"glb_m/F");
+    
     if ( m_fillGenMuons ) {
 	// Dimuons constructed from GEN muons matched to GLB muons
 	m_tree_recoDimuons->Branch("glb_gen",&b_recoDimu_glb_gen,"glb_gen/O");
@@ -418,6 +438,17 @@ MuAlAnalyzer::MuAlAnalyzer( const edm::ParameterSet& iConfig ) {
     m_tree_recoDimuons->Branch("sta_eta",&b_recoDimu_sta_eta,"sta_eta/F");
     m_tree_recoDimuons->Branch("sta_phi",&b_recoDimu_sta_phi,"sta_phi/F");
     m_tree_recoDimuons->Branch("sta_m",&b_recoDimu_sta_m,"sta_m/F");
+    // Dimuons constructed from one STA and one GLB muons
+    m_tree_recoDimuons->Branch("hyb",&b_recoDimu_hyb,"hyb/O");
+    m_tree_recoDimuons->Branch("hyb_pt",&b_recoDimu_hyb_pt,"hyb_pt/F");
+    m_tree_recoDimuons->Branch("hyb_eta",&b_recoDimu_hyb_eta,"hyb_eta/F");
+    m_tree_recoDimuons->Branch("hyb_phi",&b_recoDimu_hyb_phi,"hyb_phi/F");
+    m_tree_recoDimuons->Branch("hyb_sta_pt",&b_recoDimu_hyb_sta_pt,"hyb_sta_pt/F");
+    m_tree_recoDimuons->Branch("hyb_sta_eta",&b_recoDimu_hyb_sta_eta,"hyb_sta_eta/F");
+    m_tree_recoDimuons->Branch("hyb_sta_phi",&b_recoDimu_hyb_sta_phi,"hyb_sta_phi/F");
+    m_tree_recoDimuons->Branch("hyb_m",&b_recoDimu_hyb_m,"hyb_m/F");
+    m_tree_recoDimuons->Branch("hyb_q",&b_recoDimu_hyb_sta_q,"hyb_q/F");
+    
   }
 }
 
@@ -1061,12 +1092,68 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
 	  b_recoDimu_sta_eta = tLV_dimu_sta.Eta();
 	  b_recoDimu_sta_phi = tLV_dimu_sta.Phi();
 	  b_recoDimu_sta_m   = tLV_dimu_sta.M();
+
+    if ( b_recoMu_pos_glb_pic == true && b_recoMu_neg_glb_pic == true ){
+        randomInt =  random->Integer(2);
+        TLorentzVector  tLV_dimu_hyb;
+        b_recoDimu_hyb = true;
+        TLorentzVector tLV_recoMuon_glb;
+      
+      
+
+        if(randomInt > 0.5){
+            tLV_recoMuon_glb.SetPtEtaPhiM(b_recoMu_pos_glb_pt, b_recoMu_pos_glb_eta, b_recoMu_pos_glb_phi, 0.105658);
+            tLV_dimu_hyb = tLV_recoMuon_glb + tLV_recoMuonNeg_sta;
+            b_recoDimu_hyb_sta_q = -1;
+            b_recoDimu_hyb_sta_pt = b_recoMu_neg_sta_pt;
+            b_recoDimu_hyb_sta_eta = b_recoMu_neg_sta_eta;
+            b_recoDimu_hyb_sta_phi = b_recoMu_neg_sta_phi;
+       } else {
+            tLV_recoMuon_glb.SetPtEtaPhiM(b_recoMu_neg_glb_pt, b_recoMu_neg_glb_eta, b_recoMu_neg_glb_phi, 0.105658);
+            tLV_dimu_hyb = tLV_recoMuon_glb + tLV_recoMuonPos_sta;
+            b_recoDimu_hyb_sta_q = 1;
+            b_recoDimu_hyb_sta_pt = b_recoMu_pos_sta_pt;
+            b_recoDimu_hyb_sta_eta = b_recoMu_pos_sta_eta;
+            b_recoDimu_hyb_sta_phi = b_recoMu_pos_sta_phi;
+       }
+            b_recoDimu_hyb_pt  = tLV_dimu_hyb.Pt();
+            b_recoDimu_hyb_eta = tLV_dimu_hyb.Eta();
+            b_recoDimu_hyb_phi = tLV_dimu_hyb.Phi();
+            b_recoDimu_hyb_m = tLV_dimu_hyb.M();
+
+      } else {
+        b_recoDimu_hyb     = false;
+        b_recoDimu_hyb_pt  = -1.0;
+        b_recoDimu_hyb_eta = 10.0;
+        b_recoDimu_hyb_phi =  5.0;
+        b_recoDimu_hyb_sta_pt  = -1.0;
+        b_recoDimu_hyb_sta_eta = 10.0;
+        b_recoDimu_hyb_sta_phi =  5.0;
+        b_recoDimu_hyb_m   = -1.0;
+        b_recoDimu_hyb_sta_q   = 0.0;
+
+      }
+
+
+
 	} else {
 	  b_recoDimu_sta     = false;
 	  b_recoDimu_sta_pt  = -1.0;
 	  b_recoDimu_sta_eta = 10.0;
 	  b_recoDimu_sta_phi =  5.0;
 	  b_recoDimu_sta_m   = -1.0;
+
+      b_recoDimu_hyb     = false;
+      b_recoDimu_hyb_pt  = -1.0;
+      b_recoDimu_hyb_eta = 10.0;
+      b_recoDimu_hyb_phi =  5.0;
+      b_recoDimu_hyb_sta_pt  = -1.0;
+      b_recoDimu_hyb_sta_eta = 10.0;
+      b_recoDimu_hyb_sta_phi =  5.0;
+      b_recoDimu_hyb_m   = -1.0;
+      b_recoDimu_hyb_sta_q   = 0.0;
+
+
 	}
 
 	m_tree_recoDimuons->Fill();

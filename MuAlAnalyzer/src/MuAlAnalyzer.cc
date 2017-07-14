@@ -627,7 +627,7 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
 	  //https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideMuonIdRun2#Tight_Muon
 	  //https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideMuonIdRun2#Muon_Isolation
 	  //bool isTight = muon::isTightMuon(PV,recoMuonsSelected[i]);
-	  std::cout<<"b_recoMu_IsoPF04 "<<recoMuonsSelected[i]->pfIsolationR04().sumChargedHadronPt<<" + "<<std::max(0., recoMuonsSelected[i]->pfIsolationR04().sumNeutralHadronEt + recoMuonsSelected[i]->pfIsolationR04().sumPhotonEt - 0.5*recoMuonsSelected[i]->pfIsolationR04().sumPUPt)<<" / "<<recoMuonsSelected[i]->pt()<<std::endl;
+	  //std::cout<<"b_recoMu_IsoPF04 "<<recoMuonsSelected[i]->pfIsolationR04().sumChargedHadronPt<<" + "<<std::max(0., recoMuonsSelected[i]->pfIsolationR04().sumNeutralHadronEt + recoMuonsSelected[i]->pfIsolationR04().sumPhotonEt - 0.5*recoMuonsSelected[i]->pfIsolationR04().sumPUPt)<<" / "<<recoMuonsSelected[i]->pt()<<std::endl;
 	  b_recoMu_IsoPF04 = (recoMuonsSelected[i]->pfIsolationR04().sumChargedHadronPt + std::max(0., recoMuonsSelected[i]->pfIsolationR04().sumNeutralHadronEt + recoMuonsSelected[i]->pfIsolationR04().sumPhotonEt - 0.5*recoMuonsSelected[i]->pfIsolationR04().sumPUPt))/recoMuonsSelected[i]->pt();
 
 	  if ( recoMuonsSelected[i]->isGlobalMuon() ) {

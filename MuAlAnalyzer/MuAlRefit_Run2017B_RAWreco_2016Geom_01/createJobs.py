@@ -1,6 +1,6 @@
 import os, sys, optparse, math
 
-def writeCfg(fname, inputNames, pwd, i, wd, cfg):
+def writeCfg(fname, inputNames, pwd, i):
     file(fname, "w").write("""#!/bin/sh
 
 echo $SHELL
@@ -12,44 +12,37 @@ export AFSDIR=`pwd`
 export IJOB=%d
 export INPUTFILES='%s'
 
+export SCRAM_ARCH=slc6_amd64_gcc530
 eval `scramv1 run -sh`
-cp %s $CAFDIR/
+cp muAlAnalyzer_Data_cfg.py $CAFDIR/
 cd $CAFDIR/
 
-cmsRun %s
+cmsRun muAlAnalyzer_Data_cfg.py
 
-cmsStage *root /store/group/alca_muonalign/aysen/%s/
+cp out_*root $AFSDIR
 rm *root
 
-""" % (pwd, i, inputNames, cfg, cfg, wd))
+""" % (pwd, i, inputNames))
 
-working_dir = "refit_highpt_newGT_v1"
-file_list = "SingleMuon_Run2015D_v3_v4_files.py"
-njobs = 480
-cfg = "refit_highpt_newGT_cfg.py"
+file_list = sys.argv[1]   # MuAlRefit_Run2016E_RAWreco_DT3DOF_CSC3DOF_02_list.py
+njobs = int(sys.argv[2])  # 700
 
-print "working_dir =", working_dir
 print "file_list =", file_list
 print "njobs =", njobs
-print "cfg =", cfg
-
-os.system("rm -rf %s; mkdir %s" % (working_dir, working_dir))
 
 execfile(file_list)
 
 bsubfile = ["#!/bin/sh", ""]
-bsubfile.append("cd %s" % working_dir)
 
 for i in range(njobs):
     inputNames = " ".join(fileNames[len(fileNames)*i/njobs:len(fileNames)*(i+1)/njobs])
-    analyzer = "%s/analyzer%03d.sh" % (working_dir, i)
-    writeCfg(analyzer, inputNames, str(os.getcwdu()), i, working_dir, cfg)
+    analyzer = "analyzer%03d.sh" % (i)
+    writeCfg(analyzer, inputNames, str(os.getcwdu()), i)
     os.system("chmod +x %s" % analyzer)
-    bsubfile.append("echo %s/analyzer%03d.sh" % (working_dir, i))
+    bsubfile.append("echo analyzer%03d.sh" % (i))
     bsubfile.append("bsub -R \"type==SLC6_64\" -q cmscaf1nd -J \"analyzer%03d\" -u a@b analyzer%03d.sh" % (i,i))
 
-bsubfile.append("cd ..")
+#bsubfile.append("cd ..")
 bsubfile.append("")
 file("submit.sh", "w").write("\n".join(bsubfile))
 os.system("chmod +x submit.sh")
-

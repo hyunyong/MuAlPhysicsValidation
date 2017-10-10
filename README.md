@@ -1,25 +1,19 @@
 # Muon Alignment Physics Validation
 
-Checkout the physics validation code
+**Checkout the physics validation code**
+1. Filloe the instruction in: https://github.com/cms-mual/Alignment/blob/CMSSW_9_2_6/README.md
+2. There you will see also how to take MuAlPhysicsValidation (basically just do https://github.com/cms-mual/MuAlPhysicsValidation.git in your favorite release)
 
-    cmsrel CMSSW_8_0_8_patch1
-    cd CMSSW_8_0_8_patch1/src/
-    cmsenv
-    git clone https://github.com/cms-mual/MuAlPhysicsValidation.git -b CMSSW_8_0_X
+**The idea:**
+1. You need to take RAWRECO SingelMuon events and reconstruct muons using the Muon Geometry and/or APEs you want to test
+2. Run the Analyzer, in order to produce Ntuples with muon and di-muonn information
+3. Use the Ntuples to plot the reconstruction performance, overimposing the results obtained using several geometries and/or APEs
 
----
-## Refitting
+**Refitting**
 
-1a. Change directory to MuAlRefit:
-
-    cd MuAlPhysicsValidation/MuAlRefit
-
-1b. You should create a working directory as CRAB_2016E_6vs3FOD. We will analyze all the things you have to customize each time.
-
-    cp -r CRAB_2016E_6vs3FOD CRAB_MYSTUDY
-    cd CRAB_MYSTUDY
-
-1c. Change the crab configuration file: **crab_data.py**:
+1. cd MuAlPhysicsValidation/MuAlRefit
+2. cp -r MuAlRefit_Run2017B_RAWreco_2016Geom_01 CRAB_MYSTUDY; cd CRAB_MYSTUDY
+3. Change the crab configuration file: **crab_data.py**:
 
     Change the requestName and outLFNDirBase 
     Change the Input dataset: inputDataset and the json file (if data)

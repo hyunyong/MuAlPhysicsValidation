@@ -120,6 +120,8 @@ TH1F_glb_nChi2_barrel = standard_histograms.get("D1_glb_nChi2_barrel").plot.root
 
 TH2F_glb_eta_nChi2 = standard_histograms.get("D2_glb_eta_nChi2").plot.root("TH2F_glb_eta_nChi2", "glb n#chi^{2};#eta; normalized #chi^{2}")
 TH2F_glb_pt_nChi2 = standard_histograms.get("D2_glb_pt_nChi2").plot.root("TH2F_glb_nChi2_pt", "glb n#chi^{2}; p_{T}; normalized #chi^{2}")
+TH2F_sta_pt_nChi2 = standard_histograms.get("D2_sta_pt_nChi2").plot.root("TH2F_sta_nChi2_pt", "sta n#chi^{2}; p_{T}; normalized #chi^{2}")
+TH2F_sta_eta_nChi2 = standard_histograms.get("D2_sta_eta_nChi2").plot.root("TH2F_sta_eta_nChi2", "sta n#chi^{2};#eta; normalized #chi^{2}")
 
 ##
 ## nhits
@@ -154,9 +156,9 @@ TH2F_glb_sta_phi_ptRes_barrel = standard_histograms.get("D2_glb_sta_phi_ptRes_ba
 ##
 
 
-TH2F_sta_glb_pt_HybridSTA_Mass = mass_histograms.get("D2_sta_glb_pt_HybridSTA_Mass").plot.root("sta_glb_pt_HybridSTA_Mass"," sta glb Hydrid Z Mass ;p_{T} mu STA;GeV")
-TH2F_sta_glb_eta_HybridSTA_Mass = mass_histograms.get("D2_sta_glb_eta_HybridSTA_Mass").plot.root("sta_glb_eta_HybridSTA_Mass"," sta glb Hydrid Z Mass ;#eta mu STA;GeV")
-TH2F_sta_glb_phi_HybridSTA_Mass = mass_histograms.get("D2_sta_glb_phi_HybridSTA_Mass").plot.root("sta_glb_phi_HybridSTA_Mass"," sta glb Hydrid Z Mass ;#phi mu STA;GeV")
+TH2F_sta_glb_pt_HybridSTA_Mass = mass_histograms.get("D2_sta_glb_pt_HybridSTA_Mass").plot.root("sta_glb_pt_HybridSTA_Mass"," CMS preliminary ;p_{T}_{#mu}^{STA};")
+TH2F_sta_glb_eta_HybridSTA_Mass = mass_histograms.get("D2_sta_glb_eta_HybridSTA_Mass").plot.root("sta_glb_eta_HybridSTA_Mass"," CMS preliminary ;#eta_{#mu}^{STA};")
+TH2F_sta_glb_phi_HybridSTA_Mass = mass_histograms.get("D2_sta_glb_phi_HybridSTA_Mass").plot.root("sta_glb_phi_HybridSTA_Mass"," CMS preliminary ;#phi_{#mu}^{STA};")
  
 
 

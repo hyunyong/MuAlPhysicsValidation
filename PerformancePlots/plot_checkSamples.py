@@ -8,7 +8,7 @@ for sample in samples:
   header     = sample[0]
   legend     = sample[1]
   label      = sample[2]
-  color      = sample[3]
+  color      = sample[3][0]
   maxEntries = sample[4]
   filenames  = sample[5:]
   

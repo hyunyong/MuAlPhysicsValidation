@@ -7,9 +7,7 @@ execfile("tdrStyle.py")
 
 # Define different canvas headers:
 ch_CmsSim = "CMS Simulation"
-ch_Data2015 = "CMS Prelim. 2015   #sqrt{s} = 13 TeV   L_{int} = 2.6 fb^{-1}"
-ch_Data2016B = "CMS Prelim. 2016B   #sqrt{s} = 13 TeV   L_{int} = 0.87 fb^{-1}"
-ch_Data2016E = "CMS Prelim. 2016E   #sqrt{s} = 13 TeV   L_{int} = 4.1 fb^{-1}"
 ch_Data2016G = "CMS Prelim. 2016G   #sqrt{s} = 13 TeV   L_{int} = 7.5 fb^{-1}"
 ch_Data2016H = "CMS Prelim. 2016H   #sqrt{s} = 13 TeV   L_{int} = 9.2 fb^{-1}"
+ch_Data2017B = "CMS Prelim. 2017B   #sqrt{s} = 13 TeV   L_{int} = 3.6 fb^{-1}"
 ch_MC = "Zmumu MC #sqrt{s} = 13 TeV"

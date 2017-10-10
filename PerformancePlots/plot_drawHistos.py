@@ -65,8 +65,10 @@ for sampleGroup in combineHistos:
     iHisto = iHisto + 1
     
     # Draw histograms
+    histo[0][ iFirstInGroup ].SetMarkerColor(samples[iFirstInGroup][3][0])
     histo[0][ iFirstInGroup ].Draw()
     for iSample in sampleGroup[1:]:
+      histo[0][ iSample ].SetMarkerColor(samples[iSample][3][0])
       histo[0][ iSample ].Draw("same")
     
     # Draw labels

@@ -53,8 +53,8 @@ def makeProfile(TH2F_name, dirName, lnBins, fitType, drawBinPlots, meanRange, si
     if histo.GetName()=="sta_glb_eta_HybridSTA_Mass": histo.GetXaxis().SetTitle("#eta_{#mu}^{STA}");
     if histo.GetName()=="sta_glb_phi_HybridSTA_Mass": histo.GetXaxis().SetTitle("#phi_{#mu}^{STA}");
     if histo.GetName()=="sta_glb_pt_HybridSTA_Mass": histo.GetXaxis().SetTitle("pT_{#mu}^{STA}");
-    TH1F_fit_mean_output.append(TH1F("{}_{}_mean".format(histo.GetName(),histoCount) , ";{};{} mass mean [GeV]".format(histo.GetXaxis().GetTitle(),y_axis), lnBins, histoBounds[0], histoBounds[1])) #,  histo.GetYaxis().GetXmin(),histo.GetYaxis().GetXmax()  )
-    TH1F_fit_sigma_output.append(TH1F("{}_{}_sigma".format(histo.GetName(),histoCount) , ";{};{} mass width [GeV]".format(histo.GetXaxis().GetTitle(),y_axis), lnBins, histoBounds[0], histoBounds[1])) 
+    TH1F_fit_mean_output.append(TH1F("{}_{}_mean".format(histo.GetName(),histoCount) , ";{};{} mean [GeV]".format(histo.GetXaxis().GetTitle(),y_axis), lnBins, histoBounds[0], histoBounds[1])) #,  histo.GetYaxis().GetXmin(),histo.GetYaxis().GetXmax()  )
+    TH1F_fit_sigma_output.append(TH1F("{}_{}_sigma".format(histo.GetName(),histoCount) , ";{};{} width [GeV]".format(histo.GetXaxis().GetTitle(),y_axis), lnBins, histoBounds[0], histoBounds[1])) 
   for bins in range(lnBins):
     temp = []
     for fileCount, histo in enumerate(TH2F_temp_input):

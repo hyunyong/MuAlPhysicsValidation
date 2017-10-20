@@ -56,6 +56,6 @@ TH2F_gen_glb_pt_ptRes = TH2F("gen_glb_pt_v_ptRes"," gen vs glb p_{T}Res ;p_{T};p
 
 # Reco Di-muon plots
 # Hybrid Z-boson
-TH2F_sta_glb_pt_HybridSTA_Mass = TH2F("sta_glb_pt_HybridSTA_Mass"," sta glb Hydrid Z Mass ;pT_{#mu}^{STA};Di-#mu",ptBins, ptMin, ptMax ,massBins, massMin, massMax )
-TH2F_sta_glb_eta_HybridSTA_Mass = TH2F("sta_glb_eta_HybridSTA_Mass"," sta glb Hydrid Z Mass ;#eta_{#mu}^{STA};Di-#mu",etaBins, etaMin, etaMax ,massBins, massMin, massMax )
-TH2F_sta_glb_phi_HybridSTA_Mass = TH2F("sta_glb_phi_HybridSTA_Mass"," sta glb Hydrid Z Mass ;#phi_{#mu}^{STA};GeV",phiBins, phiMin, phiMax ,massBins, massMin, massMax )
+TH2F_sta_glb_pt_HybridSTA_Mass = TH2F("sta_glb_pt_HybridSTA_Mass"," sta glb Hydrid Z Mass ;pT_{#mu}^{STA};Di-#mu mass",ptBins, ptMin, ptMax ,massBins, massMin, massMax )
+TH2F_sta_glb_eta_HybridSTA_Mass = TH2F("sta_glb_eta_HybridSTA_Mass"," sta glb Hydrid Z Mass ;#eta_{#mu}^{STA};Di-#mu mass",etaBins, etaMin, etaMax ,massBins, massMin, massMax )
+TH2F_sta_glb_phi_HybridSTA_Mass = TH2F("sta_glb_phi_HybridSTA_Mass"," sta glb Hydrid Z Mass ;#phi_{#mu}^{STA};Di-#mu mass",phiBins, phiMin, phiMax ,massBins, massMin, massMax )

@@ -1,10 +1,11 @@
-from ROOT import TFile, TTree, TH1F, TLorentzVector, TCanvas
+from ROOT import TFile, TTree, TH1F, TLorentzVector, TCanvas, TPaveStats, TLatex
 from random import randint
 import math, sys, os
 from math import fabs
 execfile("constants.py")
 #RUN WITH:
 #python Step1_make_2d_plots.py inputFile outputFolder Treating_Mu_AntiMU (std, use only positive, only negative, equal number)
+##python Step1_make_2d_plots.py /afs/cern.ch/work/l/lpernie/MuonAlign/WD/CMSSW_9_4_0_pre3/src/MuAlPhysicsValidation/MuAlAnalyzer/MuAlRefit_Run2017part1_RAWreco_rerecov2 MuAlRefit_Run2017part1_RAWreco_rerecov2 std -b # std,pos,neg,equal
 #python Step1_make_2d_plots.py /eos/cms/store/group/alca_muonalign/lpernie/MuAlAnalyzer/MuAlRefit_Run2017B_RAWreco_2016Geom_01.root MuAlRefit_2017B_2016Geom std -b # std,pos,neg,equal
 #python Step1_make_2d_plots.py /eos/cms/store/group/alca_muonalign/lpernie/MuAlAnalyzer/MuAlRefit_Legacy.root MuAlRefit_2016Perform std -b # std,pos,neg,equal
 #python Step1_make_2d_plots.py /eos/cms/store/group/alca_muonalign/lpernie/MuAlAnalyzer/MuAlRefit_Run2017B_RAWreco_DT6DOFCSC3DOF.root MuAlRefit_2017B_DT6DOFCSC3DOF std -b

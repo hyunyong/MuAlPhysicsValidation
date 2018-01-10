@@ -32,10 +32,13 @@
 
 1f. Submit CRAB jobs:
 
+    cmsenv
+    voms-proxy-init -voms cms
+    source /cvmfs/cms.cern.ch/crab3/crab.sh
     crab submit -c crab_data.py
     crab status (and all the CRAB commands to check status, resubmit etc...)
 
-1g. Once the jobs are finished, the output will be in EOS, as spdecified by outLFNDirBase in the crab cfg file.
+1g. Once the jobs are finished, the output will be in EOS, as spdecified by outLFNDirBase location in the crab cfg file.
 
 ---
 ## Analysis

@@ -51,7 +51,7 @@
 
         mkdir MuAlRefit_MYSTUDY
 
-2c. Create a filelist for the sample to be analyzed (need to specify in **Create_Input.sh** the EOS folder that contains the Refit files and the output txt file)
+2c. Create a filelist for the sample to be analyzed in **Create_Input.sh**; the EOS folder that contains the Refit files and the output txt file.
 
         bash Create_Input.sh 
         cd MYSTUDY

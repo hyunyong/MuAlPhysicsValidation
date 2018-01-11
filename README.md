@@ -103,11 +103,11 @@ This is an alternative procedure for step 3.
 
 3'a. Change directory to PerformancePlots_2_0
 
-    cd../PerformancePlots_2_0
+    cd ../PerformancePlots_2_0
 
 3'b. Point **Step1_make_2d_plots.py** at the root file you hadded in the previous step, also specifying an output file:
 
-    python Step1_make_2d_plots.py ../MuAlAnalyzer/FINALFILE.root MuAlRefit_Step1_plots std -b
+    python Step1_make_2d_plots.py ../MuAlAnalyzer/MuAlRefit_MYSTUDY/FINALFILE.root MuAlRefit_Step1_plots std -b
     
 This will create a folder with some 2D plots in it named MuAlRefit_Step1_plots as well as a ROOT file MuAlRefit_Step1_plots.root. To make comparison plots with another analysis, you may repeat this step to create multiple root files to be used in step 3'c.
 

@@ -47,20 +47,25 @@
 
         cd ../MuAlAnalyzer
 
-2b. Create a Working directory for this comparison (it could be the filder name on EOS from prev. step)
+2b. Create a Working directory for this comparison (it could be the folder name on EOS from the previous step)
 
         mkdir MuAlRefit_MYSTUDY
 
-2c. Create a filelist for the sample to be analyzed in **Create_Input.sh**; the EOS folder that contains the Refit files and the output txt file.
+2c. Create a file list for the sample to be analyzed in **Create_Input.sh**; this will be the EOS folder that contains the Refit files and a python file that will create the file list. You will specify these on lines 2 and 3 of **Create_Input.sh**:
+
+        Folder="/store/group/alca_muonalign/<user>/<crab_output_location>"
+        fileTXT="MuAlRefit_MYSTUDY/MuAlRefit_MYSTUDY_list.py"
+
+Then, execute the script.
 
         bash Create_Input.sh 
-        cd MYSTUDY
+        cd MuAlRefit_MYSTUDY
 
 2d. Now copy here the python file you will change to run your comparison **muAlAnalyzer_Data_cfg.py**.
       
         cp ../muAlAnalyzer_Data_cfg.py .
         cp ../createJobs.py .
-        python createJobs.py $FILELIST$ $N_JOBS$ (FILELIST is the one you created and N_JOBS is the job splitting you want to use; recommend 500)
+        python createJobs.py $FILELIST$ $N_JOBS$ (FILELIST is the one you created and N_JOBS is the job splitting you want to use; recommend 500 jobs)
 
 2e. Now you can submit the jobs:
 
@@ -100,11 +105,11 @@ This is an alternative procedure for step 3.
 
     cd../PerformancePlots_2_0
 
-3'b. Target **Step1_make_2d_plots.py** at the root file you hadded in the previous step, also specifying an output file:
+3'b. Point **Step1_make_2d_plots.py** at the root file you hadded in the previous step, also specifying an output file:
 
     python Step1_make_2d_plots.py ../MuAlAnalyzer/FINALFILE.root MuAlRefit_Step1_plots std -b
 
-3'c. Edit **Step2_makeProfiles.py** to make comparison plots over groups of ROOT files. Then run
+3'c. Edit **Step2_makeProfiles.py** to make comparison plots over groups of ROOT files. Then run it.
 
     python Step2_makeProfiles.py -b
 

@@ -92,3 +92,19 @@
 3d. Launch the command:
 
     python myPlot_MINE.py
+
+## Plotting with Performance Plots 2.0
+This is an alternative procedure for step 3. 
+
+3'a. Change directory to PerformancePlots_2_0
+
+    cd../PerformancePlots_2_0
+
+3'b. Target **Step1_make_2d_plots.py** at the root file you hadded in the previous step, also specifying an output file:
+
+    python Step1_make_2d_plots.py ../MuAlAnalyzer/FINALFILE.root MuAlRefit_Step1_plots std -b
+
+3'c. Edit **Step2_makeProfiles.py** to make comparison plots over groups of ROOT files. Then run
+
+    python Step2_makeProfiles.py -b
+

@@ -108,8 +108,18 @@ This is an alternative procedure for step 3.
 3'b. Point **Step1_make_2d_plots.py** at the root file you hadded in the previous step, also specifying an output file:
 
     python Step1_make_2d_plots.py ../MuAlAnalyzer/FINALFILE.root MuAlRefit_Step1_plots std -b
+    
+This will create a folder with some 2D plots in it named MuAlRefit_Step1_plots as well as a ROOT file MuAlRefit_Step1_plots.root. To make comparison plots with another analysis, you may repeat this step to create multiple root files to be used in step 3'c.
 
-3'c. Edit **Step2_makeProfiles.py** to make comparison plots over groups of ROOT files. Then run it.
+3'c. Edit **Step2_makeProfiles.py** to make comparison plots over groups of analysis datasets. You need to edit the following fields:
+    
+    tot_fileList
+    tot_fileListName
+    tot_colors
+    Combinations
+    tot_outputFolderName
+    
+Specify the list of root files created in step 3'b in `tot_fileList`, labeling each dataset in `tot_fileListName` appropriately, and assigning colors and the grouping in `tot_colors` and `Combinations`, respectively. Finally, create an output folder to store all your comparison plots in the `tot_outputFolderName` field. Then, run the code:
 
     python Step2_makeProfiles.py -b
 

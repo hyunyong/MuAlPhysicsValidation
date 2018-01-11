@@ -65,7 +65,8 @@ Then, execute the script.
       
     cp ../muAlAnalyzer_Data_cfg.py .
     cp ../createJobs.py .
-    python createJobs.py $FILELIST$ $N_JOBS$ (FILELIST is the one you created and N_JOBS is the job splitting you want to use; recommend 500 jobs)
+    python createJobs.py $FILELIST$ $N_JOBS$
+FILELIST is the one you created and N_JOBS is the job splitting you want to use; recommend N_JOBS be in the range [500-900] jobs.
 
 2e. Now you can submit the jobs:
 

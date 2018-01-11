@@ -45,27 +45,27 @@
 
 2a. Change directory to MuAlAnalyzer:
 
-        cd ../MuAlAnalyzer
+    cd ../MuAlAnalyzer
 
 2b. Create a Working directory for this comparison (it could be the folder name on EOS from the previous step)
 
-        mkdir MuAlRefit_MYSTUDY
+    mkdir MuAlRefit_MYSTUDY
 
 2c. Create a file list for the sample to be analyzed in **Create_Input.sh**; this will be the EOS folder that contains the Refit files and a python file that will create the file list. You will specify these on lines 2 and 3 of **Create_Input.sh**:
 
-        Folder="/store/group/alca_muonalign/<user>/<crab_output_location>"
-        fileTXT="MuAlRefit_MYSTUDY/MuAlRefit_MYSTUDY_list.py"
+    Folder="/store/group/alca_muonalign/<user>/<crab_output_location>"
+    fileTXT="MuAlRefit_MYSTUDY/MuAlRefit_MYSTUDY_list.py"
 
 Then, execute the script.
 
-        bash Create_Input.sh 
-        cd MuAlRefit_MYSTUDY
+    bash Create_Input.sh 
+    cd MuAlRefit_MYSTUDY
 
 2d. Now copy here the python file you will change to run your comparison **muAlAnalyzer_Data_cfg.py**.
       
-        cp ../muAlAnalyzer_Data_cfg.py .
-        cp ../createJobs.py .
-        python createJobs.py $FILELIST$ $N_JOBS$ (FILELIST is the one you created and N_JOBS is the job splitting you want to use; recommend 500 jobs)
+    cp ../muAlAnalyzer_Data_cfg.py .
+    cp ../createJobs.py .
+    python createJobs.py $FILELIST$ $N_JOBS$ (FILELIST is the one you created and N_JOBS is the job splitting you want to use; recommend 500 jobs)
 
 2e. Now you can submit the jobs:
 

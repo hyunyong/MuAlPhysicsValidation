@@ -18,8 +18,7 @@ execfile("constants.py")
 fileIn = sys.argv[1]
 fileOut = sys.argv[2]
 method = sys.argv[3]
-# TODO(Adrian/Ryan): Buggy when oldTTrees is false; defaulting to True as a band-aid.
-oldTTrees = True #sys.argv[4]=="oldTTrees"
+oldTTrees = sys.argv[4]=="oldTTrees"
 if(method!="std" and method!="pos" and method!="neg" and method!="equal"):
   print "WARNIGN! method is unknown, options are std,pos,neg,equal";
 

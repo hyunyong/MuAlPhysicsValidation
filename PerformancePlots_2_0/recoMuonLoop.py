@@ -30,44 +30,44 @@ for counter, event in enumerate(recoMuons):
   if(method=="equal" and event.q<0 and nMuonNeg>nMinPosNeg): continue
   if(method=="equal" and event.q>0 and nMuonPos>nMinPosNeg): continue
 
-  if not oldTTrees:
-    deltaPhiGLB = (event.glb_phi-event.sta_phi)/event.glb_phi_error
-    deltaPhiTRK = (event.glb_trk_phi-event.sta_phi)/event.glb_phi_error
+  deltaPhiGLB = (event.glb_phi-event.sta_phi)/event.glb_phi_error
+  deltaPhiTRK = (event.glb_trk_phi-event.sta_phi)/event.glb_phi_error
+  
   # CHI2
   TH2F_glb_eta_nChi2.Fill(event.glb_eta, event.glb_nchi2)
   TH2F_glb_pt_nChi2.Fill(event.glb_pt, event.glb_nchi2)
   TH2F_sta_eta_nChi2.Fill(event.sta_eta, event.sta_nchi2)
   TH2F_sta_pt_nChi2.Fill(event.sta_pt, event.sta_nchi2)
+  
   # N HITs
-  if not oldTTrees:
-    TH2F_glb_eta_nHits.Fill(event.glb_eta, event.glb_nhits)
-    TH2F_glb_pt_nHits.Fill(event.glb_pt, event.glb_nhits)
+  TH2F_glb_eta_nHits.Fill(event.glb_eta, event.glb_nhits)
+  TH2F_glb_pt_nHits.Fill(event.glb_pt, event.glb_nhits)
+  
   # Phi Pull
-  if not oldTTrees:
-    TH1F_sta_glb_delta_phi.Fill(deltaPhiGLB)
-    TH1F_sta_TRK_delta_phi.Fill(deltaPhiTRK)
+  TH1F_sta_glb_delta_phi.Fill(deltaPhiGLB)
+  TH1F_sta_TRK_delta_phi.Fill(deltaPhiTRK)
+  
   # Barrel
   if abs(event.glb_eta) < 0.9 :
     TH1F_sta_nChi2_barrel.Fill(event.sta_nchi2)
     TH1F_glb_nChi2_barrel.Fill(event.glb_nchi2)
-    if not oldTTrees:
-      TH1F_sta_glb_delta_phi_barrel.Fill(deltaPhiGLB)
-      TH1F_sta_TRK_delta_phi_barrel.Fill(deltaPhiTRK)
+    TH1F_sta_glb_delta_phi_barrel.Fill(deltaPhiGLB)
+    TH1F_sta_TRK_delta_phi_barrel.Fill(deltaPhiTRK)
+ 
   # Endcap
   if abs(event.glb_eta) > 0.9 :
     TH1F_sta_nChi2_endcap.Fill(event.sta_nchi2)
     TH1F_glb_nChi2_endcap.Fill(event.glb_nchi2)
-    if not oldTTrees:
-      TH1F_sta_glb_delta_phi_endcap.Fill(deltaPhiGLB)
-      TH1F_sta_TRK_delta_phi_endcap.Fill(deltaPhiTRK)
+    TH1F_sta_glb_delta_phi_endcap.Fill(deltaPhiGLB)
+    TH1F_sta_TRK_delta_phi_endcap.Fill(deltaPhiTRK)
+  
   # pT PULL
   if event.glb and event.sta and  event.sta_pt != 0.0 and event.glb_pt != 0.0:
     glb_qoverp = event.q/event.glb_pt
     sta_qoverp = event.q/event.sta_pt
-    if not oldTTrees:
-      pTPull = (glb_qoverp-sta_qoverp)/event.glb_qoverpterror
-      TH2F_glb_sta_eta_ptPull.Fill(event.glb_eta,pTPull)
-      TH2F_glb_sta_pt_ptPull.Fill(event.glb_pt,pTPull)
+    pTPull = (glb_qoverp-sta_qoverp)/event.glb_qoverpterror
+    TH2F_glb_sta_eta_ptPull.Fill(event.glb_eta,pTPull)
+    TH2F_glb_sta_pt_ptPull.Fill(event.glb_pt,pTPull)
   
   # pT RES
   ptResGLBSTA = event.q*(1.0/event.sta_pt-1.0/event.glb_trk_pt)
@@ -77,6 +77,7 @@ for counter, event in enumerate(recoMuons):
     TH2F_glb_sta_phi_ptRes_endcap.Fill(event.glb_phi, ptResGLBSTA)
   if abs(event.glb_eta) < 0.9 :
     TH2F_glb_sta_phi_ptRes_barrel.Fill(event.glb_phi, ptResGLBSTA)
+  
   # GEN
   if isMC and event.glb_gen:
     ptResGLB = (event.glb_pt-event.glb_gen_pt)/event.glb_gen_pt

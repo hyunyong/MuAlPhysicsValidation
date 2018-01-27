@@ -12,7 +12,7 @@ def getFitParams(hist):
   
   p0 = fit.GetParameter(0) # offset from x axis
   p0e = fit.GetParError(0) # offset from x axis
-  
+
   p1 = fit.GetParameter(1) # slope
   p1e = fit.GetParError(1) # slope
 
@@ -34,13 +34,13 @@ def makeProfile(TH2F_name, dirName, lnBins, fitType, drawBinPlots, meanRange, si
   TH2F_temp_input = []
   TH1F_fit_mean_output = []
   TH1F_fit_sigma_output = []
-  
+
   path = "{}/{}".format(outputFolderName,dirName)
   if not os.path.exists(path):
     os.makedirs(path)
   widthType = "RMS"
   meanType = "mean"
-  if fitType == "gaus":  
+  if fitType == "gaus":
     widthType = ""#"fit #sigma"
     meanType = ""#"fit center"
   for fileCount, file in enumerate(files):
@@ -66,25 +66,21 @@ def makeProfile(TH2F_name, dirName, lnBins, fitType, drawBinPlots, meanRange, si
       minValue = histo.GetXaxis().GetXmin()
       boundsBins = int(bins*widthBins), int((bins+1)*widthBins)
       bounds = minValue + bins*width, minValue + (bins+1)*width
-      
+
       boundsValue = histoBounds[0]+ length/(lnBins+.0)*bins, histoBounds[0]+ length/(lnBins+.0)*(bins+1)
       #print lengthBins, lnBins, widthBins,  boundsBins, bins, boundsValue
       temp.append(histo.ProjectionY("temp_{:b}".format(fileCount),boundsBins[0], boundsBins[1], ""))
-      temp[fileCount].SetLineColor(fileCount)    
+      temp[fileCount].SetLineColor(fileCount)
       temp[fileCount].Sumw2()
       if temp[fileCount].Integral() > 0: temp[fileCount].Scale(1.0/temp[fileCount].Integral())
       if fitType == "gaus" and temp[fileCount].GetEntries() > 20:
-        #temp.Fit("gaus","QC")
         fitCut(temp[fileCount], nGausFit, "QC")
+        temp[fileCount].GetFunction("gaus").SetLineColor(colors[fileCount])
         values = getFitParamsGauss(temp[fileCount])
-        #print values[2], values[3], getFitParamsGauss
         TH1F_fit_mean_output[fileCount].SetBinContent(bins+1, values[2])
         TH1F_fit_mean_output[fileCount].SetBinError(bins+1, values[3])
         TH1F_fit_sigma_output[fileCount].SetBinContent(bins+1, values[4])
         TH1F_fit_sigma_output[fileCount].SetBinError(bins+1, values[5])
-        #print boundsValue, bins, temp[fileCount].GetEntries()
-        #print meanType, " ", values[2]
-        #print widthType, " ", values[4]
       if fitType != "gaus":
         values = temp[fileCount].GetMean(), temp[fileCount].GetMeanError(), temp[fileCount].GetRMS(), temp[fileCount].GetRMSError()
         TH1F_fit_mean_output[fileCount].SetBinContent(bins+1, values[0])
@@ -96,7 +92,7 @@ def makeProfile(TH2F_name, dirName, lnBins, fitType, drawBinPlots, meanRange, si
         path = "{}/{}/{}_{}".format(outputFolderName,dirName,TH2F_name,fitType )
         if not os.path.exists(path):
           os.makedirs(path)
-        
+
         for count, binHisto in enumerate(temp):
           setHistoStyle(binHisto, colors[count] )
           if count == 0: 
@@ -105,7 +101,7 @@ def makeProfile(TH2F_name, dirName, lnBins, fitType, drawBinPlots, meanRange, si
           if count > 0: 
             print binHisto.GetMean()
             binHisto.Draw("same")
-        
+
         titleString = histo.GetXaxis().GetTitle().replace("{", "")
         titleString = titleString.replace("}", "")
         titleString = titleString.replace("_", "")
@@ -120,7 +116,7 @@ def makeProfile(TH2F_name, dirName, lnBins, fitType, drawBinPlots, meanRange, si
   texData.Draw()
   texPrelim.Draw()
   c1.SaveAs('{}/{}/{}_{}_mean.png'.format(outputFolderName,dirName,TH2F_name, fitType))
-  
+
   legendRMS =  TLegend(0.33,0.68,0.73,0.88)
   drawProfile(TH1F_fit_sigma_output, sigmaRange, legendRMS)
   texLumi.Draw()

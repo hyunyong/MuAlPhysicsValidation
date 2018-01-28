@@ -45,22 +45,28 @@
 
 2a. Change directory to MuAlAnalyzer:
 
-        cd ../MuAlAnalyzer
+    cd ../MuAlAnalyzer
 
-2b. Create a Working directory for this comparison (it could be the filder name on EOS from prev. step)
+2b. Create a Working directory for this comparison (it could be the folder name on EOS from the previous step)
 
-        mkdir MuAlRefit_MYSTUDY
+    mkdir MuAlRefit_MYSTUDY
 
-2c. Create a filelist for the sample to be analyzed in **Create_Input.sh**; the EOS folder that contains the Refit files and the output txt file.
+2c. Create a file list for the sample to be analyzed in **Create_Input.sh**; this will be the EOS folder that contains the Refit files and a python file that will create the file list. You will specify these on lines 2 and 3 of **Create_Input.sh**:
 
-        bash Create_Input.sh 
-        cd MYSTUDY
+    Folder="/store/group/alca_muonalign/<user>/<crab_output_location>"
+    fileTXT="MuAlRefit_MYSTUDY/MuAlRefit_MYSTUDY_list.py"
+
+Then, execute the script.
+
+    bash Create_Input.sh 
+    cd MuAlRefit_MYSTUDY
 
 2d. Now copy here the python file you will change to run your comparison **muAlAnalyzer_Data_cfg.py**.
       
-        cp ../muAlAnalyzer_Data_cfg.py .
-        cp ../createJobs.py .
-        python createJobs.py $FILELIST$ $N_JOBS$ (FILELIST is the one you created and N_JOBS is the job splitting you want to use; recommend 500)
+    cp ../muAlAnalyzer_Data_cfg.py .
+    cp ../createJobs.py .
+    python createJobs.py $FILELIST$ $N_JOBS$
+`FILELIST` is the one you created and `N_JOBS` is the job splitting you want to use; recommend `N_JOBS` ~800 jobs and to remain in the range [500-900] jobs.
 
 2e. Now you can submit the jobs:
 
@@ -92,3 +98,29 @@
 3d. Launch the command:
 
     python myPlot_MINE.py
+
+## Plotting with Performance Plots 2.0
+This is an alternative procedure for step 3. 
+
+3'a. Change directory to PerformancePlots_2_0
+
+    cd ../PerformancePlots_2_0
+
+3'b. Point **Step1_make_2d_plots.py** at the root file you hadded in the previous step, also specifying an output file:
+
+    python Step1_make_2d_plots.py ../MuAlAnalyzer/MuAlRefit_MYSTUDY/FINALFILE.root MuAlRefit_Step1_plots std -b
+    
+This will create a folder with some 2D plots in it named MuAlRefit_Step1_plots as well as a ROOT file MuAlRefit_Step1_plots.root. To make comparison plots with another analysis, you may repeat this step to create multiple root files to be used in step 3'c.
+
+3'c. Edit **Step2_makeProfiles.py** to make comparison plots over groups of analysis datasets. You need to edit the following fields:
+    
+    tot_fileList
+    tot_fileListName
+    tot_colors
+    Combinations
+    tot_outputFolderName
+    
+Specify the list of root files created in step 3'b in `tot_fileList`, labeling each dataset in `tot_fileListName` appropriately, and assigning colors and the grouping in `tot_colors` and `Combinations`, respectively. Finally, create an output folder to store all your comparison plots in the `tot_outputFolderName` field. Then, run the code:
+
+    python Step2_makeProfiles.py -b
+

@@ -125,5 +125,6 @@ Specify the list of root files created in step 3'b in `tot_fileList`, labeling e
     python Step2_makeProfiles.py -b
 
 
-#Notes:
+## Notes:
+
 1 Input to Refit is full RECO, not ALCARECO!

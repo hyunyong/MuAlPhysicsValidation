@@ -24,9 +24,9 @@ from root_numpy import fill_hist
 
 array = tree2array(recoMuons,
     branches=[	'glb', 'sta', 
-    			'TMath::Abs(glb_eta)', 'glb_trk_eta',
+    			'TMath::Abs(glb_eta)', 'glb_trk_eta', 'sta_eta',
     			'glb_phi',  'glb_trk_phi', 'sta_phi', 'glb_phi_error',
-    			'glb_pt','glb_trk_pt',
+    			'glb_pt','glb_trk_pt', 'sta_pt',
     			'glb_nchi2', 'sta_nchi2',
     			'glb_nhits',
     			'q * (1.0/sta_pt-1.0/glb_pt)',
@@ -35,9 +35,9 @@ array = tree2array(recoMuons,
     start=0, stop=Event_ro_RUN, step=1)
 
 array.dtype.names = [	'glb', 'sta', 
-						'glb_eta', 'glb_trk_eta',
+						'glb_eta', 'glb_trk_eta', 'sta_eta',
 						'glb_phi', 'glb_trk_phi', 'sta_phi', 'glb_phi_error',
-						'glb_pt', 'glb_trk_pt',
+						'glb_pt', 'glb_trk_pt','sta_pt',
 						'glb_nchi2','sta_nchi2',
 						'glb_nhits',
 						'ptResSTAGLB',
@@ -147,6 +147,8 @@ TH2F_glb_sta_pt_ptPull = standard_histograms.get("D2_glb_sta_pt_ptPull").plot.ro
 
 TH2F_glb_sta_eta_ptRes = standard_histograms.get("D2_glb_sta_eta_ptRes").plot.root("glb_sta_eta_v_ptRes"," glb vs sta p_{T}Res ;#eta;pTRes")
 TH2F_glb_sta_phi_ptRes = standard_histograms.get("D2_glb_sta_phi_ptRes").plot.root("glb_sta_phi_v_ptRes"," glb vs sta p_{T}Res ;#phi;pTRes")
+TH2F_glb_sta_pt_ptRes = standard_histograms.get("D2_glb_sta_pt_ptRes").plot.root("glb_sta_pt_v_ptRes"," glb vs sta p_{T}Res ;#pt;pTRes")
+
 TH2F_glb_sta_phi_ptRes_endcap = standard_histograms.get("D2_glb_sta_phi_ptRes_endcap").plot.root("glb_sta_phi_v_ptRes_endcap"," glb vs sta p_{T}Res |#eta| > 0.9;#phi;pTRes")
 TH2F_glb_sta_phi_ptRes_barrel = standard_histograms.get("D2_glb_sta_phi_ptRes_barrel").plot.root("glb_sta_phi_v_ptRes_barrel"," glb vs sta p_{T}Res |#eta| < 0.9;#phi;pTRes")
 

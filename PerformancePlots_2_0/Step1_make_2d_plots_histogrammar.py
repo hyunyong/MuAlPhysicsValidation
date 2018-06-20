@@ -14,6 +14,8 @@ import time
 # python Step1_make_2d_plots_histogrammar.py MuAlRefit_Prompt.root MuAlRefit_Prompt_Out_test std -b
 # python Step1_make_2d_plots_histogrammar.py MuAlRefit_Legacy.root MuAlRefit_Legacy_out_test std -b
 
+# python Step1_make_2d_plots_histogrammar.py MuAlRefit_Legacy.root MuAlRefit_Legacy_out_test std -b
+
 # input arguments, first is input root file, second is output root file 
 fileIn = sys.argv[1]
 fileOut = sys.argv[2]

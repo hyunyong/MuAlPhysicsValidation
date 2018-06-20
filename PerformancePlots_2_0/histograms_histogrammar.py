@@ -71,6 +71,10 @@ deltaPhiRange = .03
 phiErrorRange = .001
 
 standard_histograms = Select( lambda array: numpy.logical_and(array['glb_trk_pt'] > thresholdPt ,abs(array['glb_trk_eta']) < 2.4), Bundle(
+
+
+
+
 ##
 ## phi
 ##
@@ -99,8 +103,6 @@ D1_sta_glb_delta_phi_endcap = Select(lambda array: abs(array['glb_eta']) > .9 ,
 ## nchi2
 ##
 
-D1_glb_nChi2 = Bin(nChi2Bins, nChi2Min, nChi2Max, 
-	lambda array : array['glb_nchi2'], Count() ),
 
 D1_glb_nChi2_barrel = Select(lambda array: abs(array['glb_eta']) < .9 , 
 	Bin(nChi2Bins, nChi2Min, nChi2Max, lambda array : array['glb_nchi2'], Count() )),
@@ -122,6 +124,12 @@ D2_glb_eta_nChi2 = Bin( etaBins, etaMin, etaMax, lambda array: array['glb_eta'],
 	Bin( nBins, nChi2Range[0], nChi2Range[1], lambda array: array['glb_nchi2'], Count() )),
 
 D2_glb_pt_nChi2 = Bin( ptBins, ptMin, ptMax, lambda array: array['glb_pt'], 
+	Bin( nBins, nChi2Range[0], nChi2Range[1], lambda array: array['glb_nchi2'], Count() )),
+
+D2_sta_pt_nChi2 = Bin( ptBins, ptMin, ptMax, lambda array: array['sta_pt'], 
+	Bin( nBins, nChi2Range[0], nChi2Range[1], lambda array: array['glb_nchi2'], Count() )),
+
+D2_sta_eta_nChi2 = Bin( ptBins, ptMin, ptMax, lambda array: array['sta_eta'], 
 	Bin( nBins, nChi2Range[0], nChi2Range[1], lambda array: array['glb_nchi2'], Count() )),
 
 ##

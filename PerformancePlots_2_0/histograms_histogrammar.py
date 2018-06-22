@@ -229,7 +229,7 @@ D2_gen_glb_phi_ptPull = Bin( phiBins, phiMin, phiMax, lambda array: array['glb_g
 ROOT.gInterpreter.Declare("""
 double diMuonCut( double pos_trk_pt,double neg_trk_pt, double pos_trk_eta, double neg_trk_eta, double recoMu_pos_IsoPF04, double recoMu_neg_IsoPF04  ) {
    	double passes = 1;
-    if(pos_trk_pt < 30 || neg_trk_pt < 300){
+    if(pos_trk_pt < 30 || neg_trk_pt < 30){
     	passes = 0;
     }
     if(TMath::Abs(pos_trk_eta) > 2.4){
@@ -299,6 +299,29 @@ double * hybridMass(double pos_sta_pt,double neg_sta_pt,double pos_sta_eta,doubl
 
 }
 """)
+
+
+
+
+mass_histograms2 = Select( lambda array: numpy.logical_and(array['pos_glb_trk_pt'] > thresholdPt ,abs(array['pos_glb_trk_eta']) < 2.4), 
+				   Select( lambda array: numpy.logical_and(array['neg_glb_trk_pt'] > thresholdPt ,abs(array['neg_glb_trk_eta']) < 2.4), 
+				   #Select( lambda array: numpy.logical_and(array['recoMu_neg_IsoPF04'] > 0.15 ,array['recoMu_pos_IsoPF04'] > 0.15), Bundle(
+				   Select( lambda array: numpy.logical_and(array['hyb_m'] < hybridMassValue+hydridMassCut ,array['hyb_m'] > hybridMassValue-hydridMassCut),  Bundle(
+ 
+	D2_sta_glb_pt_HybridSTA_Mass = 
+	Bin( ptBins, ptMin, ptMax, lambda array: array['hyb_sta_pt'], 
+	Bin( nBins, massMin, massMax, lambda array: array['hyb_m'], Count() )),
+	D2_sta_glb_phi_HybridSTA_Mass = 
+	Bin( phiBins, phiMin, phiMax, lambda array: array['hyb_sta_phi'], 
+	Bin( nBins, massMin, massMax, lambda array: array['hyb_m'], Count() )),
+
+	D2_sta_glb_eta_HybridSTA_Mass = 
+	Bin(etaBins,etaMin,etaMax, lambda array: array['hyb_sta_eta'], 
+	Bin( nBins, massMin, massMax, lambda array: array['hyb_m'], Count() )),
+
+
+	))))
+	#)))))
 
 
 

@@ -31,7 +31,7 @@ genMuons     = td.Get("genMuons")
 recoMuons    = td.Get("recoMuons")
 recoDimuons  = td.Get("recoDimuons")
 savePng      = True
-Event_ro_RUN = 1000099
+Event_ro_RUN = -1
 #Events.Print(); genMuons.Print(); recoMuons.Print(); recoDimuons.Print()
 
 startTime = time.time()

@@ -74,12 +74,30 @@ diMuonArray = tree2array(recoDimuons,
     selection='glb && sta',
     start=0, stop=Event_ro_RUN, step=1)
 
+
+diMuonArray2 = tree2array(recoDimuons,
+    branches=['hyb_pt', 'hyb_eta',  
+    'hyb_phi',  'hyb_sta_pt',   'hyb_sta_eta', 
+    'hyb_sta_phi', 'hyb_m', 'hyb_q', 'pos_sta_phi', 
+    'neg_sta_phi', 
+    'recoMu_neg_IsoPF04', 'recoMu_pos_IsoPF04',
+    'pos_glb_trk_pt', 'neg_glb_trk_pt',
+    'pos_glb_trk_eta',  'neg_glb_trk_eta',],
+    selection='glb && sta',
+    start=0, stop=Event_ro_RUN, step=1)
+
+
 recoDimuons = array2tree(diMuonArray)
 
 
+
+
 standard_histograms.fill.numpy(array)
+mass_histograms2.fill.numpy(diMuonArray2)
+
 
 mass_histograms.fill.root(recoDimuons)
+
 
 
 
@@ -158,9 +176,9 @@ TH2F_glb_sta_phi_ptRes_barrel = standard_histograms.get("D2_glb_sta_phi_ptRes_ba
 ##
 
 
-TH2F_sta_glb_pt_HybridSTA_Mass = mass_histograms.get("D2_sta_glb_pt_HybridSTA_Mass").plot.root("sta_glb_pt_HybridSTA_Mass"," CMS preliminary ;p_{T}_{#mu}^{STA};")
-TH2F_sta_glb_eta_HybridSTA_Mass = mass_histograms.get("D2_sta_glb_eta_HybridSTA_Mass").plot.root("sta_glb_eta_HybridSTA_Mass"," CMS preliminary ;#eta_{#mu}^{STA};")
-TH2F_sta_glb_phi_HybridSTA_Mass = mass_histograms.get("D2_sta_glb_phi_HybridSTA_Mass").plot.root("sta_glb_phi_HybridSTA_Mass"," CMS preliminary ;#phi_{#mu}^{STA};")
+TH2F_sta_glb_pt_HybridSTA_Mass = mass_histograms2.get("D2_sta_glb_pt_HybridSTA_Mass").plot.root("sta_glb_pt_HybridSTA_Mass"," CMS preliminary ;p_{T}_{#mu}^{STA};")
+TH2F_sta_glb_eta_HybridSTA_Mass = mass_histograms2.get("D2_sta_glb_eta_HybridSTA_Mass").plot.root("sta_glb_eta_HybridSTA_Mass"," CMS preliminary ;#eta_{#mu}^{STA};")
+TH2F_sta_glb_phi_HybridSTA_Mass = mass_histograms2.get("D2_sta_glb_phi_HybridSTA_Mass").plot.root("sta_glb_phi_HybridSTA_Mass"," CMS preliminary ;#phi_{#mu}^{STA};")
  
 
 

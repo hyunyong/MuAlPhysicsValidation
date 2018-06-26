@@ -73,6 +73,7 @@ for counter, event in enumerate(recoMuons):
   ptResGLBSTA = event.q*(1.0/event.sta_pt-1.0/event.glb_trk_pt)
   TH2F_glb_sta_eta_ptRes.Fill(event.glb_eta, ptResGLBSTA)
   TH2F_glb_sta_phi_ptRes.Fill(event.glb_phi, ptResGLBSTA)
+  TH2F_glb_sta_pt_ptRes.Fill(event.glb_pt, ptResGLBSTA)
   if abs(event.glb_eta) > 0.9 :
     TH2F_glb_sta_phi_ptRes_endcap.Fill(event.glb_phi, ptResGLBSTA)
   if abs(event.glb_eta) < 0.9 :

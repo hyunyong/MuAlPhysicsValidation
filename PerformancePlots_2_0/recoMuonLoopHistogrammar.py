@@ -165,7 +165,7 @@ TH2F_glb_sta_pt_ptPull = standard_histograms.get("D2_glb_sta_pt_ptPull").plot.ro
 
 TH2F_glb_sta_eta_ptRes = standard_histograms.get("D2_glb_sta_eta_ptRes").plot.root("glb_sta_eta_v_ptRes"," glb vs sta p_{T}Res ;#eta;pTRes")
 TH2F_glb_sta_phi_ptRes = standard_histograms.get("D2_glb_sta_phi_ptRes").plot.root("glb_sta_phi_v_ptRes"," glb vs sta p_{T}Res ;#phi;pTRes")
-TH2F_glb_sta_pt_ptRes = standard_histograms.get("D2_glb_sta_pt_ptRes").plot.root("glb_sta_pt_v_ptRes"," glb vs sta p_{T}Res ;#pt;pTRes")
+TH2F_glb_sta_pt_ptRes = standard_histograms.get("D2_glb_sta_pt_ptRes").plot.root("glb_sta_pt_v_ptRes"," glb vs sta p_{T}Res ;p_{T};pTRes")
 
 TH2F_glb_sta_phi_ptRes_endcap = standard_histograms.get("D2_glb_sta_phi_ptRes_endcap").plot.root("glb_sta_phi_v_ptRes_endcap"," glb vs sta p_{T}Res |#eta| > 0.9;#phi;pTRes")
 TH2F_glb_sta_phi_ptRes_barrel = standard_histograms.get("D2_glb_sta_phi_ptRes_barrel").plot.root("glb_sta_phi_v_ptRes_barrel"," glb vs sta p_{T}Res |#eta| < 0.9;#phi;pTRes")

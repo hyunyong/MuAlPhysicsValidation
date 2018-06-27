@@ -45,21 +45,21 @@ for counter, event in enumerate(recoMuons):
   
   # Phi Pull
   TH1F_sta_glb_delta_phi.Fill(deltaPhiGLB)
-  TH1F_sta_TRK_delta_phi.Fill(deltaPhiTRK)
+  TH1F_sta_trk_delta_phi.Fill(deltaPhiTRK)
   
   # Barrel
   if abs(event.glb_eta) < 0.9 :
     TH1F_sta_nChi2_barrel.Fill(event.sta_nchi2)
     TH1F_glb_nChi2_barrel.Fill(event.glb_nchi2)
     TH1F_sta_glb_delta_phi_barrel.Fill(deltaPhiGLB)
-    TH1F_sta_TRK_delta_phi_barrel.Fill(deltaPhiTRK)
+    TH1F_sta_trk_delta_phi_barrel.Fill(deltaPhiTRK)
  
   # Endcap
   if abs(event.glb_eta) > 0.9 :
     TH1F_sta_nChi2_endcap.Fill(event.sta_nchi2)
     TH1F_glb_nChi2_endcap.Fill(event.glb_nchi2)
     TH1F_sta_glb_delta_phi_endcap.Fill(deltaPhiGLB)
-    TH1F_sta_TRK_delta_phi_endcap.Fill(deltaPhiTRK)
+    TH1F_sta_trk_delta_phi_endcap.Fill(deltaPhiTRK)
   
   # pT PULL
   if event.glb and event.sta and  event.sta_pt != 0.0 and event.glb_pt != 0.0:
@@ -73,6 +73,7 @@ for counter, event in enumerate(recoMuons):
   ptResGLBSTA = event.q*(1.0/event.sta_pt-1.0/event.glb_trk_pt)
   TH2F_glb_sta_eta_ptRes.Fill(event.glb_eta, ptResGLBSTA)
   TH2F_glb_sta_phi_ptRes.Fill(event.glb_phi, ptResGLBSTA)
+  TH2F_glb_sta_pt_ptRes.Fill(event.glb_pt, ptResGLBSTA)
   if abs(event.glb_eta) > 0.9 :
     TH2F_glb_sta_phi_ptRes_endcap.Fill(event.glb_phi, ptResGLBSTA)
   if abs(event.glb_eta) < 0.9 :

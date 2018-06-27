@@ -18,9 +18,9 @@ TH1F_sta_glb_delta_phi_barrel = TH1F("TH1F_sta_glb_delta_phi_barrel", "(#phi_{GL
 TH1F_sta_glb_delta_phi_endcap = TH1F("TH1F_sta_glb_delta_phi_endcap", "(#phi_{GLB}-#phi_{STA})/#phi_{GLB Error}  |#eta| > 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
 TH1F_sta_glb_delta_phi = TH1F("TH1F_sta_glb_delta_phi", "(#phi_{GLB}-#phi_{STA})/#phi_{GLB Error}; #delta #phi",phiResBins, phiResMin, phiResMax )
 #phi TRK
-TH1F_sta_TRK_delta_phi_barrel = TH1F("TH1F_sta_TRK_delta_phi_barrel", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}  |#eta| < 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
-TH1F_sta_TRK_delta_phi_endcap = TH1F("TH1F_sta_TRK_delta_phi_endcap", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}  |#eta| > 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
-TH1F_sta_TRK_delta_phi = TH1F("TH1F_sta_TRK_delta_phi", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}; #delta #phi",phiResBins, phiResMin, phiResMax )
+TH1F_sta_trk_delta_phi_barrel = TH1F("TH1F_sta_trk_delta_phi_barrel", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}  |#eta| < 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
+TH1F_sta_trk_delta_phi_endcap = TH1F("TH1F_sta_trk_delta_phi_endcap", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}  |#eta| > 0.9; #delta #phi",phiResBins, phiResMin, phiResMax )
+TH1F_sta_trk_delta_phi = TH1F("TH1F_sta_trk_delta_phi", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}; #delta #phi",phiResBins, phiResMin, phiResMax )
 
 #Nchi2
 TH1F_sta_nChi2_barrel = TH1F("TH1F_sta_nChi2_barrel", "sta n#chi^{2} |#eta| < 0.9; n#chi^2",nChi2Bins, nChi2Min, nChi2Max )
@@ -43,13 +43,14 @@ TH2F_glb_sta_pt_ptPull = TH2F("TH2F_glb_sta_pt_ptPull", "glb sta p_{T} Pull;p_{T
 TH2F_gen_glb_eta_ptPull = TH2F("TH2F_gen_glb_eta_ptPull", "gen glb p_{T} Pull;#eta;  p_{T} Pull", etaBins, etaMin, etaMax ,nBins, ptPullRange[0], ptPullRange[1]  )
 TH2F_gen_glb_pt_ptPull = TH2F("TH2F_gen_glb_pt_ptPull", "gen glb p_{T} Pull;p_{T};  p_{T} Pull", ptBins, ptMin, ptMax ,nBins, ptPullRange[0], ptPullRange[1]  )
 
-#PtRes GLB-STA vs eta
+# pT Resolution (GLB-STA muons) as a function of eta/phi/pT.
 TH2F_glb_sta_eta_ptRes = TH2F("glb_sta_eta_v_ptRes"," glb vs sta p_{T}Res ;#eta;pTRes",etaBins, etaMin, etaMax ,ptResBins, ptResMin, ptResMax )
 TH2F_glb_sta_phi_ptRes = TH2F("glb_sta_phi_v_ptRes"," glb vs sta p_{T}Res ;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResMin, ptResMax )
-#PtRes GLB-STA vs phi
+TH2F_glb_sta_pt_ptRes = TH2F("glb_sta_pt_v_ptRes"," glb vs sta p_{T}Res ;p_{T};pTRes",ptBins, ptMin, ptMax ,ptResBins, ptResMin, ptResMax )
+# pT Resolution (GLB-STA muons) by region.
 TH2F_glb_sta_phi_ptRes_endcap = TH2F("glb_sta_phi_v_ptRes_endcap"," glb vs sta p_{T}Res |#eta| > 0.9;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResMin, ptResMax )
 TH2F_glb_sta_phi_ptRes_barrel = TH2F("glb_sta_phi_v_ptRes_barrel"," glb vs sta p_{T}Res |#eta| < 0.9;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResMin, ptResMax )
-#PtRes GLB-GEN vs eta/phi/pt
+# pT Resolution (GLB-GEN muons) as a function of eta/phi/pT.
 TH2F_gen_glb_eta_ptRes = TH2F("gen_glb_eta_v_ptRes"," gen vs glb p_{T}Res ;#eta;pTRes",etaBins, etaMin, etaMax ,ptResBins, ptResGLB[0], ptResGLB[1] )
 TH2F_gen_glb_phi_ptRes = TH2F("gen_glb_phi_v_ptRes"," gen vs glb p_{T}Res ;#phi;pTRes",phiBins, phiMin, phiMax ,ptResBins, ptResGLB[0], ptResGLB[1] )
 TH2F_gen_glb_pt_ptRes = TH2F("gen_glb_pt_v_ptRes"," gen vs glb p_{T}Res ;p_{T};pTRes",ptBins, ptMin, ptMax ,ptResBins, ptResGLB[0], ptResGLB[1] )

@@ -24,7 +24,7 @@ from root_numpy import fill_hist
 
 array = tree2array(recoMuons,
     branches=[	'glb', 'sta', 
-    			'TMath::Abs(glb_eta)', 'glb_trk_eta', 'sta_eta',
+    			'TMath::Abs(glb_eta)', 'glb_eta', 'glb_trk_eta', 'sta_eta',
     			'glb_phi',  'glb_trk_phi', 'sta_phi', 'glb_phi_error',
     			'glb_pt','glb_trk_pt', 'sta_pt',
     			'glb_nchi2', 'sta_nchi2',
@@ -35,7 +35,7 @@ array = tree2array(recoMuons,
     start=0, stop=Event_ro_RUN, step=1)
 
 array.dtype.names = [	'glb', 'sta', 
-						'glb_eta', 'glb_trk_eta', 'sta_eta',
+						'glb_eta_abs', 'glb_eta', 'glb_trk_eta', 'sta_eta',
 						'glb_phi', 'glb_trk_phi', 'sta_phi', 'glb_phi_error',
 						'glb_pt', 'glb_trk_pt','sta_pt',
 						'glb_nchi2','sta_nchi2',

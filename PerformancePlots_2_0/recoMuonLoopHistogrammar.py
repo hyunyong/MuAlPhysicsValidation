@@ -1,103 +1,76 @@
-
-#ROOT.gInterpreter.Declare("""
-#	double ptResGLBSTA(int q, double sta_pt, double glb_pt){
-#		return (double) q * ( 1.0/sta_pt- 1.0/glb_pt);
-#	}
-#""")
-#
-#TH2F_glb_sta_eta_ptRes_histogrammar = Select("glb && sta ", Bin(etaBins, etaMin, etaMax, "glb_eta",  Bin(ptResBins, ptResMin, ptResMax, "ptResGLBSTA(q, sta_pt, glb_pt)") ) )
-#
-#
-#
-#TH2F_glb_sta_eta_ptRes_histogrammar.fill.root(recoMuons)
-#
-#TH2F_glb_sta_eta_ptRes = TH2F_glb_sta_eta_ptRes_histogrammar.plot.root("TH2F_glb_sta_eta_ptRes", "example")
-#
-#TH2F_glb_sta_eta_ptRes.Draw("colz");
-#c1.SaveAs("example.png")
-
-
 from root_numpy import  tree2array, array2tree
 from root_numpy import fill_hist
 
-#sta_TRK_delta_phi = Bin(phiResBins, phiResMin, phiResMax, lambda array : (array['glb_trk_phi']- array['sta_phi'])/ array['glb_phi_error'], Count() )
 
-array = tree2array(recoMuons,
-    branches=[	'glb', 'sta', 
-    			'TMath::Abs(glb_eta)', 'glb_eta', 'glb_trk_eta', 'sta_eta',
-    			'glb_phi',  'glb_trk_phi', 'sta_phi', 'glb_phi_error',
-    			'glb_pt','glb_trk_pt', 'sta_pt',
-    			'glb_nchi2', 'sta_nchi2',
-    			'glb_nhits',
-    			'q * (1.0/sta_pt-1.0/glb_pt)',
-    			'(q/glb_pt-q/sta_pt)/glb_qoverpterror' ],
+def recoMuonTree2Array(recoMuons, Event_to_RUN):
+    recoMuonArray = tree2array(recoMuons,
+        branches=[  'glb', 'sta', 
+                    'TMath::Abs(glb_eta)', 'glb_eta', 'glb_trk_eta', 'sta_eta',
+                    'glb_phi',  'glb_trk_phi', 'sta_phi', 'glb_phi_error',
+                    'glb_pt','glb_trk_pt', 'sta_pt',
+                    'glb_nchi2', 'sta_nchi2',
+                    'glb_nhits',
+                    'q * (1.0/sta_pt-1.0/glb_pt)',
+                    '(q/glb_pt-q/sta_pt)/glb_qoverpterror' ],
+        selection='glb && sta',
+        start=0, stop=Event_to_RUN, step=1)
+    
+    recoMuonArray.dtype.names = [   'glb', 'sta', 
+                            'glb_eta_abs', 'glb_eta', 'glb_trk_eta', 'sta_eta',
+                            'glb_phi', 'glb_trk_phi', 'sta_phi', 'glb_phi_error',
+                            'glb_pt', 'glb_trk_pt','sta_pt',
+                            'glb_nchi2','sta_nchi2',
+                            'glb_nhits',
+                            'ptResSTAGLB',
+                            'ptPullSTAGLB' ]
+    return recoMuonArray
+
+def genMuonTree2Array(recoMuons, Event_to_RUN):
+    recoMuonArrayMC = tree2array(recoMuons,
+    branches=[  'glb', 'sta', 
+                'glb_gen_eta',
+                'glb_gen_phi', 
+                'glb__genpt'
+                'q * (1.0/sta_pt-1.0/glb_gen_pt)',
+                'q*(1.0/sta_pt - 1.0/glb_gen_pt)/glb_qoverpterror',
+                'q * (1.0/glb_pt-1.0/glb_gen_pt)',
+                'q*(1.0/glb_pt - 1.0/glb_gen_pt)/glb_qoverpterror' ],
     selection='glb && sta',
-    start=0, stop=Event_ro_RUN, step=1)
+    start=0, stop=Event_to_RUN, step=1)
 
-array.dtype.names = [	'glb', 'sta', 
-						'glb_eta_abs', 'glb_eta', 'glb_trk_eta', 'sta_eta',
-						'glb_phi', 'glb_trk_phi', 'sta_phi', 'glb_phi_error',
-						'glb_pt', 'glb_trk_pt','sta_pt',
-						'glb_nchi2','sta_nchi2',
-						'glb_nhits',
-						'ptResSTAGLB',
-						'ptPullSTAGLB' ]
+    recoMuonArrayMC.dtype.names = [ 'glb', 'sta', 
+                            'glb_gen_eta',
+                            'glb_gen_phi',
+                            'glb_gen_pt', 
+                            'ptResSTAGEN',
+                            'ptPullSTAGEN',
+                            'ptResGLBGEN',
+                            'ptPullGLBGEN']
+    return recoMuonArrayMC
 
-#if isMC:
-#	arrayMC = tree2array(recoMuons,
-#    branches=[	'glb', 'sta', 
-#    			'glb_gen_eta',
-#    			'glb_gen_phi', 
-#    			'glb__genpt'
-#    			'q * (1.0/sta_pt-1.0/glb_gen_pt)',
-#    			'q*(1.0/sta_pt - 1.0/glb_gen_pt)/glb_qoverpterror',
-#    			'q * (1.0/glb_pt-1.0/glb_gen_pt)',
-#    			'q*(1.0/glb_pt - 1.0/glb_gen_pt)/glb_qoverpterror' ],
-#    selection='glb && sta',
-#    start=0, stop=Event_ro_RUN, step=1)
-#
-#	arrayMC.dtype.names = [	'glb', 'sta', 
-#							'glb_gen_eta',
-#							'glb_gen_phi',
-#							'glb_gen_pt', 
-#							'ptResSTAGEN',
-#							'ptPullSTAGEN',
-#							'ptResGLBGEN',
-#							'ptPullGLBGEN']
-#
-#	gen_histograms.fill.numpy(arrayMC)
+    
 
-
-
-diMuonArray = tree2array(recoDimuons,
-    branches=['pos_glb_trk_pt', 'neg_glb_trk_pt',  'pos_glb_trk_eta',  'neg_glb_trk_eta',	'pos_sta_pt', 'neg_sta_pt', 'pos_sta_eta', 'neg_sta_eta', 'pos_sta_phi', 'neg_sta_phi' ],
-    selection='glb && sta',
-    start=0, stop=Event_ro_RUN, step=1)
-
-
-diMuonArray2 = tree2array(recoDimuons,
-    branches=['hyb_pt', 'hyb_eta',  
-    'hyb_phi',  'hyb_sta_pt',   'hyb_sta_eta', 
-    'hyb_sta_phi', 'hyb_m', 'hyb_q', 'pos_sta_phi', 
-    'neg_sta_phi', 
-    'glb_m',
-    'recoMu_neg_IsoPF04', 'recoMu_pos_IsoPF04',
-    'pos_glb_trk_pt', 'neg_glb_trk_pt',
-    'pos_glb_trk_eta',  'neg_glb_trk_eta',],
-    selection='glb && sta',
-    start=0, stop=Event_ro_RUN, step=1)
-
-
-recoDimuons = array2tree(diMuonArray)
+def diMuonTree2Array(recoDimuons, Event_to_RUN):
+    diMuonArray = tree2array(recoDimuons,
+        branches=['hyb_pt', 'hyb_eta',  
+        'hyb_phi',  'hyb_sta_pt',   'hyb_sta_eta', 
+        'hyb_sta_phi', 'hyb_m', 'hyb_q', 'pos_sta_phi', 
+        'neg_sta_phi', 
+        'glb_m',
+        'recoMu_neg_IsoPF04', 'recoMu_pos_IsoPF04',
+        'pos_glb_trk_pt', 'neg_glb_trk_pt',
+        'pos_glb_trk_eta',  'neg_glb_trk_eta',],
+        selection='glb && sta',
+        start=0, stop=Event_to_RUN, step=1)
+    return diMuonArray
 
 
 
 
-standard_histograms.fill.numpy(array)
-mass_histograms2.fill.numpy(diMuonArray2)
+'''
+standard_histograms.fill.numpy(recoMuonArray)
+mass_histograms.fill.numpy(diMuonArray)
 
-
-mass_histograms.fill.root(recoDimuons)
 
 
 
@@ -187,15 +160,15 @@ TH2F_sta_glb_phi_HybridSTA_Mass = mass_histograms2.get("D2_sta_glb_phi_HybridSTA
 # recoDimuon plots
 
 #if isMC:
-#	TH2F_gen_glb_eta_ptRes = standard_histograms.get("D2_gen_glb_eta_ptRes").plot.root("gen_glb_eta_v_ptRes"," gen vs glb p_{T}Res ;#eta;pTRes")
-#	TH2F_gen_glb_phi_ptRes = standard_histograms.get("D2_gen_glb_phi_ptRes").plot.root("gen_glb_phi_v_ptRes"," gen vs glb p_{T}Res ;#phi;pTRes")
-#	TH2F_gen_glb_pt_ptRes = standard_histograms.get("D2_gen_glb_pt_ptRes").plot.root("gen_glb_pt_v_ptRes"," gen vs glb p_{T}Res ;p_{T};pTRes")
-#	TH2F_gen_glb_phi_ptRes_barrel = standard_histograms.get("D2_gen_glb_phi_ptRes_barrel").plot.root("gen_glb_phi_v_ptRes"," gen vs glb p_{T}Res |#eta| < 0.9;#phi;pTRes")
-#	TH2F_gen_glb_phi_ptRes_endcap = standard_histograms.get("D2_gen_glb_phi_ptRes_endcap").plot.root("gen_glb_phi_v_ptRes"," gen vs glb p_{T}Res |#eta| > 0.9;#phi;pTRes")
+#   TH2F_gen_glb_eta_ptRes = standard_histograms.get("D2_gen_glb_eta_ptRes").plot.root("gen_glb_eta_v_ptRes"," gen vs glb p_{T}Res ;#eta;pTRes")
+#   TH2F_gen_glb_phi_ptRes = standard_histograms.get("D2_gen_glb_phi_ptRes").plot.root("gen_glb_phi_v_ptRes"," gen vs glb p_{T}Res ;#phi;pTRes")
+#   TH2F_gen_glb_pt_ptRes = standard_histograms.get("D2_gen_glb_pt_ptRes").plot.root("gen_glb_pt_v_ptRes"," gen vs glb p_{T}Res ;p_{T};pTRes")
+#   TH2F_gen_glb_phi_ptRes_barrel = standard_histograms.get("D2_gen_glb_phi_ptRes_barrel").plot.root("gen_glb_phi_v_ptRes"," gen vs glb p_{T}Res |#eta| < 0.9;#phi;pTRes")
+#   TH2F_gen_glb_phi_ptRes_endcap = standard_histograms.get("D2_gen_glb_phi_ptRes_endcap").plot.root("gen_glb_phi_v_ptRes"," gen vs glb p_{T}Res |#eta| > 0.9;#phi;pTRes")
 #
-#	TH2F_gen_glb_eta_ptPull = standard_histograms.get("D2_gen_glb_eta_ptPull").plot.root("gen_glb_eta_v_ptPull"," gen vs glb p_{T}Pull ;#eta;p_{T}Pull")
-#	TH2F_gen_glb_phi_ptPull = standard_histograms.get("D2_gen_glb_phi_ptPull").plot.root("gen_glb_phi_v_ptPull"," gen vs glb p_{T}Pull ;#phi;p_{T}Pull")
-#	TH2F_gen_glb_pt_ptPull = standard_histograms.get("D2_gen_glb_pt_ptPull").plot.root("gen_glb_pt_v_ptPull"," gen vs glb p_{T}Pull ;p_{T};p_{T}Pull")
+#   TH2F_gen_glb_eta_ptPull = standard_histograms.get("D2_gen_glb_eta_ptPull").plot.root("gen_glb_eta_v_ptPull"," gen vs glb p_{T}Pull ;#eta;p_{T}Pull")
+#   TH2F_gen_glb_phi_ptPull = standard_histograms.get("D2_gen_glb_phi_ptPull").plot.root("gen_glb_phi_v_ptPull"," gen vs glb p_{T}Pull ;#phi;p_{T}Pull")
+#   TH2F_gen_glb_pt_ptPull = standard_histograms.get("D2_gen_glb_pt_ptPull").plot.root("gen_glb_pt_v_ptPull"," gen vs glb p_{T}Pull ;p_{T};p_{T}Pull")
 
 
 #TH2F_gen_glb_eta_ptRes = standard_histograms.get("D2_gen_glb_eta_ptRes").plot.root("gen_glb_eta_v_ptRes"," gen vs glb p_{T}Res ;#eta;pTRes")
@@ -246,3 +219,4 @@ TH2F_sta_glb_phi_HybridSTA_Mass = mass_histograms2.get("D2_sta_glb_phi_HybridSTA
 #TH2F_glb_sta_eta_ptRes.Draw("colz");
 
 #fill_hist(TH2F_glb_sta_eta_ptRes, array['glb_eta'], array['ptResSTAGLB'] )
+'''

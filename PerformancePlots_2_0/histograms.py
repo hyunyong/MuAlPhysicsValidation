@@ -33,7 +33,7 @@ TH2F_sta_eta_nChi2 = TH2F("TH2F_sta_eta_nChi2", "sta n#chi^{2};#eta; normalized 
 TH2F_sta_pt_nChi2 = TH2F("TH2F_sta_nChi2_pt", "sta n#chi^{2}; p_{T}; normalized #chi^{2}", ptBins, ptMin, ptMax,nBins, nChi2Range[0], nChi2Range[1] )
 
 #Nhits
-TH2F_glb_eta_nHits = TH2F("TH2F_glb_eta_nHits", "glb nHits; #eta; nHits", etaBins, etaMin, etaMax,nBins, nHitsRange[0], nHitsRange[1] )
+TH2F_glb_eta_nHits = TH2F("TH2F_glb_eta_nHits", "glb nHits; #eta; nHits", 48, -2.4, 2.4,24, 0, 75 )
 TH2F_glb_pt_nHits = TH2F("TH2F_glb_pt_nHits", "glb nHits; p_{t}; nHits", ptBins, ptMin, ptMax,nBins, nHitsRange[0], nHitsRange[1]  )
 
 #Pt pull GLB-STA

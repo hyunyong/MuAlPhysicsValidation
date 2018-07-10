@@ -27,6 +27,9 @@ for counter, event in enumerate(recoDimuons):
     hybridZ = TLorentzVector(); hybridZ=hybridMu1+hybridMu2
     
     if( abs(event.glb_m-91.)<5. ):  
-	TH2F_sta_glb_pt_HybridSTA_Mass.Fill(pTSta, hybridZ.M())
-	TH2F_sta_glb_eta_HybridSTA_Mass.Fill(etaSta, hybridZ.M())
-	TH2F_sta_glb_phi_HybridSTA_Mass.Fill(phiSta, hybridZ.M())
+	#TH2F_sta_glb_pt_HybridSTA_Mass.Fill(pTSta, hybridZ.M())
+	#TH2F_sta_glb_eta_HybridSTA_Mass.Fill(etaSta, hybridZ.M())
+	#TH2F_sta_glb_phi_HybridSTA_Mass.Fill(phiSta, hybridZ.M())
+	TH2F_sta_glb_pt_HybridSTA_Mass.Fill(event.hyb_sta_pt, event.hyb_m)
+	TH2F_sta_glb_eta_HybridSTA_Mass.Fill(event.hyb_sta_eta, event.hyb_m)
+	TH2F_sta_glb_phi_HybridSTA_Mass.Fill(event.hyb_sta_phi, event.hyb_m)

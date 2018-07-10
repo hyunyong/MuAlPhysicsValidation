@@ -70,7 +70,9 @@ ptResGLB = [-.1,.1]
 deltaPhiRange = .03
 phiErrorRange = .001
 
-standard_histograms = Select( lambda array: numpy.logical_and(array['glb_trk_pt'] > thresholdPt ,abs(array['glb_trk_eta']) < 2.4), Bundle(
+standard_histograms = Select( lambda array: numpy.logical_and(array['glb_trk_pt'] > thresholdPt ,abs(array['glb_trk_eta']) < 2.4),
+						Select( lambda array: numpy.logical_and(array['glb'] == True ,abs(array['sta']) == True ),
+						Select( lambda array: numpy.logical_and(array['sta_pt'] != 0 ,abs(array['glb_trk_eta']) != 0), Bundle(
 
 
 
@@ -138,8 +140,8 @@ D2_sta_eta_nChi2 = Bin( ptBins, ptMin, ptMax, lambda array: array['sta_eta'],
 
 
 
-D2_glb_eta_nHits = Bin( etaBins, etaMin, etaMax, lambda array: array['glb_eta'], 
-	Bin( nBins, nHitsRange[0], nHitsRange[1], lambda array: array['glb_nhits'], Count() )),
+D2_glb_eta_nHits = Bin( 48, -2.4, 2.4, lambda array: array['glb_eta'], 
+	Bin( 24, 0, 75, lambda array: array['glb_nhits'], Count() )),
 
 D2_glb_pt_nHits = Bin( ptBins, ptMin, ptMax, lambda array: array['glb_pt'], 
 	Bin( nBins, nHitsRange[0], nHitsRange[1], lambda array: array['glb_nhits'], Count() )),
@@ -182,7 +184,7 @@ D2_glb_sta_phi_ptPull = Bin( phiBins, phiMin, phiMax, lambda array: array['glb_p
 
 
 
-))
+))))
 
 
 gen_histograms = Select( lambda array: array['glb_trk_pt'] > thresholdPt, Bundle(
@@ -306,7 +308,8 @@ double * hybridMass(double pos_sta_pt,double neg_sta_pt,double pos_sta_eta,doubl
 mass_histograms2 = Select( lambda array: numpy.logical_and(array['pos_glb_trk_pt'] > thresholdPt ,abs(array['pos_glb_trk_eta']) < 2.4), 
 				   Select( lambda array: numpy.logical_and(array['neg_glb_trk_pt'] > thresholdPt ,abs(array['neg_glb_trk_eta']) < 2.4), 
 				   #Select( lambda array: numpy.logical_and(array['recoMu_neg_IsoPF04'] > 0.15 ,array['recoMu_pos_IsoPF04'] > 0.15), Bundle(
-				   Select( lambda array: numpy.logical_and(array['hyb_m'] < hybridMassValue+hydridMassCut ,array['hyb_m'] > hybridMassValue-hydridMassCut),  Bundle(
+				   #Select( lambda array:   numpy.logical_and(array['glb_m'] < hybridMassValue+hydridMassCut ,array['glb_m'] > hybridMassValue-hydridMassCut),  Bundle(
+				   Select( lambda array:   abs(array['glb_m']-hybridMassValue) <hydridMassCut,  Bundle(
  
 	D2_sta_glb_pt_HybridSTA_Mass = 
 	Bin( ptBins, ptMin, ptMax, lambda array: array['hyb_sta_pt'], 

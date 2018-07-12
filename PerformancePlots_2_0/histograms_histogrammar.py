@@ -82,22 +82,22 @@ D2_glb_pt_nHits = Bin( ptBins, ptMin, ptMax, lambda array: array['glb_pt'],
 ##
 
 D2_glb_sta_eta_ptRes = Bin( etaBins, etaMin, etaMax, lambda array: array['glb_eta'], 
-    Bin( ptResBins, ptResMin, ptResMax, lambda array: array['ptResSTAGLB'], Count() )),
+    Bin( ptResBins, ptResMin, ptResMax, lambda array: array['ptResSTAGLBTRK'], Count() )),
 
 D2_glb_sta_pt_ptRes = Bin( ptBins, ptMin, ptMax, lambda array: array['glb_pt'], 
-    Bin( ptResBins, ptResMin, ptResMax, lambda array: array['ptResSTAGLB'], Count() )),
+    Bin( ptResBins, ptResMin, ptResMax, lambda array: array['ptResSTAGLBTRK'], Count() )),
 
 D2_glb_sta_phi_ptRes = Bin( phiBins, phiMin, phiMax, lambda array: array['glb_phi'], 
-    Bin( ptResBins, ptResMin, ptResMax, lambda array: array['ptResSTAGLB'], Count() )),
+    Bin( ptResBins, ptResMin, ptResMax, lambda array: array['ptResSTAGLBTRK'], Count() )),
 
 D2_glb_sta_phi_ptRes_barrel = Select(lambda array: abs(array['glb_eta']) < .9 , 
     Bin( phiBins, phiMin, phiMax, lambda array: array['glb_phi'], 
-    Bin( ptResBins, ptResMin, ptResMax, lambda array: array['ptResSTAGLB'], Count() ))),
+    Bin( ptResBins, ptResMin, ptResMax, lambda array: array['ptResSTAGLBTRK'], Count() ))),
 
 
 D2_glb_sta_phi_ptRes_endcap = Select(lambda array: abs(array['glb_eta']) > .9 , 
     Bin( phiBins, phiMin, phiMax, lambda array: array['glb_phi'], 
-    Bin( ptResBins, ptResMin, ptResMax, lambda array: array['ptResSTAGLB'], Count() ))),
+    Bin( ptResBins, ptResMin, ptResMax, lambda array: array['ptResSTAGLBTRK'], Count() ))),
 
 ##
 ##  ptPull

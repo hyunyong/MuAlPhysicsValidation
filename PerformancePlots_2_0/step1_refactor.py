@@ -5,12 +5,13 @@ import math, sys, os
 from math import fabs
 from histogrammar import *
 import time
+from histograms_histogrammar import standard_histograms, gen_histograms, mass_histograms
+from recoMuonLoopHistogrammar import recoMuonTree2Array, diMuonTree2Array, genMuonTree2Array
+from histogrammarToRoot import histogrammarToRoot
 
 # Usage examples:
 
 # python step1_refactor.py MuAlRefit_Run2018A_+2018MuonGeom_narrowAPEs_2.root histogrammar_test std -b
-
-
 
 # input arguments, first is input root file, second is output root file 
 fileIn = sys.argv[1]
@@ -28,33 +29,24 @@ recoMuons    = td.Get("recoMuons")
 recoDimuons  = td.Get("recoDimuons")
 savePng      = True
 isMC		 = False
-Event_to_RUN = 100000
-#Events.Print(); genMuons.Print(); recoMuons.Print(); recoDimuons.Print()
-
-
+Event_to_RUN = 10000000
 
 print "opening file: ", fileIn
 print "creating file: ", fileOut
 
-
-
-
-
 startTime = time.time()
-## First step, define your histograms in histograms.py
-#execfile("histograms_histogrammar.py")
-from histograms_histogrammar import standard_histograms, gen_histograms, mass_histograms
 
-from recoMuonLoopHistogrammar import recoMuonTree2Array, diMuonTree2Array, genMuonTree2Array
-
+#convert ttrees to numpy arrays
 recoMuonArray = recoMuonTree2Array(recoMuons, Event_to_RUN)
 
 diMuonArray = diMuonTree2Array(recoDimuons, Event_to_RUN)
 
+#fill histogrammar histograms with numpy arrays
 standard_histograms.fill.numpy(recoMuonArray)
 
 mass_histograms.fill.numpy(diMuonArray)
 
+#gen hist part, needs work
 gen_histograms = False
 
 if isMC:
@@ -62,12 +54,10 @@ if isMC:
 
     gen_histograms.fill.numpy(recoMuonArrayMC)
 
-from histogrammarToRoot import histogrammarToRoot
-
+#convert histogrammar histograms to root histograms, save root file, and draw pngs
 histogrammarToRoot(standard_histograms, mass_histograms, gen_histograms, fileOut, savePng)
-
 
 endTime = time.time()
 
-print "This took", endTime - startTime, "seconds (including compilation)."
+print "This took", endTime - startTime, "seconds."
 

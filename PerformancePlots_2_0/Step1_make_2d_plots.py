@@ -16,6 +16,8 @@ execfile("constants.py")
 # python Step1_make_2d_plots.py /eos/cms/store/group/alca_muonalign/lpernie/MuAlAnalyzer/MuAlRefit_Run2017B_RAWRECO_DT6DOFnoT0it1CSC3DOF_OfficialAPEDTminuit_CSCasym.root MuAlRefit_2017B_DT6DOFnoT0it1CSC3DOF_OfficialAPEDTminuit_CSCasym std -b
 # python Step1_make_2d_plots.py /eos/cms/store/group/alca_muonalign/lpernie/MuAlAnalyzer/MuAlRefit_Run2017B_RAWreco_FromGT.root MuAlRefit_2017B_fromGT std -b
 
+#python Step1_make_2d_plots.py MuAlRefit_Run2018A_+2018MuonGeom_narrowAPEs_2.root pyroot_test std -b
+
 # input arguments, first is input root file, second is output root file 
 fileIn = sys.argv[1]
 fileOut = sys.argv[2]
@@ -31,7 +33,7 @@ genMuons     = td.Get("genMuons")
 recoMuons    = td.Get("recoMuons")
 recoDimuons  = td.Get("recoDimuons")
 savePng      = True
-Event_ro_RUN = -1
+Event_ro_RUN = 10000000
 
 ## First step, define your histograms in histograms.py
 execfile("functions.py")

@@ -156,18 +156,18 @@ mass_histograms = Select( lambda array: numpy.logical_and(array['pos_glb_trk_pt'
                    Select( lambda array: numpy.logical_and(array['neg_glb_trk_pt'] > thresholdPt ,abs(array['neg_glb_trk_eta']) < 2.4), 
                    #Select( lambda array: numpy.logical_and(array['recoMu_neg_IsoPF04'] > 0.15 ,array['recoMu_pos_IsoPF04'] > 0.15), Bundle(
                    #Select( lambda array:   numpy.logical_and(array['glb_m'] < hybridMassValue+hydridMassCut ,array['glb_m'] > hybridMassValue-hydridMassCut),  Bundle(
-                   Select( lambda array:   abs(array['glb_m']-hybridMassValue) <hydridMassCut,  Bundle(
+                   Select( lambda array:   abs(array['glb_m']-91.) <5.,  Bundle(
  
     D2_sta_glb_pt_HybridSTA_Mass = 
-    Bin( ptBins, ptMin, ptMax, lambda array: array['hyb_sta_pt'], 
-    Bin( nBins, massMin, massMax, lambda array: array['hyb_m'], Count() )),
+    Bin( 48, ptMin, ptMax, lambda array: array['hyb_sta_pt'], 
+    Bin( 48, massMin, massMax, lambda array: array['hyb_m'], Count() )),
     D2_sta_glb_phi_HybridSTA_Mass = 
-    Bin( phiBins, phiMin, phiMax, lambda array: array['hyb_sta_phi'], 
-    Bin( nBins, massMin, massMax, lambda array: array['hyb_m'], Count() )),
+    Bin( 48, phiMin, phiMax, lambda array: array['hyb_sta_phi'], 
+    Bin( 48, massMin, massMax, lambda array: array['hyb_m'], Count() )),
 
     D2_sta_glb_eta_HybridSTA_Mass = 
-    Bin(etaBins,etaMin,etaMax, lambda array: array['hyb_sta_eta'], 
-    Bin( nBins, massMin, massMax, lambda array: array['hyb_m'], Count() )),
+    Bin(48,etaMin,etaMax, lambda array: array['hyb_sta_eta'], 
+    Bin( 48, massMin, massMax, lambda array: array['hyb_m'], Count() )),
 
 
     ))))

@@ -2,14 +2,11 @@ from ROOT import TFile, TTree, TH1F, TLorentzVector, TMath, TRandom, TCanvas
 from histogrammar import *
 import math, sys, os
 
-
 def histogrammarToRoot(standard_histograms, mass_histograms, gen_histograms, fileOut, drawPNG):
 
     outFile = TFile("{}.root".format(fileOut), "recreate")
     
     c1 = TCanvas("c1", "c1", 600, 400)
-    
-    
     
     ##
     ## phi
@@ -22,9 +19,7 @@ def histogrammarToRoot(standard_histograms, mass_histograms, gen_histograms, fil
     TH1F_sta_trk_delta_phi_barrel = standard_histograms.get("D1_sta_trk_delta_phi_barrel").plot.root("TH1F_sta_trk_delta_phi_barrel", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}  |#eta| < 0.9; #delta #phi")
     TH1F_sta_trk_delta_phi_endcap = standard_histograms.get("D1_sta_trk_delta_phi_endcap").plot.root("TH1F_sta_trk_delta_phi_endcap", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}  |#eta| > 0.9; #delta #phi")
     TH1F_sta_trk_delta_phi = standard_histograms.get("D1_sta_trk_delta_phi").plot.root("TH1F_sta_trk_delta_phi", "(#phi_{TRK}-#phi_{STA})/#phi_{GLB Error}; #delta #phi")
-    
-    
-    
+      
     ##
     ## nchi2
     ##
@@ -52,11 +47,7 @@ def histogrammarToRoot(standard_histograms, mass_histograms, gen_histograms, fil
     
     TH2F_glb_sta_eta_ptPull = standard_histograms.get("D2_glb_sta_eta_ptPull").plot.root("TH2F_glb_sta_eta_ptPull", "glb sta p_{T} Pull;#eta;  p_{T} Pull")
     TH2F_glb_sta_pt_ptPull = standard_histograms.get("D2_glb_sta_pt_ptPull").plot.root("TH2F_glb_sta_pt_ptPull", "glb sta p_{T} Pull;p_{T},  p_{T} Pull")
-    
-    
-    
-    
-    
+        
     ##
     ## ptRes
     ##
@@ -68,11 +59,9 @@ def histogrammarToRoot(standard_histograms, mass_histograms, gen_histograms, fil
     TH2F_glb_sta_phi_ptRes_endcap = standard_histograms.get("D2_glb_sta_phi_ptRes_endcap").plot.root("glb_sta_phi_v_ptRes_endcap"," glb vs sta p_{T}Res |#eta| > 0.9;#phi;pTRes")
     TH2F_glb_sta_phi_ptRes_barrel = standard_histograms.get("D2_glb_sta_phi_ptRes_barrel").plot.root("glb_sta_phi_v_ptRes_barrel"," glb vs sta p_{T}Res |#eta| < 0.9;#phi;pTRes")
     
-    
     ##
     ## hybrid Z Mass
     ##
-    
     
     TH2F_sta_glb_pt_HybridSTA_Mass = mass_histograms.get("D2_sta_glb_pt_HybridSTA_Mass").plot.root("sta_glb_pt_HybridSTA_Mass"," CMS preliminary ;p_{T}_{#mu}^{STA};")
     TH2F_sta_glb_eta_HybridSTA_Mass = mass_histograms.get("D2_sta_glb_eta_HybridSTA_Mass").plot.root("sta_glb_eta_HybridSTA_Mass"," CMS preliminary ;#eta_{#mu}^{STA};")
@@ -100,12 +89,6 @@ def histogrammarToRoot(standard_histograms, mass_histograms, gen_histograms, fil
         ##sta gen
         #TH2F_sta_gen_pt_ptRes = TH2F("sta_gen_pt_v_ptRes"," sta vs gen p_{T}Res ;p_{T};pTRes",ptBins, ptMin, ptMax ,ptResBins, ptResSTA[0], ptResSTA[1] )
         #TH2F_sta_gen_eta_ptRes = TH2F("sta_gen_eta_v_ptRes"," sta vs gen p_{T}Res ;#eta;pTRes",etaBins, etaMin, etaMax ,ptResBins, ptResSTA[0], ptResSTA[1])
-
-
-
-
-
-
 
     if not os.path.exists(fileOut):
         os.makedirs(fileOut)
@@ -195,7 +178,4 @@ def histogrammarToRoot(standard_histograms, mass_histograms, gen_histograms, fil
         c1.SaveAs("{}/TH2F_glb_pt_nHits.png".format(fileOut)) 
 
     outFile.Write()
-    outFile.Close()
-    
-     
-        
+    outFile.Close()       

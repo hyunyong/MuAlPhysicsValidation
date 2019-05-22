@@ -30,7 +30,7 @@ def fitCut(hist, sigmas, opts):
   lower, upper = hist.GetMean()-sigmas*hist.GetRMS(), hist.GetMean()+sigmas*hist.GetRMS()
   hist.Fit("gaus",opts, "", lower, upper)
 
-def makeProfile(TH2F_name, dirName, lnBins, fitType, drawBinPlots, meanRange, sigmaRange):
+def makeProfile(TH2F_name, dirName, lnBins, fitType, drawBinPlots, meanRange, sigmaRange, draw_TRatio):
   TH2F_temp_input = []
   TH1F_fit_mean_output = []
   TH1F_fit_sigma_output = []
@@ -109,6 +109,13 @@ def makeProfile(TH2F_name, dirName, lnBins, fitType, drawBinPlots, meanRange, si
         binlegend =  TLegend(0.12,0.68,0.5,0.88)
         makeLegend(binlegend, temp)
         c1.SaveAs('{}/{}_{}_from_{:0.3f}_to_{:0.3f}_{}.png'.format(path,TH2F_name,fitType, boundsValue[0],boundsValue[1],titleString ))
+
+        if draw_TRatio  and len(temp) > 1:
+          rp = TRatioPlot(temp[0], temp[1])
+          rp.Draw()
+          #makeLegend(binlegend, temp)
+          c1.SaveAs('{}/TRatioPlot_{}_{}_from_{:0.3f}_to_{:0.3f}_{}.png'.format(path,TH2F_name,fitType, boundsValue[0],boundsValue[1],titleString ))
+
   temp = []
   legend =  TLegend(0.33,0.68,0.73,0.88)
   drawProfile(TH1F_fit_mean_output, meanRange, legend)
@@ -124,6 +131,28 @@ def makeProfile(TH2F_name, dirName, lnBins, fitType, drawBinPlots, meanRange, si
   texPrelim.Draw()
   c1.SaveAs('{}/{}/{}_{}_sigma.png'.format(outputFolderName,dirName,TH2F_name, fitType))
 
+  if draw_TRatio  and len(TH1F_fit_sigma_output) > 1 and  len(TH1F_fit_mean_output) > 1:
+    rp = TRatioPlot(TH1F_fit_sigma_output[0], TH1F_fit_sigma_output[1])
+    rp.Draw()
+    c1.SaveAs('{}/{}/TRatio_{}_{}_sigma.png'.format(outputFolderName,dirName,TH2F_name, fitType))
+
+    rp1 = TRatioPlot(TH1F_fit_mean_output[0], TH1F_fit_mean_output[1])
+    rp1.Draw()
+    c1.SaveAs('{}/{}/TRatio_{}_{}_mean.png'.format(outputFolderName,dirName,TH2F_name, fitType))
+
+    #drawTRatio(TH1F_fit_sigma_output, sigmaRange, legendRMS)
+    #texLumi.Draw()
+    #texData.Draw()
+    #texPrelim.Draw()
+    #c1.SaveAs('{}/{}/TRatio_{}_{}_sigma.png'.format(outputFolderName,dirName,TH2F_name, fitType))
+#
+    #drawTRatio(TH1F_fit_mean_output, meanRange, legend)
+    #texLumi.Draw()
+    #texData.Draw()
+    #texPrelim.Draw()
+    #c1.SaveAs('{}/{}/TRatio_{}_{}_mean.png'.format(outputFolderName,dirName,TH2F_name, fitType))
+       
+
 def drawProfile(l_histogram, range,l_legend):
   for TH2FCount, histo in enumerate(l_histogram):
     setHistoStyle(histo, colors[TH2FCount])
@@ -132,6 +161,14 @@ def drawProfile(l_histogram, range,l_legend):
     if TH2FCount == 0: histo.Draw()
     if TH2FCount > 0: histo.Draw("same")
   makeLegend(l_legend, l_histogram)
+
+def drawTRatio(l_histogram, range,l_legend):
+  rp = TRatioPlot(l_histogram[0], l_histogram[1])
+  rp.Draw()
+  #makeLegend(binlegend, temp)
+  makeLegend(l_legend, l_histogram)
+
+
 
 def draw1D(l_histogram, range,l_legend):
   for TH2FCount, histo in enumerate(l_histogram):

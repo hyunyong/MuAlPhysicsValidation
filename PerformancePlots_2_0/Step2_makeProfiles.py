@@ -17,15 +17,24 @@ execfile("constants.py")
 
 tot_fileList     = ["MuAlRefit_Run2017F_UL_Vanilla_IOV3_step1.root", "MuAlRefit_Run2017F_UL_ReReco_IOV3_Step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV3_oldAPE_Step1.root"]
 tot_fileList     = ["MuAlRefit_Run2017B_UL_old_IOV2_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV2_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV2_oldAPE_step1.root"]
-tot_fileList     = ["MuAlRefit_Run2017B_UL_old_step1.root", "MuAlRefit_Run2017B_UL_ReReco_step1.root", "MuAlRefit_Run2017B_UL_ReReco_oldAPE_step1.root"]
+
 tot_fileList     = ["vanilla.root", "oldAPE.root"]
 tot_fileList     = ["MuAlRefit_Run2017F_UL_Vanilla_IOV3_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV3_oldAPE_oldTracker_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV3_oldAPE_Step1.root"]
+
+tot_fileList     = ["MuAlRefit_Run2017B_UL_old_step1.root", "MuAlRefit_data_IOV1_newAPE_FineTrackerAPE_set1_file.root","MuAlRefit_data_IOV1_newAPE_CoarseTrackerAPE_step1.root", "MuAlRefit_Run2017B_UL_ReReco_oldAPE_step1.root"]
+tot_fileList     = ["MuAlRefit_Run2017B_UL_old_IOV2_step1.root", "MuAlRefit_data_IOV3_newAPE_CoarseTrackerAPE_step1.root", "MuAlRefit_data_IOV2_newAPE_FineTrackerAPE_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV2_oldAPE_step1.root"]
+tot_fileList     = ["MuAlRefit_Run2017F_UL_Vanilla_IOV3_step1.root", "MuAlRefit_data_IOV3_newAPE_CoarseTrackerAPE_step1.root", "MuAlRefit_data_IOV3_newAPE_FineTrackerAPE_short_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV3_oldAPE_Step1.root"]
+
+tot_fileList     = ["test.root"]
+
 #tot_fileList     = ["MuAlRefit_Run2017B_UL_old_IOV2_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV2_step1.root"]
 #tot_fileList     = ["MuAlRefit_Run2017B_UL_old_step1.root", "MuAlRefit_Run2017B_UL_ReReco_step1.root"]
-tot_fileListName = ["EOY2017 + New Tracker", "EOY2017", "UL ReReco"]
-tot_colors       = [ROOT.kRed,  ROOT.kBlue, ROOT.kBlack]
-Combinations      = [[0,1,2]]#,[1,3],[3,4],[0,1,3]]
-tot_outputFolderName  = ["2017_UL_IOV3_oldMA_oldTrk"]
+tot_fileListName = ["test_delta_eta"]
+#tot_fileListName = ["EOY2017", "UL+Coarse Tracker APE","UL+Fine Tracker APE", "UL ReReco"]
+
+tot_colors       = [ROOT.kRed]
+Combinations      = [[0]]#,[1,3],[3,4],[0,1,3]]
+tot_outputFolderName  = ["test"]
 
 
 drawTRatio = True
@@ -98,3 +107,8 @@ for Comb in Combinations:
   makeProfile("sta_glb_phi_HybridSTA_Mass","mass",nBins, "gaus", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
   makeProfile("sta_glb_eta_HybridSTA_Mass","mass",nBins, "gaus", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
   makeProfile("sta_glb_eta_HybridSTA_Mass","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
+
+
+  #delta eta plots
+  makeProfile("TH2F_deltaEta_sta_Mass","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
+  makeProfile("TH2F_deltaEta_glb_Mass","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)

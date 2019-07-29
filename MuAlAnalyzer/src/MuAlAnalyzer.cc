@@ -238,6 +238,12 @@ class MuAlAnalyzer : public edm::EDAnalyzer {
     Float_t b_recoDimu_hyb_sta_pt;
     Float_t b_recoDimu_hyb_sta_eta;
     Float_t b_recoDimu_hyb_sta_phi;
+
+    Float_t b_recoDimu_hyb_glb_pt;
+    Float_t b_recoDimu_hyb_glb_eta;
+    Float_t b_recoDimu_hyb_glb_phi;
+
+
     Float_t b_recoDimu_hyb_m;
     Int_t b_recoDimu_hyb_sta_q;
 
@@ -446,6 +452,11 @@ MuAlAnalyzer::MuAlAnalyzer( const edm::ParameterSet& iConfig ) {
     m_tree_recoDimuons->Branch("hyb_sta_pt",&b_recoDimu_hyb_sta_pt,"hyb_sta_pt/F");
     m_tree_recoDimuons->Branch("hyb_sta_eta",&b_recoDimu_hyb_sta_eta,"hyb_sta_eta/F");
     m_tree_recoDimuons->Branch("hyb_sta_phi",&b_recoDimu_hyb_sta_phi,"hyb_sta_phi/F");
+
+    m_tree_recoDimuons->Branch("hyb_glb_pt",&b_recoDimu_hyb_glb_pt,"hyb_glb_pt/F");
+    m_tree_recoDimuons->Branch("hyb_glb_eta",&b_recoDimu_hyb_glb_eta,"hyb_glb_eta/F");
+    m_tree_recoDimuons->Branch("hyb_glb_phi",&b_recoDimu_hyb_glb_phi,"hyb_glb_phi/F");
+
     m_tree_recoDimuons->Branch("hyb_m",&b_recoDimu_hyb_m,"hyb_m/F");
     m_tree_recoDimuons->Branch("hyb_q",&b_recoDimu_hyb_sta_q,"hyb_q/F");
     
@@ -1108,6 +1119,10 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
             b_recoDimu_hyb_sta_pt = b_recoMu_neg_sta_pt;
             b_recoDimu_hyb_sta_eta = b_recoMu_neg_sta_eta;
             b_recoDimu_hyb_sta_phi = b_recoMu_neg_sta_phi;
+
+            b_recoDimu_hyb_glb_pt = b_recoMu_pos_glb_pt;
+            b_recoDimu_hyb_glb_eta = b_recoMu_pos_glb_eta;
+            b_recoDimu_hyb_glb_phi = b_recoMu_pos_glb_phi;
        } else {
             tLV_recoMuon_glb.SetPtEtaPhiM(b_recoMu_neg_glb_pt, b_recoMu_neg_glb_eta, b_recoMu_neg_glb_phi, 0.105658);
             tLV_dimu_hyb = tLV_recoMuon_glb + tLV_recoMuonPos_sta;
@@ -1115,6 +1130,10 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
             b_recoDimu_hyb_sta_pt = b_recoMu_pos_sta_pt;
             b_recoDimu_hyb_sta_eta = b_recoMu_pos_sta_eta;
             b_recoDimu_hyb_sta_phi = b_recoMu_pos_sta_phi;
+
+            b_recoDimu_hyb_glb_pt = b_recoMu_neg_glb_pt;
+            b_recoDimu_hyb_glb_eta = b_recoMu_neg_glb_eta;
+            b_recoDimu_hyb_glb_phi = b_recoMu_neg_glb_phi;
        }
             b_recoDimu_hyb_pt  = tLV_dimu_hyb.Pt();
             b_recoDimu_hyb_eta = tLV_dimu_hyb.Eta();
@@ -1129,6 +1148,11 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
         b_recoDimu_hyb_sta_pt  = -1.0;
         b_recoDimu_hyb_sta_eta = 10.0;
         b_recoDimu_hyb_sta_phi =  5.0;
+
+        b_recoDimu_hyb_glb_pt  = -1.0;
+        b_recoDimu_hyb_glb_eta = 10.0;
+        b_recoDimu_hyb_glb_phi =  5.0;
+
         b_recoDimu_hyb_m   = -1.0;
         b_recoDimu_hyb_sta_q   = 0.0;
 
@@ -1150,6 +1174,11 @@ void MuAlAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup& iSe
       b_recoDimu_hyb_sta_pt  = -1.0;
       b_recoDimu_hyb_sta_eta = 10.0;
       b_recoDimu_hyb_sta_phi =  5.0;
+
+      b_recoDimu_hyb_glb_pt  = -1.0;
+      b_recoDimu_hyb_glb_eta = 10.0;
+      b_recoDimu_hyb_glb_phi =  5.0;
+      
       b_recoDimu_hyb_m   = -1.0;
       b_recoDimu_hyb_sta_q   = 0.0;
 

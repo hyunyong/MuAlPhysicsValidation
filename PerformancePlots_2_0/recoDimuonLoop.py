@@ -1,3 +1,5 @@
+
+
 for counter, event in enumerate(recoDimuons):
   if counter % 100000 == 0: print counter, (counter +0.0)/event.GetEntries()
   if(Event_ro_RUN>0):
@@ -5,7 +7,26 @@ for counter, event in enumerate(recoDimuons):
   
   # Di-MU MASS
   if ( event.pos_glb_trk_pt > thresholdPt and event.neg_glb_trk_pt > thresholdPt and fabs(event.pos_glb_trk_eta)<2.4 and fabs(event.neg_glb_trk_eta)<2.4):
-    
+
+    #delta Eta plots
+
+    pos_STA = TLorentzVector()
+    pos_STA.SetPtEtaPhiM(event.pos_sta_pt,event.pos_sta_eta,event.pos_sta_phi,0)
+    neg_STA = TLorentzVector()
+    neg_STA.SetPtEtaPhiM(event.neg_sta_pt,event.neg_sta_eta,event.neg_sta_phi,0)
+
+    pos_GLB = TLorentzVector()
+    pos_GLB.SetPtEtaPhiM(event.pos_glb_pt,event.pos_glb_eta,event.pos_glb_phi,0)
+    neg_GLB = TLorentzVector()
+    neg_GLB.SetPtEtaPhiM(event.neg_glb_pt,event.neg_glb_eta,event.neg_glb_phi,0)
+
+    deltaEta = event.pos_glb_eta - event.neg_glb_eta
+
+    TH2F_deltaEta_glb_Mass.Fill(deltaEta,(pos_GLB + neg_GLB).M())
+    TH2F_deltaEta_sta_Mass
+
+    TH2F_deltaEta_sta_Mass.Fill(deltaEta,(pos_STA + neg_STA).M())
+
     # HybridZ
     RandmonNumber=randint(0,1) # generate or 0 or 1
     hybridMu1 = TLorentzVector()
@@ -33,3 +54,7 @@ for counter, event in enumerate(recoDimuons):
 	TH2F_sta_glb_pt_HybridSTA_Mass.Fill(event.hyb_sta_pt, event.hyb_m)
 	TH2F_sta_glb_eta_HybridSTA_Mass.Fill(event.hyb_sta_eta, event.hyb_m)
 	TH2F_sta_glb_phi_HybridSTA_Mass.Fill(event.hyb_sta_phi, event.hyb_m)
+
+	TH2F_sta_glb_glb_mu_pt_HybridSTA_Mass.Fill(event.hyb_glb_pt, event.hyb_m)
+	TH2F_sta_glb_glb_mu_eta_HybridSTA_Mass.Fill(event.hyb_glb_eta, event.hyb_m)
+	TH2F_sta_glb_glb_mu_phi_HybridSTA_Mass.Fill(event.hyb_glb_phi, event.hyb_m)

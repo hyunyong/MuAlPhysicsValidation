@@ -23,9 +23,10 @@ for counter, event in enumerate(recoDimuons):
     deltaEta = event.pos_glb_eta - event.neg_glb_eta
 
     TH2F_deltaEta_glb_Mass.Fill(deltaEta,(pos_GLB + neg_GLB).M())
-    TH2F_deltaEta_sta_Mass
-
+    TH2F_deltaEta_glb_Mass_wide.Fill(deltaEta,(pos_GLB + neg_GLB).M())
+    
     TH2F_deltaEta_sta_Mass.Fill(deltaEta,(pos_STA + neg_STA).M())
+    TH2F_deltaEta_sta_Mass_wide.Fill(deltaEta,(pos_STA + neg_STA).M())
 
     # HybridZ
     RandmonNumber=randint(0,1) # generate or 0 or 1

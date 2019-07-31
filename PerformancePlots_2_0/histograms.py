@@ -75,3 +75,7 @@ TH2F_deltaEta_sta_Mass = TH2F("TH2F_deltaEta_sta_Mass"," #Delta #eta STA Z Mass 
 TH2F_deltaEta_glb_Mass = TH2F("TH2F_deltaEta_glb_Mass"," #Delta #eta GLB Z Mass ;#eta_{#mu^{+}} - #eta_{#mu^{-}};GLB Di-#mu mass",etaBins, etaMin, etaMax ,massBins, massMin, massMax )
 
 
+TH2F_deltaEta_sta_Mass_wide = TH2F("TH2F_deltaEta_sta_Mass_wide"," #Delta #eta STA Z Mass ;#eta_{#mu^{+}} - #eta_{#mu^{-}};STA Di-#mu mass",etaBins, etaMin*2, etaMax*2 ,massBins, massMin, massMax )
+TH2F_deltaEta_glb_Mass_wide = TH2F("TH2F_deltaEta_glb_Mass_wide"," #Delta #eta GLB Z Mass ;#eta_{#mu^{+}} - #eta_{#mu^{-}};GLB Di-#mu mass",etaBins, etaMin*2, etaMax*2 ,massBins, massMin, massMax )
+
+

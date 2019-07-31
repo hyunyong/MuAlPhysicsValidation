@@ -112,3 +112,6 @@ for Comb in Combinations:
   #delta eta plots
   makeProfile("TH2F_deltaEta_sta_Mass","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
   makeProfile("TH2F_deltaEta_glb_Mass","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
+
+  makeProfile("TH2F_deltaEta_sta_Mass_wide","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
+  makeProfile("TH2F_deltaEta_glb_Mass_wide","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)

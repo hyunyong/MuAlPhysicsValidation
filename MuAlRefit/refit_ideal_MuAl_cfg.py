@@ -114,21 +114,19 @@ process.es_prefer_globalPosition = cms.ESPrefer("PoolDBESSource","globalPosition
 #                  )
 #)
 
-process.Path = cms.Path(process.MeasurementTrackerEvent * process.muAlGeneralTracks * process.muAlAncientMuonSeed * process.muAlStandAloneMuons * process.muAlGlobalMuons * process.muAlTevMuons * process.muAlGlbTrackQual * process.muAlMuons)
+process.muAlAnalyzer = cms.EDAnalyzer('MuAlAnalyzer',
+  debugLevel      = cms.int32(1),
+  recoMuons       = cms.InputTag("muAlMuons"),
+  recoBeamSpot    = cms.InputTag("offlineBeamSpot"),
+  fillRecoMuons   = cms.bool(True),
+  fillRecoDimuons = cms.bool(True),
+  fillGenMuons    = cms.bool(False),
+)
 
-process.out = cms.OutputModule("PoolOutputModule",
-                                outputCommands = cms.untracked.vstring("drop *",
-                                                                       "keep GenEventInfoProduct_generator_*_*",
-                                                                       "keep edmHepMCProduct_generator_*_*",
-                                                                       "keep *_genParticles_*_*",
-                                                                       "keep recoBeamSpot_offlineBeamSpot_*_*",
-                                                                       "keep *_TriggerResults_*_*",
-                                                                       "keep recoMuons_*_*_MUALREFIT",
-                                                                       "keep recoTracks_*_*_MUALREFIT",
-                                                                       "keep recoTrackExtras_*_*_MUALREFIT"
-                                                                       ),
-                                fileName = cms.untracked.string("output.root"),
-                                SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring("Path")),
-                                )
 
-process.EndPath = cms.EndPath(process.out)
+process.Path = cms.Path(process.MeasurementTrackerEvent * process.muAlGeneralTracks * process.muAlAncientMuonSeed * process.muAlStandAloneMuons * process.muAlGlobalMuons * process.muAlTevMuons * process.muAlGlbTrackQual * process.muAlMuons * process.muAlAnalyzer)
+
+process.TFileService = cms.Service("TFileService",
+  fileName = cms.string("out.root")
+)
+

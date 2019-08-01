@@ -9,7 +9,7 @@ config.General.transferLogs = True
 config.section_("JobType")
 config.JobType.pluginName = 'Analysis'
 config.JobType.psetName = 'refit_ideal_MuAl_cfg.py'
-config.JobType.outputFiles = ['output.root']
+config.JobType.outputFiles = ['out.root']
 #6DOF
 config.JobType.inputFiles = ['Geometries/muonGeometry_IDEAL_AllZeroes.Ape6x6.StdTags.746p3.DBv2.db','Geometries/inertGlobalPositionRcd.StdTags.746p3.DBv2.db']
 

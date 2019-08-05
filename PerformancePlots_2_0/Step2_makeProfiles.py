@@ -1,11 +1,11 @@
 import ROOT
-from ROOT import TFile, TTree, TH1F, TCanvas, TProfile, TH2F,  TCollection, TLegend, gStyle, TPaveStats, TLatex, TRatioPlot
+from ROOT import TFile, TTree, TH1F, TCanvas, TProfile, TH2F,  TCollection, TLegend, gStyle, TPaveStats, TLatex, TRatioPlot, gROOT
 import  math, sys, os
 
 gStyle.SetOptStat(0);
 gStyle.SetLegendBorderSize(0);
 gStyle.SetLegendFillColor(0);
-
+gROOT.SetBatch(1)
 execfile("functions.py")
 execfile("constants.py")
 
@@ -15,26 +15,21 @@ execfile("constants.py")
 #Combinations      = [[0,3]]#,[1,3],[3,4],[0,1,3]]
 #tot_outputFolderName  = ["Out2017B_Legacy_After6DOFAPE","Out2017B_After6DOF_After6DOFAPE","Out2017B_After6DOFAPE_Before","Out2017B_Legacy_After6DOF_After6DOFAPE"]
 
-tot_fileList     = ["MuAlRefit_Run2017F_UL_Vanilla_IOV3_step1.root", "MuAlRefit_Run2017F_UL_ReReco_IOV3_Step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV3_oldAPE_Step1.root"]
-tot_fileList     = ["MuAlRefit_Run2017B_UL_old_IOV2_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV2_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV2_oldAPE_step1.root"]
-
-tot_fileList     = ["vanilla.root", "oldAPE.root"]
-tot_fileList     = ["MuAlRefit_Run2017F_UL_Vanilla_IOV3_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV3_oldAPE_oldTracker_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV3_oldAPE_Step1.root"]
-
-tot_fileList     = ["MuAlRefit_Run2017B_UL_old_step1.root", "MuAlRefit_data_IOV1_newAPE_FineTrackerAPE_set1_file.root","MuAlRefit_data_IOV1_newAPE_CoarseTrackerAPE_step1.root", "MuAlRefit_Run2017B_UL_ReReco_oldAPE_step1.root"]
-tot_fileList     = ["MuAlRefit_Run2017B_UL_old_IOV2_step1.root", "MuAlRefit_data_IOV3_newAPE_CoarseTrackerAPE_step1.root", "MuAlRefit_data_IOV2_newAPE_FineTrackerAPE_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV2_oldAPE_step1.root"]
-tot_fileList     = ["MuAlRefit_Run2017F_UL_Vanilla_IOV3_step1.root", "MuAlRefit_data_IOV3_newAPE_CoarseTrackerAPE_step1.root", "MuAlRefit_data_IOV3_newAPE_FineTrackerAPE_short_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV3_oldAPE_Step1.root"]
-
-tot_fileList     = ["test.root"]
+tot_fileList     = ["2018ULIOV1.root","2018ULIOV2.root","2018ULIOV3.root", "2017UL.root"]
+#tot_fileList     = ["2017UL_step1.root", "2017UL.root"]
 
 #tot_fileList     = ["MuAlRefit_Run2017B_UL_old_IOV2_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV2_step1.root"]
 #tot_fileList     = ["MuAlRefit_Run2017B_UL_old_step1.root", "MuAlRefit_Run2017B_UL_ReReco_step1.root"]
-tot_fileListName = ["test_delta_eta"]
+tot_fileListName = ["2018 UL IOV1","2018 UL IOV2", "2018 UL IOV3", "2017 UL"]
+#tot_fileListName = ["2017 UL","2017 UL repro."]
 #tot_fileListName = ["EOY2017", "UL+Coarse Tracker APE","UL+Fine Tracker APE", "UL ReReco"]
-
-tot_colors       = [ROOT.kRed]
-Combinations      = [[0]]#,[1,3],[3,4],[0,1,3]]
-tot_outputFolderName  = ["test"]
+# kBlue-4, kGreen+3,kViolet-1, kRed-4, kOrange+7,kCyan-7,kRed-7, kBlue-7,kMagenta-9
+tot_colors       = [ROOT.kRed-4, ROOT.kBlue-4, ROOT.kMagenta-9, ROOT.kViolet-1]#, ROOT.kMagenta]
+#tot_colors       = [ROOT.kRed-4, ROOT.kBlue-4]#, ROOT.kMagenta-9, ROOT.kViolet-1]#, ROOT.kMagenta]
+Combinations      = [[0,1,2,3]]#,[1,3],[3,4],[0,1,3]]
+#Combinations      = [[0,1]]#,2,3]]#,[1,3],[3,4],[0,1,3]]
+tot_outputFolderName  = ["2018UL_test"]
+#tot_outputFolderName  = ["2017UL_test"]
 
 
 drawTRatio = True
@@ -107,8 +102,6 @@ for Comb in Combinations:
   makeProfile("sta_glb_phi_HybridSTA_Mass","mass",nBins, "gaus", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
   makeProfile("sta_glb_eta_HybridSTA_Mass","mass",nBins, "gaus", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
   makeProfile("sta_glb_eta_HybridSTA_Mass","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
-
-
   #delta eta plots
   makeProfile("TH2F_deltaEta_sta_Mass","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
   makeProfile("TH2F_deltaEta_glb_Mass","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)

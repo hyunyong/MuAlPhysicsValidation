@@ -1,7 +1,8 @@
-from ROOT import TFile, TTree, TH1F, TLorentzVector, TCanvas, TPaveStats, TLatex
+from ROOT import TFile, TTree, TH1F, TLorentzVector, TCanvas, TPaveStats, TLatex, gROOT
 from random import randint
 import math, sys, os
 from math import fabs
+gROOT.SetBatch(1)
 execfile("constants.py")
 
 # Usage examples:

@@ -86,20 +86,20 @@ from CondCore.DBCommon.CondDBSetup_cfi import *
 
 # Muon geometry (CRAB copies take the files location in the crab.py file and copy it where the cmsRun command is executed)
 process.muonDtAlignment = cms.ESSource("PoolDBESSource", CondDBSetup,
-                                     connect = cms.string('sqlite_file:muonGeometry_IDEAL_AllZeroes.Ape6x6.StdTags.746p3.DBv2.db'),
+                                     connect = cms.string('sqlite_file:data_DT-1100-111111_2018UL_IOV1_CMSSW106_JSON-313041-320377_dataRun2_MuAl_v1_01.db'),
                                      toGet   = cms.VPSet(cms.PSet(record = cms.string("DTAlignmentRcd"),  tag = cms.string("DTAlignmentRcd")))
                                      )
 process.es_prefer_muonDtAlignment = cms.ESPrefer("PoolDBESSource","muonDtAlignment")
 
 process.muonCscAlignment = cms.ESSource("PoolDBESSource", CondDBSetup,
-                                     connect = cms.string('sqlite_file:muonGeometry_IDEAL_AllZeroes.Ape6x6.StdTags.746p3.DBv2.db'),
+                                     connect = cms.string('sqlite_file:data_CSC-1100-110001_2018UL_IOV1_CMSSW106_JSON-313041-320377_dataRun2_MuAl_v1_01.db'),
                                      toGet   = cms.VPSet(cms.PSet(record = cms.string("CSCAlignmentRcd"), tag = cms.string("CSCAlignmentRcd")))
                                      )
 process.es_prefer_muonCscAlignment = cms.ESPrefer("PoolDBESSource","muonCscAlignment")
 
 process.globalPosition = cms.ESSource("PoolDBESSource", CondDBSetup,
-                                     connect = cms.string('sqlite_file:inertGlobalPositionRcd.StdTags.746p3.DBv2.db'),
-                                     toGet   = cms.VPSet(cms.PSet(record = cms.string("GlobalPositionRcd"), tag = cms.string("inertGlobalPositionRcd")))
+                                     connect = cms.string('sqlite_file:GPR_Aug03_2019_SW1060_GT106X_dataRun2_newTkAl_v18_IOV1_dL_iter2.db'),
+                                     toGet   = cms.VPSet(cms.PSet(record = cms.string("GlobalPositionRcd"), tag = cms.string("IdealGeometry")))
                                      )
 process.es_prefer_globalPosition = cms.ESPrefer("PoolDBESSource","globalPosition")
 

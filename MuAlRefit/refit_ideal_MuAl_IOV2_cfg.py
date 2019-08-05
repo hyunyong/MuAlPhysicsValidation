@@ -3,7 +3,7 @@ import os
 
 process = cms.Process("MUALREFIT")
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:out_RECO_dropped.root')
+    fileNames = cms.untracked.vstring('file:/eos/cms/store/data/Run2018D/SingleMuon/RAW-RECO/ZMu-PromptReco-v2/000/321/457/00000/9E6AD29E-BEA5-E811-BD40-FA163E73968C.root')
 )
 
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
@@ -66,7 +66,20 @@ process.muAlMuons.globalTrackQualityInputTag = cms.InputTag('muAlGlbTrackQual')
 # This is to load new CondDB
 from CondCore.DBCommon.CondDBSetup_cfi import *
 #from CondCore.CondDB.CondDB_cfi import *
-
+#process.GlobalTag.toGet = cms.VPSet(
+#         cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+#                  tag =  cms.string("Alignments"),
+#                  connect = cms.string('sqlite_file:alignments_MP.db')
+#                  ),
+#         cms.PSet(record = cms.string("TrackerAlignmentErrorExtendedRcd"),
+#                  tag =  cms.string("AlignmentErrorsExtended"),
+#                  connect = cms.string('sqlite_file:alignments_MP.db')
+#                  ),
+#         cms.PSet(record = cms.string("TrackerSurfaceDeformationRcd"),
+#                  tag =  cms.string("Deformations"),
+#                  connect = cms.string('sqlite_file:alignments_MP.db')
+#                  ),
+#)
 # New Tracker geometry from GT in this case
 #process.GlobalTag.toGet = cms.VPSet(
 #        ###### starts customization of tracker part
@@ -86,23 +99,32 @@ from CondCore.DBCommon.CondDBSetup_cfi import *
 
 # Muon geometry (CRAB copies take the files location in the crab.py file and copy it where the cmsRun command is executed)
 process.muonDtAlignment = cms.ESSource("PoolDBESSource", CondDBSetup,
-                                     connect = cms.string('sqlite_file:muonGeometry_IDEAL_AllZeroes.Ape6x6.StdTags.746p3.DBv2.db'),
+                                     connect = cms.string('sqlite_file:data_DT-1100-111111_2018UL_IOV2_CMSSW106_JSON-320377-322603_dataRun2_MuAl_v1_01.db'),
                                      toGet   = cms.VPSet(cms.PSet(record = cms.string("DTAlignmentRcd"),  tag = cms.string("DTAlignmentRcd")))
                                      )
 process.es_prefer_muonDtAlignment = cms.ESPrefer("PoolDBESSource","muonDtAlignment")
 
 process.muonCscAlignment = cms.ESSource("PoolDBESSource", CondDBSetup,
-                                     connect = cms.string('sqlite_file:muonGeometry_IDEAL_AllZeroes.Ape6x6.StdTags.746p3.DBv2.db'),
+                                     connect = cms.string('sqlite_file:data_CSC-1100-110001_2018UL_IOV2_CMSSW106_JSON-320377-322603_dataRun2_MuAl_v1_01.db'),
                                      toGet   = cms.VPSet(cms.PSet(record = cms.string("CSCAlignmentRcd"), tag = cms.string("CSCAlignmentRcd")))
                                      )
 process.es_prefer_muonCscAlignment = cms.ESPrefer("PoolDBESSource","muonCscAlignment")
 
 process.globalPosition = cms.ESSource("PoolDBESSource", CondDBSetup,
-                                     connect = cms.string('sqlite_file:inertGlobalPositionRcd.StdTags.746p3.DBv2.db'),
-                                     toGet   = cms.VPSet(cms.PSet(record = cms.string("GlobalPositionRcd"), tag = cms.string("inertGlobalPositionRcd")))
+                                     connect = cms.string('sqlite_file:GPR_Aug03_2019_SW1060_GT106X_dataRun2_newTkAl_v18_IOV2_dL_iter1.db'),
+                                     toGet   = cms.VPSet(cms.PSet(record = cms.string("GlobalPositionRcd"), tag = cms.string("IdealGeometry")))
                                      )
 process.es_prefer_globalPosition = cms.ESPrefer("PoolDBESSource","globalPosition")
 
+
+process.muAlAnalyzer = cms.EDAnalyzer('MuAlAnalyzer',
+  debugLevel      = cms.int32(1),
+  recoMuons       = cms.InputTag("muAlMuons"),
+  recoBeamSpot    = cms.InputTag("offlineBeamSpot"),
+  fillRecoMuons   = cms.bool(True),
+  fillRecoDimuons = cms.bool(True),
+  fillGenMuons    = cms.bool(False),
+)
 # Asymptotic Muon APEs
 #process.GlobalTag.toGet = cms.VPSet(
 #         cms.PSet(record = cms.string("CSCAlignmentErrorExtendedRcd"),
@@ -115,19 +137,13 @@ process.es_prefer_globalPosition = cms.ESPrefer("PoolDBESSource","globalPosition
 #                  )
 #)
 
-process.muAlAnalyzer = cms.EDAnalyzer('MuAlAnalyzer',
-  debugLevel      = cms.int32(1),
-  recoMuons       = cms.InputTag("muAlMuons"),
-  recoBeamSpot    = cms.InputTag("offlineBeamSpot"),
-  fillRecoMuons   = cms.bool(True),
-  fillRecoDimuons = cms.bool(True),
-  fillGenMuons    = cms.bool(False),
-)
-
-
 process.Path = cms.Path(process.MeasurementTrackerEvent * process.muAlGeneralTracks * process.muAlAncientMuonSeed * process.muAlStandAloneMuons * process.muAlGlobalMuons * process.muAlTevMuons * process.muAlGlbTrackQual * process.muAlMuons * process.muAlAnalyzer)
-
+"""
+process.out = cms.OutputModule("PoolOutputModule",
+                                fileName = cms.untracked.string("output.root"),
+                                SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring("Path")),
+                                )
+"""
 process.TFileService = cms.Service("TFileService",
   fileName = cms.string("out.root")
 )
-

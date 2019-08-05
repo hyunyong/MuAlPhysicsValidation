@@ -11,22 +11,23 @@ for counter, event in enumerate(recoDimuons):
     #delta Eta plots
 
     pos_STA = TLorentzVector()
-    pos_STA.SetPtEtaPhiM(event.pos_sta_pt,event.pos_sta_eta,event.pos_sta_phi,0)
+    pos_STA.SetPtEtaPhiM(event.pos_sta_pt,event.pos_sta_eta,event.pos_sta_phi,0.105658)
     neg_STA = TLorentzVector()
-    neg_STA.SetPtEtaPhiM(event.neg_sta_pt,event.neg_sta_eta,event.neg_sta_phi,0)
+    neg_STA.SetPtEtaPhiM(event.neg_sta_pt,event.neg_sta_eta,event.neg_sta_phi,0.105658)
 
     pos_GLB = TLorentzVector()
-    pos_GLB.SetPtEtaPhiM(event.pos_glb_pt,event.pos_glb_eta,event.pos_glb_phi,0)
+    pos_GLB.SetPtEtaPhiM(event.pos_glb_pt,event.pos_glb_eta,event.pos_glb_phi,0.105658)
     neg_GLB = TLorentzVector()
-    neg_GLB.SetPtEtaPhiM(event.neg_glb_pt,event.neg_glb_eta,event.neg_glb_phi,0)
+    neg_GLB.SetPtEtaPhiM(event.neg_glb_pt,event.neg_glb_eta,event.neg_glb_phi,0.105658)
 
-    deltaEta = event.pos_glb_eta - event.neg_glb_eta
-
-    TH2F_deltaEta_glb_Mass.Fill(deltaEta,(pos_GLB + neg_GLB).M())
-    TH2F_deltaEta_glb_Mass_wide.Fill(deltaEta,(pos_GLB + neg_GLB).M())
-    
-    TH2F_deltaEta_sta_Mass.Fill(deltaEta,(pos_STA + neg_STA).M())
-    TH2F_deltaEta_sta_Mass_wide.Fill(deltaEta,(pos_STA + neg_STA).M())
+    if( abs((pos_GLB + neg_GLB).M()-91.)<5. ):
+      deltaEta = event.pos_glb_eta - event.neg_glb_eta
+      TH2F_deltaEta_glb_Mass.Fill(deltaEta,(pos_GLB + neg_GLB).M())
+      TH2F_deltaEta_glb_Mass_wide.Fill(deltaEta,(pos_GLB + neg_GLB).M())
+    if( abs((pos_STA + neg_STA).M()-91.)<5. ):
+      deltaEta = event.pos_sta_eta - event.neg_sta_eta
+      TH2F_deltaEta_sta_Mass.Fill(deltaEta,(pos_STA + neg_STA).M())
+      TH2F_deltaEta_sta_Mass_wide.Fill(deltaEta,(pos_STA + neg_STA).M())
 
     # HybridZ
     RandmonNumber=randint(0,1) # generate or 0 or 1

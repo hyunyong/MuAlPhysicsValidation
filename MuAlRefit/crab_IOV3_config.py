@@ -21,7 +21,7 @@ config.Data.inputDataset = '/SingleMuon/Run2018D-ZMu-PromptReco-v2/RAW-RECO'
 
 config.Data.inputDBS = 'global' # global`
 config.Data.splitting = 'LumiBased'
-config.Data.splitting = 'Automatic'	
+config.Data.unitsPerJob = 20
 config.Data.lumiMask = 'Geometries/2018_UL_IOV3.txt'
 config.Data.outLFNDirBase =  '/store/group/alca_muonalign/hyunyong/MuAlRefit_data_2018_UL_IOV3'
 config.Data.publication = False

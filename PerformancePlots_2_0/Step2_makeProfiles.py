@@ -15,20 +15,14 @@ execfile("constants.py")
 #Combinations      = [[0,3]]#,[1,3],[3,4],[0,1,3]]
 #tot_outputFolderName  = ["Out2017B_Legacy_After6DOFAPE","Out2017B_After6DOF_After6DOFAPE","Out2017B_After6DOFAPE_Before","Out2017B_Legacy_After6DOF_After6DOFAPE"]
 
-tot_fileList     = ["2018ULIOV1.root","2018ULIOV2.root","2018ULIOV3.root", "2017UL.root"]
-#tot_fileList     = ["2017UL_step1.root", "2017UL.root"]
-
-#tot_fileList     = ["MuAlRefit_Run2017B_UL_old_IOV2_step1.root", "MuAlRefit_Run2017B_UL_ReReco_IOV2_step1.root"]
-#tot_fileList     = ["MuAlRefit_Run2017B_UL_old_step1.root", "MuAlRefit_Run2017B_UL_ReReco_step1.root"]
-tot_fileListName = ["2018 UL IOV1","2018 UL IOV2", "2018 UL IOV3", "2017 UL"]
-#tot_fileListName = ["2017 UL","2017 UL repro."]
-#tot_fileListName = ["EOY2017", "UL+Coarse Tracker APE","UL+Fine Tracker APE", "UL ReReco"]
+tot_fileList     = ["UL2017_step1.root","UL2016_IOV1_step1.root", "UL2016_IOV2_step1.root", "2016_IOV1_step1.root", "2016_IOV2_step1.root"]
+tot_fileListName = ["UL 2017", "UL 2016 IOV1","UL 2016 IOV2","2016 IOV1","2016 IOV2"]
 # kBlue-4, kGreen+3,kViolet-1, kRed-4, kOrange+7,kCyan-7,kRed-7, kBlue-7,kMagenta-9
-tot_colors       = [ROOT.kRed-4, ROOT.kBlue-4, ROOT.kMagenta-9, ROOT.kViolet-1]#, ROOT.kMagenta]
+tot_colors       = [ROOT.kRed-4, ROOT.kBlue-4, ROOT.kMagenta-9, ROOT.kViolet-1, ROOT.kOrange+7]#, ROOT.kMagenta]
 #tot_colors       = [ROOT.kRed-4, ROOT.kBlue-4]#, ROOT.kMagenta-9, ROOT.kViolet-1]#, ROOT.kMagenta]
-Combinations      = [[0,1,2,3]]#,[1,3],[3,4],[0,1,3]]
+Combinations      = [[0,1,2,3,4],[0,1,2],[1,2,3,4,],[1,3],[2,4]]#,[1,3],[3,4],[0,1,3]]
 #Combinations      = [[0,1]]#,2,3]]#,[1,3],[3,4],[0,1,3]]
-tot_outputFolderName  = ["2018UL_test"]
+tot_outputFolderName  = ["UL2016_test","UL2016_test2", "UL2016_old_vs_new","UL2016_IOV1_old_vs_new", "UL2016_IOV2_old_vs_new"]
 #tot_outputFolderName  = ["2017UL_test"]
 
 
@@ -103,8 +97,12 @@ for Comb in Combinations:
   makeProfile("sta_glb_eta_HybridSTA_Mass","mass",nBins, "gaus", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
   makeProfile("sta_glb_eta_HybridSTA_Mass","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
   #delta eta plots
-  makeProfile("TH2F_deltaEta_sta_Mass","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
-  makeProfile("TH2F_deltaEta_glb_Mass","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
+  makeProfile("TH2F_deltaEta_sta_Mass","mass",DEnBins, "mean", drawBinPlots,DEmassMeanRange,DEmassSigmaRange, drawTRatio)
+  makeProfile("TH2F_deltaEta_sta_Mass","mass",DEnBins, "gaus", drawBinPlots,DEmassMeanRange,DEmassSigmaRange, drawTRatio)
+  makeProfile("TH2F_deltaEta_glb_Mass","mass",DEnBins, "mean", drawBinPlots,DEmassMeanRange,DEmassSigmaRange, drawTRatio)
+  makeProfile("TH2F_deltaEta_glb_Mass","mass",DEnBins, "gaus", drawBinPlots,DEmassMeanRange,DEmassSigmaRange, drawTRatio)
 
-  makeProfile("TH2F_deltaEta_sta_Mass_wide","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
-  makeProfile("TH2F_deltaEta_glb_Mass_wide","mass",nBins, "mean", drawBinPlots,massMeanRange,massSigmaRange, drawTRatio)
+  makeProfile("TH2F_deltaEta_sta_Mass_wide","mass",DEnBins, "mean", drawBinPlots,DEmassMeanRange,DEmassSigmaRange, drawTRatio)
+  makeProfile("TH2F_deltaEta_sta_Mass_wide","mass",DEnBins, "gaus", drawBinPlots,DEmassMeanRange,DEmassSigmaRange, drawTRatio)
+  makeProfile("TH2F_deltaEta_glb_Mass_wide","mass",DEnBins, "mean", drawBinPlots,DEmassMeanRange,DEmassSigmaRange, drawTRatio)
+  makeProfile("TH2F_deltaEta_glb_Mass_wide","mass",DEnBins, "gaus", drawBinPlots,DEmassMeanRange,DEmassSigmaRange, drawTRatio)

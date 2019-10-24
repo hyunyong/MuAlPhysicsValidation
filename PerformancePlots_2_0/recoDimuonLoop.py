@@ -20,11 +20,13 @@ for counter, event in enumerate(recoDimuons):
     neg_GLB = TLorentzVector()
     neg_GLB.SetPtEtaPhiM(event.neg_glb_pt,event.neg_glb_eta,event.neg_glb_phi,0.105658)
 
-    if( abs((pos_GLB + neg_GLB).M()-91.)<5. ):
+
+    
+    if( abs((pos_GLB + neg_GLB).M()-91.)<5. and (pos_GLB + neg_GLB).Pt()>35):
       deltaEta = event.pos_glb_eta - event.neg_glb_eta
       TH2F_deltaEta_glb_Mass.Fill(deltaEta,(pos_GLB + neg_GLB).M())
       TH2F_deltaEta_glb_Mass_wide.Fill(deltaEta,(pos_GLB + neg_GLB).M())
-    if( abs((pos_STA + neg_STA).M()-91.)<5. ):
+    if( abs((pos_STA + neg_STA).M()-91.)<5. and (pos_STA + neg_STA).Pt()>35):
       deltaEta = event.pos_sta_eta - event.neg_sta_eta
       TH2F_deltaEta_sta_Mass.Fill(deltaEta,(pos_STA + neg_STA).M())
       TH2F_deltaEta_sta_Mass_wide.Fill(deltaEta,(pos_STA + neg_STA).M())

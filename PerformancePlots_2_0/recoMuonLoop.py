@@ -31,7 +31,9 @@ for counter, event in enumerate(recoMuons):
   if(method=="equal" and event.q>0 and nMuonPos>nMinPosNeg): continue
 
   deltaPhiGLB = (event.glb_phi-event.sta_phi)/event.glb_phi_error
+  deltaPhiGLB = (event.glb_phi-event.sta_phi)
   deltaPhiTRK = (event.glb_trk_phi-event.sta_phi)/event.glb_phi_error
+  deltaPhiTRK = (event.glb_trk_phi-event.sta_phi)
   
   # CHI2
   TH2F_glb_eta_nChi2.Fill(event.glb_eta, event.glb_nchi2)

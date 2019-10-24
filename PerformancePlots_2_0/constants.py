@@ -12,9 +12,17 @@ thresholdPt = 30.0
 phiBins = 48
 phiMin = -3.2
 phiMax = 3.2
+
 phiResBins = 48
 phiResMin = -100
 phiResMax = 100
+
+
+phiResBins = 200
+phiResMin = -0.1
+phiResMax = 0.1
+
+
 
 etaBins = 48
 etaMin = -2.4
@@ -65,8 +73,15 @@ ptPullSTASigmaRange = 0, 30
 ptPullGLBMeanRange = -.3,.3
 ptPullGLBSigmaRange = 0, 3
 
-massMeanRange = 80, 100
+massMeanRange = 85, 95
 massSigmaRange = 0, 20
+
+DEmassMeanRange = 90, 92
+DEmassSigmaRange = 0, 10
+DEnBins = 12
+DEetaMin = -3.5
+DEetaMax = 3.5
+
 
 nChi2MeanRange = .5, 2
 nChi2RMSRange = 0, 1
